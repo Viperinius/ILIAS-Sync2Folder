@@ -239,13 +239,13 @@
     <value>Einstellungen</value>
   </data>
   <data name="feedbackBugsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="feedbackBugsToolStripMenuItem.Text" xml:space="preserve">
     <value>Feedback, Bugs</value>
   </data>
   <data name="infoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="infoToolStripMenuItem.Text" xml:space="preserve">
     <value>Info</value>
@@ -451,7 +451,7 @@
     <value>Beim Aktualisieren nur neue Dateien zeigen</value>
   </data>
   <data name="chkListSyncOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>462, 23</value>
+    <value>462, 33</value>
   </data>
   <data name="chkListSyncOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 30</value>
@@ -511,7 +511,7 @@
     <value>MiddleLeft</value>
   </data>
   <data name="btnSync.Location" type="System.Drawing.Point, System.Drawing">
-    <value>704, 3</value>
+    <value>709, 14</value>
   </data>
   <data name="btnSync.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 71</value>
@@ -736,7 +736,7 @@
     <value>6</value>
   </data>
   <data name="groupLogin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 3</value>
+    <value>12, 13</value>
   </data>
   <data name="groupLogin.Size" type="System.Drawing.Size, System.Drawing">
     <value>437, 71</value>

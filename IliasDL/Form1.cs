@@ -335,7 +335,7 @@ namespace IliasDL
         {
             string sTempPath = "";
             string sConfigPath = config.GetPath();
-
+            
             string[] sTempNames = sPath.Split(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
             string sCourseName = sTempNames[0];
 
@@ -377,6 +377,12 @@ namespace IliasDL
 
             if (!Directory.Exists(sPath))
             {
+                if (sConfigPath == "")
+                {
+                    worker.CancelAsync();
+                    MessageBox.Show("Es ist kein Speicherpfad angegeben.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 Directory.CreateDirectory(sPath);
             }
             //Console.WriteLine("inner: " + sPath);
@@ -430,6 +436,12 @@ namespace IliasDL
             {
                 if (!Directory.Exists(sPath))
                 {
+                    if (sConfigPath == "")
+                    {
+                        worker.CancelAsync();
+                        MessageBox.Show("Es ist kein Speicherpfad angegeben.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     Directory.CreateDirectory(sPath);
                 }
             }
@@ -755,7 +767,7 @@ namespace IliasDL
                     sStatus = "Vorhanden";
                 }
 
-                //format size to be human readible
+                //format size to be human readable
                 iSize = Int32.Parse(sSize);
                 if (iSize < 1049000)   //if smaller than 1 MB
                 {
@@ -769,6 +781,15 @@ namespace IliasDL
                 //##############
                 //Console.WriteLine("Size formatting done.");
                 //##############                
+
+                //--------------------------------------
+                worker.ReportProgress(iFilePercentage);
+                //check again if cancelling needed
+                if (worker.CancellationPending)
+                {
+                    return;
+                }
+                //--------------------------------------
 
                 bool bNewFile = false;
                 //download Files
