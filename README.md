@@ -28,6 +28,6 @@ All features can be found at [Features](#features)
 ### Support
 If you have any questions, bugs or just feedback, you have multiple possibilities to make contact:
 1. open an issue here at Github
-2. visit our Discord server:
+2. visit our Discord server: [Link](http://discord.gg/zxDfVpM)
 
 ![](https://img.shields.io/discord/469639729164582912.svg?style=for-the-badge)
