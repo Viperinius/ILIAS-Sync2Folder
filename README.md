@@ -16,7 +16,7 @@ All features can be found at [Features](#features)
 + save files either with the same folder structure as in ILIAS (i.e. creating course folders in a root directory) or let the tool create the course folders in subfolders for each semester (editable name template)
 + define, where the downloaded files should be stored
 + progress shown (for each course and in general)
-- currently only in German
+- UI currently only in German
 
 #### Planned Features
 + be able to change the folder structure settings (e.g. turning the "semester structure" on) and move already loaded files to the new structure
