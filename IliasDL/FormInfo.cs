@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace IliasDL
 {
@@ -20,6 +21,11 @@ namespace IliasDL
         private void FormInfo_Load(object sender, EventArgs e)
         {
             lbTitle.Text = lbTitle.Text.Replace("$", Application.ProductVersion);
+        }
+
+        private void LinkGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(@"https://github.com/Viperinius/ILIAS-Sync2Folder");
         }
     }
 }

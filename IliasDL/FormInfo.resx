@@ -117,16 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbTitle.Text" xml:space="preserve">
-    <value>Made by Viperinius 2018
-
-Installierte Version: $
-
-Für Hilfen und aktuelle Versionshinweise besuchen Sie unseren Discord Server 
-(Link im Hilfemenü unter Feedback verfügbar).
-
-Link zum Repository auf Github: Coming Soon!</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -22,7 +22,7 @@ namespace IliasDL
         {
             LinkLabel.Link link = new LinkLabel.Link
             {
-                LinkData = @"https://discord.gg/y5z7djw"
+                LinkData = @"http://discord.gg/zxDfVpM"
             };
             linklbDiscord.Links.Add(link);
         }
