@@ -244,6 +244,28 @@ namespace IliasDL
             }
         }
 
+        private void ExportSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormSettingsExport exportForm = new FormSettingsExport())
+            {
+                if (exportForm.ShowDialog() == DialogResult.OK)
+                {
+                    exportForm.Close();
+                }
+            }
+        }
+
+        private void ImportSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormSettingsImport importForm = new FormSettingsImport())
+            {
+                if (importForm.ShowDialog() == DialogResult.OK)
+                {
+                    importForm.Close();
+                }
+            }
+        }
+
         private void AddToListView(string sStatus, string sName, string sPath, string sDate, string sSize, string sRefId)
         {
             string[] row = { sStatus, sName, sPath, sDate, sSize, sRefId };
@@ -976,9 +998,9 @@ namespace IliasDL
             return client.logout(sSessionId);
         }             
 
-        private int GetPercentage(int current, int max)
+        private int GetPercentage(int iCurrent, int iMax)
         {
-            return (int)(((double)current / max)*100);
+            return (int)(((double)iCurrent / iMax)*100);
         }
 
         private int GetSizeInKiB(int iSizeInByte)

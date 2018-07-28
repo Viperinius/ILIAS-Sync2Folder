@@ -138,6 +138,18 @@
     <Compile Include="FormPath.Designer.cs">
       <DependentUpon>FormPath.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSettingsExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSettingsExport.Designer.cs">
+      <DependentUpon>FormSettingsExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSettingsImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSettingsImport.Designer.cs">
+      <DependentUpon>FormSettingsImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormStructure.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +181,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPath.resx">
       <DependentUpon>FormPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSettingsExport.resx">
+      <DependentUpon>FormSettingsExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSettingsImport.resx">
+      <DependentUpon>FormSettingsImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormStructure.resx">
       <DependentUpon>FormStructure.cs</DependentUpon>
