@@ -16,11 +16,12 @@ All features can be found at [Features](#features)
 + save files either with the same folder structure as in ILIAS (i.e. creating course folders in a root directory) or let the tool create the course folders in subfolders for each semester (editable name template)
 + define, where the downloaded files should be stored
 + progress shown (for each course and in general)
++ export your settings and import them on another device
 - UI currently only in German
 
 #### Planned Features
 + be able to change the folder structure settings (e.g. turning the "semester structure" on) and move already loaded files to the new structure
-+ be able to export your settings and import them on another device
++ ~~be able to export your settings and import them on another device~~
 + changeable servers (for other universities)
 + switchable language (German <-> English)
 + implement an optional automatic synchronisation (automatically check for new files every x minutes)
