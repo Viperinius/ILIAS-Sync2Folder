@@ -4,8 +4,10 @@ ILIAS-Sync2Folder
 Sync2Folder is a tool to download files from the e-Learning platform ILIAS (currently only FH-Bielefeld).
 It automatically scans your courses including their content and either shows or downloads the files.
 All features can be found at [Features](#features)
-*Note:* The code is barely commented and sorted out as this is just a small project.
+*Note:* The code is currently barely commented and sorted out as this is just a small project.
 
+### Used libraries
++ [Octokit](https://github.com/octokit/octokit.net) (licensed under MIT License)
 
 
 ### Features
