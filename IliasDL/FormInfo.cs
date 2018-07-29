@@ -27,5 +27,10 @@ namespace IliasDL
         {
             Process.Start(@"https://github.com/Viperinius/ILIAS-Sync2Folder");
         }
+
+        private void LinkOctokit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(@"https://github.com/octokit/octokit.net");
+        }
     }
 }

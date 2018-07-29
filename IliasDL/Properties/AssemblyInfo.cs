@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("ILIAS Sync2Folder")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Download ILIAS files")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Viperinius")]
 [assembly: AssemblyProduct("ILIAS Sync2Folder")]
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.9.0.0")]
+[assembly: AssemblyFileVersion("0.9.0.0")]
 [assembly: NeutralResourcesLanguage("de")]
 

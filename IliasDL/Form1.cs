@@ -31,6 +31,7 @@ namespace IliasDL
         public bool bLoggedIn;
 
         private CConfig config = new CConfig();
+        private CUpdate updater;
         private BackgroundWorker worker;
         private BackgroundWorker loginWorker;
 
@@ -57,6 +58,8 @@ namespace IliasDL
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");  //en-EN for English culture
 
             InitializeComponent();
+
+            updater = new CUpdate(notifyIcon1);
 
             bShowOnly = false;
             bOnlyNewFiles = false;
@@ -1014,8 +1017,30 @@ namespace IliasDL
             return (int)(dTemp / 1024.0);
         }
 
+        //------------------------------------
+        //          update handling
+        //------------------------------------
 
-        //-------------------------------------------------------------------background worker
+        private void NotifyIcon1_BalloonTipClicked(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Es wurde ein Update gefunden. Möchten Sie es herunterladen und installieren?", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (result == DialogResult.Yes)
+            {
+                //string sRelease = "v" + updater.GetReleaseVersion().ToString();
+
+                //call update programme
+                const string sTemplate = @"https://github.com/{0}/{1}/releases/download/{2}/{3}";
+                //Process.Start(string.Format(sTemplate, "Viperinius", "ILIAS-Sync2Folder", sRelease, sRelease + ".zip"));
+
+                updater.GetUpdate();
+            }
+        }
+
+        //------------------------------------
+        //          background workers
+        //------------------------------------
+
         private void Form1_Load(object sender, EventArgs e)
         {
             txtUserInput.Text = config.GetUser();
@@ -1060,6 +1085,18 @@ namespace IliasDL
 
             loginWorker.DoWork += new DoWorkEventHandler(LoginWorker_DoWork);
             loginWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(LoginWorker_RunWorkerCompleted);
+
+
+            //-----------------------------
+            //      check for update
+            //-----------------------------
+
+            if (!updater.CheckForUpdate())
+            {
+                //notify user
+                updater.DisplayNotification("Update verfügbar", "Es ist ein Update für ILIAS Sync2Folder verfügbar!");
+            }
+
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -1078,8 +1115,6 @@ namespace IliasDL
             if (!worker.CancellationPending && !bCoursesDone)
             {
                 worker.ReportProgress(iFilePercentage);
-
-                //Console.WriteLine("---start worker---");
 
                 iCurrentCourseNum = 1;
                 if (config.GetSyncAll() == "true")
@@ -1104,8 +1139,6 @@ namespace IliasDL
 
                 bCoursesDone = true;
                 iCoursesPercentage = 100;
-
-                //Console.WriteLine("---end worker---");
 
                 worker.ReportProgress(100);
             }

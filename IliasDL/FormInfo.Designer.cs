@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInfo));
             this.lbTitle = new System.Windows.Forms.Label();
             this.linkGithub = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.linkOctokit = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // lbTitle
@@ -56,11 +58,34 @@
             this.linkGithub.Text = "Github-Repository";
             this.linkGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkGithub_LinkClicked);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 146);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Lizenzen / Verwendetes:";
+            // 
+            // linkOctokit
+            // 
+            this.linkOctokit.AutoSize = true;
+            this.linkOctokit.ForeColor = System.Drawing.Color.DarkBlue;
+            this.linkOctokit.Location = new System.Drawing.Point(13, 164);
+            this.linkOctokit.Name = "linkOctokit";
+            this.linkOctokit.Size = new System.Drawing.Size(69, 13);
+            this.linkOctokit.TabIndex = 3;
+            this.linkOctokit.TabStop = true;
+            this.linkOctokit.Text = "Octokit (MIT)";
+            this.linkOctokit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkOctokit_LinkClicked);
+            // 
             // FormInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 139);
+            this.ClientSize = new System.Drawing.Size(414, 209);
+            this.Controls.Add(this.linkOctokit);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.linkGithub);
             this.Controls.Add(this.lbTitle);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -79,5 +104,7 @@
 
         private System.Windows.Forms.Label lbTitle;
         private System.Windows.Forms.LinkLabel linkGithub;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel linkOctokit;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,6 +81,7 @@
             this.colDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuStrip1.SuspendLayout();
             this.panelHeader.SuspendLayout();
             this.groupLogin.SuspendLayout();
@@ -440,6 +442,11 @@
             // 
             resources.ApplyResources(this.colId, "colId");
             // 
+            // notifyIcon1
+            // 
+            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
+            this.notifyIcon1.BalloonTipClicked += new System.EventHandler(this.NotifyIcon1_BalloonTipClicked);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnLoginConfirm;
@@ -516,6 +523,7 @@
         private System.Windows.Forms.ToolStripMenuItem exportImportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importSettingsToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
