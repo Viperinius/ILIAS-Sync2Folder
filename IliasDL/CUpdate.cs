@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.IO.Compression;
 using System.Windows.Forms;
+using System.Diagnostics;
 using Octokit;
 
 namespace IliasDL
@@ -104,8 +106,43 @@ namespace IliasDL
                 string sFileName = sRelease + ".zip";
                 WebClient webClient = new WebClient();
                 webClient.DownloadFile(sAssetUrl, Path.GetTempPath() + sFileName);
+
+                //unzip
+                string sDestDirectory = Path.GetTempPath() + sRelease;
+               
+                if (Directory.Exists(sDestDirectory))
+                {
+                    Directory.Delete(sDestDirectory, recursive: true);
+                }
+
+                Directory.CreateDirectory(sDestDirectory);
+                ZipFile.ExtractToDirectory(Path.GetTempPath() + sFileName, sDestDirectory);
+
+                string sAppPath = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                string sFormattedPath = new Uri(Path.GetDirectoryName(sAppPath)).LocalPath;
+
+                string sSeparator = AddPathSeparator(sFormattedPath);
+                if (sSeparator != "")
+                {
+                    sFormattedPath = sFormattedPath + sSeparator;
+                    Process.Start(sFormattedPath + @"IliasDL_Updater.exe", sDestDirectory + " " + sFileName + " " + sSeparator);    //needs to be tested!
+                    return true;
+                }                
             }
-            return true;
+            return false;
+        }
+
+        private string AddPathSeparator(string sPath)
+        {
+            if (sPath.Contains(Path.DirectorySeparatorChar))
+            {
+                return Path.DirectorySeparatorChar.ToString();
+            }
+            else if (sPath.Contains(Path.AltDirectorySeparatorChar))
+            {
+                return Path.AltDirectorySeparatorChar.ToString();
+            }
+            return "";
         }
     }
 }

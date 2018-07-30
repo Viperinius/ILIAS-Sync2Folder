@@ -1027,13 +1027,13 @@ namespace IliasDL
 
             if (result == DialogResult.Yes)
             {
-                //string sRelease = "v" + updater.GetReleaseVersion().ToString();
-
                 //call update programme
-                const string sTemplate = @"https://github.com/{0}/{1}/releases/download/{2}/{3}";
-                //Process.Start(string.Format(sTemplate, "Viperinius", "ILIAS-Sync2Folder", sRelease, sRelease + ".zip"));
-
-                updater.GetUpdate();
+                bool bResult = updater.GetUpdate();
+                if (!bResult)
+                {
+                    MessageBox.Show("Beim Update ist leider etwas schiefgelaufen!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
         }
 
