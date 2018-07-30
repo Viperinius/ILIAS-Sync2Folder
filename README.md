@@ -9,6 +9,7 @@ All features can be found at [Features](#features)
 
 ### Used libraries
 + [Octokit](https://github.com/octokit/octokit.net) (licensed under MIT License)
++ [Wunder.ClickOnceUninstaller](https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller) (licensed under MIT License)
 
 
 ### Features
