@@ -20,6 +20,7 @@ namespace IliasDL
 
         private string sRelease;
         private int iReleaseId;
+        private string sSeparator;
 
         public CUpdate(NotifyIcon notify)
         {
@@ -37,6 +38,15 @@ namespace IliasDL
             notifyIcon.BalloonTipTitle = sTitle;
             notifyIcon.BalloonTipText = sText;
             notifyIcon.ShowBalloonTip(100);
+        }
+
+        public bool CheckForUpdater()
+        {
+            if (File.Exists(Path.GetTempPath() + @"IliasDL_Updater.exe"))
+            {
+                return true;
+            }
+            return false;
         }
 
         public Version GetReleaseVersion()
@@ -92,20 +102,28 @@ namespace IliasDL
             if (iReleaseId != 0)
             {
                 var assets = client.Repository.Release.GetAllAssets("Viperinius", "ILIAS-Sync2Folder", iReleaseId).Result;
-                string sAssetUrl = "";
+                string sAssetUrlRelease = "";
+                string sAssetUrlUpdater = "";
+
+                string sFileNameRelease = sRelease + ".zip";
+                string sFileNameUpdater = @"IliasDL_Updater.exe";
 
                 foreach (var asset in assets)
                 {
-                    if (asset.Name == sRelease + ".zip")
+                    if (asset.Name == sFileNameRelease)
                     {
-                        sAssetUrl = asset.BrowserDownloadUrl;
+                        sAssetUrlRelease = asset.BrowserDownloadUrl;
+                    }
+                    else if (asset.Name == sFileNameUpdater)
+                    {
+                        sAssetUrlUpdater = asset.BrowserDownloadUrl;
                     }
                 }
 
-                //download the file
-                string sFileName = sRelease + ".zip";
+                //download the files
                 WebClient webClient = new WebClient();
-                webClient.DownloadFile(sAssetUrl, Path.GetTempPath() + sFileName);
+                webClient.DownloadFile(sAssetUrlRelease, Path.GetTempPath() + sFileNameRelease);
+                webClient.DownloadFile(sAssetUrlUpdater, Path.GetTempPath() + sFileNameUpdater);
 
                 //unzip
                 string sDestDirectory = Path.GetTempPath() + sRelease;
@@ -116,33 +134,17 @@ namespace IliasDL
                 }
 
                 Directory.CreateDirectory(sDestDirectory);
-                ZipFile.ExtractToDirectory(Path.GetTempPath() + sFileName, sDestDirectory);
+                ZipFile.ExtractToDirectory(Path.GetTempPath() + sFileNameRelease, sDestDirectory);
 
-                string sAppPath = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-                string sFormattedPath = new Uri(Path.GetDirectoryName(sAppPath)).LocalPath;
-
-                string sSeparator = AddPathSeparator(sFormattedPath);
-                if (sSeparator != "")
+                //start updater
+                string sUpdaterPath = Path.GetTempPath() + sFileNameUpdater;
+                if (CheckForUpdater())
                 {
-                    sFormattedPath = sFormattedPath + sSeparator;
-                    Process.Start(sFormattedPath + @"IliasDL_Updater.exe", sDestDirectory + " " + sFileName + " " + sSeparator);    //needs to be tested!
+                    Process.Start(sUpdaterPath, sDestDirectory + " " + sFileNameRelease + " " + sSeparator);    //needs to be tested!
                     return true;
-                }                
+                }
             }
             return false;
-        }
-
-        private string AddPathSeparator(string sPath)
-        {
-            if (sPath.Contains(Path.DirectorySeparatorChar))
-            {
-                return Path.DirectorySeparatorChar.ToString();
-            }
-            else if (sPath.Contains(Path.AltDirectorySeparatorChar))
-            {
-                return Path.AltDirectorySeparatorChar.ToString();
-            }
-            return "";
         }
     }
 }
