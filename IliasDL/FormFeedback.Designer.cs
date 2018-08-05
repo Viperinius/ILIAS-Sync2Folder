@@ -48,7 +48,7 @@
             // linklbDiscord
             // 
             this.linklbDiscord.AutoSize = true;
-            this.linklbDiscord.Location = new System.Drawing.Point(12, 46);
+            this.linklbDiscord.Location = new System.Drawing.Point(12, 44);
             this.linklbDiscord.Name = "linklbDiscord";
             this.linklbDiscord.Size = new System.Drawing.Size(77, 13);
             this.linklbDiscord.TabIndex = 1;
@@ -59,7 +59,7 @@
             // linklbMail
             // 
             this.linklbMail.AutoSize = true;
-            this.linklbMail.Location = new System.Drawing.Point(13, 63);
+            this.linklbMail.Location = new System.Drawing.Point(12, 64);
             this.linklbMail.Name = "linklbMail";
             this.linklbMail.Size = new System.Drawing.Size(139, 13);
             this.linklbMail.TabIndex = 2;

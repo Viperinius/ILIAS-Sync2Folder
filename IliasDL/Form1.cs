@@ -29,6 +29,7 @@ namespace IliasDL
         private string sUsername;
         private string sPassword;
         public bool bLoggedIn;
+        private bool bLogInFail;
 
         private CConfig config = new CConfig();
         private CUpdate updater;
@@ -70,7 +71,7 @@ namespace IliasDL
             sUsername = "";
             sPassword = "";
             bLoggedIn = false;
-
+            bLogInFail = false;
             
         }
 
@@ -1091,7 +1092,7 @@ namespace IliasDL
             //      check for update
             //-----------------------------
 
-            if (!updater.CheckForUpdate())
+            if (updater.CheckForUpdate())
             {
                 //notify user
                 updater.DisplayNotification("Update verfügbar", "Es ist ein Update für ILIAS Sync2Folder verfügbar!");
@@ -1173,30 +1174,40 @@ namespace IliasDL
             {
                 if (txtUserInput.Text != "" && txtPasswInput.Text != "")
                 {
+                    bLogInFail = false;
                     //Console.WriteLine("Logging in.");
 
                     sUsername = txtUserInput.Text;
                     sPassword = txtPasswInput.Text;
                     config.SetUser(sUsername);
 
-                    //connect to ILIAS SOAP
-                    //get session id / log in
-                    sSessionId = client.loginLDAP("FH-Bielefeld", sUsername, sPassword);
-                    //Console.WriteLine(sSessionId);
-                    //get user id
-                    iUserId = client.getUserIdBySid(sSessionId);
-                    //Console.WriteLine(iUserId);
+                    //connect to ILIAS SOAP                    
+                    try
+                    {
+                        //get session id / log in
+                        sSessionId = client.loginLDAP("FH-Bielefeld", sUsername, sPassword);
+                        //Console.WriteLine(sSessionId);
+                        //get user id
+                        iUserId = client.getUserIdBySid(sSessionId);
+                        //Console.WriteLine(iUserId);
+                    }
+                    catch (Exception)
+                    {
+                        bLogInFail = true;
+                        MessageBox.Show("Login failed. Wrong credentials?", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }                    
                 }
                 else
                 {
                     MessageBox.Show(@"Username or Password not given!");
+                    bLogInFail = true;
                 }
             }
         }
 
         private void LoginWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (bLoggedIn)
+            if (bLoggedIn && !bLogInFail)
             {
                 lbLoggedIn.Hide();
                 picCheck.Hide();
@@ -1209,7 +1220,7 @@ namespace IliasDL
 
                 btnSync.Enabled = false;
             }
-            else
+            else if (!bLogInFail)
             {
                 lbUser.Enabled = false;
                 lbPassw.Enabled = false;
