@@ -32,5 +32,10 @@ namespace IliasDL
         {
             Process.Start(@"https://github.com/octokit/octokit.net");
         }
+
+        private void LinkWunder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(@"https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller");
+        }
     }
 }

@@ -33,6 +33,7 @@
             this.linkGithub = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.linkOctokit = new System.Windows.Forms.LinkLabel();
+            this.linkWunder = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // lbTitle
@@ -79,11 +80,24 @@
             this.linkOctokit.Text = "Octokit (MIT)";
             this.linkOctokit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkOctokit_LinkClicked);
             // 
+            // linkWunder
+            // 
+            this.linkWunder.AutoSize = true;
+            this.linkWunder.ForeColor = System.Drawing.Color.DarkBlue;
+            this.linkWunder.Location = new System.Drawing.Point(13, 187);
+            this.linkWunder.Name = "linkWunder";
+            this.linkWunder.Size = new System.Drawing.Size(174, 13);
+            this.linkWunder.TabIndex = 4;
+            this.linkWunder.TabStop = true;
+            this.linkWunder.Text = "Wunder.ClickOnceUninstaller (MIT)";
+            this.linkWunder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkWunder_LinkClicked);
+            // 
             // FormInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(414, 209);
+            this.Controls.Add(this.linkWunder);
             this.Controls.Add(this.linkOctokit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkGithub);
@@ -106,5 +120,6 @@
         private System.Windows.Forms.LinkLabel linkGithub;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkOctokit;
+        private System.Windows.Forms.LinkLabel linkWunder;
     }
 }
