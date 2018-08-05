@@ -85,8 +85,6 @@ namespace IliasDL
             ChangeLanguage("de");
         }
 
-
-
         private void ChangeLanguage(string lang)
         {
             CultureInfo culture = new CultureInfo(lang);
@@ -267,6 +265,22 @@ namespace IliasDL
                 {
                     importForm.Close();
                 }
+            }
+        }
+
+        private void TrayIconToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (trayIconToolStripMenuItem.CheckState == CheckState.Checked)
+            {
+                trayIconToolStripMenuItem.CheckState = CheckState.Checked;
+                config.SetShowTrayIcon(true);
+                notifyIcon1.Visible = true;
+            }
+            else
+            {
+                trayIconToolStripMenuItem.CheckState = CheckState.Unchecked;
+                config.SetShowTrayIcon(false);
+                notifyIcon1.Visible = false;
             }
         }
 
@@ -1066,6 +1080,15 @@ namespace IliasDL
             {
                 coursesLikeILIASToolStripMenuItem.CheckState = CheckState.Checked;
                 courseOwnToolStripMenuItem.CheckState = CheckState.Unchecked;
+            }
+
+            if (config.GetShowTrayIcon() == "true")
+            {
+                trayIconToolStripMenuItem.CheckState = CheckState.Checked;
+            }
+            else
+            {
+                trayIconToolStripMenuItem.CheckState = CheckState.Unchecked;
             }
 
             worker = new BackgroundWorker

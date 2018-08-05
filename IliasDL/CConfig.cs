@@ -210,5 +210,22 @@ namespace IliasDL
         {
             return GetAppSetting("useyear");
         }
+
+        public void SetShowTrayIcon(bool bState)
+        {
+            if (bState)
+            {
+                SetAppSetting("trayicon", "true");
+            }
+            else
+            {
+                SetAppSetting("trayicon", "false");
+            }
+        }
+
+        public string GetShowTrayIcon()
+        {
+            return GetAppSetting("trayicon");
+        }
     }
 }

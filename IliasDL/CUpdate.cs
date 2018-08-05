@@ -16,6 +16,8 @@ namespace IliasDL
     {
         private NotifyIcon notifyIcon = new NotifyIcon();
 
+        private CConfig config = new CConfig();
+
         private GitHubClient client = new GitHubClient(new ProductHeaderValue("ILIAS-Sync2Folder"));
 
         private string sRelease;
@@ -27,7 +29,14 @@ namespace IliasDL
             notifyIcon = notify;
 
             notifyIcon.Text = @"ILIAS Sync2Folder";
-            notifyIcon.Visible = true;
+            if (config.GetShowTrayIcon() == "true")
+            {
+                notifyIcon.Visible = true;
+            }
+            else
+            {
+                notifyIcon.Visible = false;
+            }
 
             iReleaseId = 0;
             sRelease = "v0.0.0.0";
