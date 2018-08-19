@@ -210,6 +210,7 @@
             // 
             this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
             resources.ApplyResources(this.serverToolStripMenuItem, "serverToolStripMenuItem");
+            this.serverToolStripMenuItem.Click += new System.EventHandler(this.ServerToolStripMenuItem_Click);
             // 
             // coursesToolStripMenuItem
             // 

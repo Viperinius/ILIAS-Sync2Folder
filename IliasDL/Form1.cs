@@ -22,12 +22,9 @@ namespace IliasDL
 {
     public partial class Form1 : Form
     {
-        private bool bShowOnly;
-        private bool bOnlyNewFiles;
-
-        private string sIliasUrl;
         private string sUsername;
         private string sPassword;
+        private string sIliasClient;
         public bool bLoggedIn;
         private bool bLogInFail;
 
@@ -50,7 +47,7 @@ namespace IliasDL
         private int iCurrentCourseNum = 0;
         private bool bCoursesDone = false;
 
-        private bool success;
+        private bool bSuccess;
 
 
         public Form1()
@@ -61,18 +58,12 @@ namespace IliasDL
             InitializeComponent();
 
             updater = new CUpdate(notifyIcon1);
-
-            bShowOnly = false;
-            bOnlyNewFiles = false;
-
-            //sIliasUrl = "https://nbl.fh-bielefeld.de/login.php?target=&soap_pw=&ext_uid=&client_id=FH-Bielefeld&lang=de";
-            sIliasUrl = "https://nbl.fh-bielefeld.de/webservice/soap/server.php";
-
+            
             sUsername = "";
             sPassword = "";
             bLoggedIn = false;
             bLogInFail = false;
-            
+            sIliasClient = "";
         }
 
         private void EnglishToolStripMenuItem_Click(object sender, EventArgs e)
@@ -281,6 +272,17 @@ namespace IliasDL
                 trayIconToolStripMenuItem.CheckState = CheckState.Unchecked;
                 config.SetShowTrayIcon(false);
                 notifyIcon1.Visible = false;
+            }
+        }
+
+        private void ServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormServer serverForm = new FormServer())
+            {
+                if (serverForm.ShowDialog() == DialogResult.OK)
+                {
+                    serverForm.Close();
+                }
             }
         }
 
@@ -1190,7 +1192,7 @@ namespace IliasDL
         {
             if (bLoggedIn)
             {
-                success = Logout(ref client, sSessionId);
+                bSuccess = Logout(ref client, sSessionId);
                 //Console.WriteLine("Logging out.");
             }
             else
@@ -1207,12 +1209,14 @@ namespace IliasDL
                     //connect to ILIAS SOAP                    
                     try
                     {
+                        //get client id
+                        sIliasClient = config.GetClient();
+
                         //get session id / log in
-                        sSessionId = client.loginLDAP("FH-Bielefeld", sUsername, sPassword);
-                        //Console.WriteLine(sSessionId);
+                        sSessionId = client.loginLDAP(sIliasClient, sUsername, sPassword);
+                        
                         //get user id
                         iUserId = client.getUserIdBySid(sSessionId);
-                        //Console.WriteLine(iUserId);
                     }
                     catch (Exception)
                     {

@@ -246,10 +246,34 @@ namespace IliasDL
             if (chkSyncAll.Checked)
             {
                 config.SetSyncAll(true);
+                var items = listViewCourses.Items;
+                for (int i = 0; i < items.Count; i++)
+                {
+                    listViewCourses.Items[i].Checked = true;
+                }
             }
             else
             {
                 config.SetSyncAll(false);
+            }
+        }
+
+        private void ChkSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            var items = listViewCourses.Items;
+            if (chkSelectAll.Checked)
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    listViewCourses.Items[i].Checked = true;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    listViewCourses.Items[i].Checked = false;
+                }
             }
         }
 
@@ -333,5 +357,7 @@ namespace IliasDL
             //Console.WriteLine(e.Result.ToString());
             if (bCancelled) Application.Exit();
         }
+
+        
     }
 }

@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Collections.Specialized;
+using System.Xml;
+using System.Net;
+using System.IO;
 
 namespace IliasDL
 {
@@ -61,7 +64,97 @@ namespace IliasDL
         }
 
 
+        public void SetIliasReference(string sUrl)
+        {
+            //load config
+            XmlDocument doc = new XmlDocument();
+            doc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+            XmlNodeList endpoints = doc.GetElementsByTagName("endpoint");
+            //search for url
+            foreach (XmlNode node in endpoints)
+            {
+                var addressAttribute = node.Attributes["address"];
 
+                if (!(addressAttribute is null))
+                {
+                    addressAttribute.Value = sUrl;
+                }
+            }
+            doc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+        }
+
+        private bool IliasUrlIsCorrect(string sUrl)
+        {
+            if (sUrl.Contains(@"/webservice/soap/server.php") || sUrl.Contains(@"/login.php"))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private string IliasGetClientId(string sUrl)
+        {
+            CookieContainer cookieJar = new CookieContainer();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(sUrl);
+
+            request.CookieContainer = cookieJar;
+            request.Method = "POST";
+            request.Credentials = CredentialCache.DefaultCredentials;
+
+            Stream dataStream = request.GetRequestStream();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            var test = response.Cookies;
+            response.Close();
+
+            return test[0].Value;            
+        }
+
+        public string FormatIliasUrlToWebServiceLink(string sUrl, ref string sClient)
+        {         
+            if (!IliasUrlIsCorrect(sUrl))
+            {
+                //url unlike expected login or webservice page
+                return "";
+            }
+            
+            string sResult = "";
+            if (sUrl.Contains(@"/login.php"))
+            {
+                //given url is login page
+
+                //get client id for further use (login)
+                if (sUrl.Contains(@"client_id="))
+                {
+                    string sClientTemplate = "client_id=";
+                    sClient = sUrl.Substring(sUrl.LastIndexOf(sClientTemplate) + sClientTemplate.Length, sUrl.Length - (sUrl.LastIndexOf(sClientTemplate) + sClientTemplate.Length));
+                    if (sClient.Contains("&"))
+                    {
+                        sClient = sClient.Split('&')[0];
+                    }
+                }
+                else
+                {
+                    sClient = IliasGetClientId(sUrl);
+                }
+
+                sResult = sUrl.Substring(0, sUrl.LastIndexOf("login.php")) + @"webservice/soap/server.php";
+                return sResult;
+            }
+            else if (sUrl.Contains(@"/webservice/soap/server.php"))
+            {
+                //given url is webservice page
+                if (sUrl.Contains("?"))
+                {
+                    sResult = sUrl.Split('?')[0];
+                }
+                else
+                {
+                    sResult = sUrl;
+                }
+                return sResult;
+            }
+            return "";
+        }
 
         public void SetPath(string sPath)
         {

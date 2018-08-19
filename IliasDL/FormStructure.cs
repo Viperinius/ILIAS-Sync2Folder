@@ -24,7 +24,16 @@ namespace IliasDL
             if (config.GetStructureTemplate() != "__NO_VAL__")
             {
                 txtTemplate.Text = config.GetStructureTemplate();
-            }            
+            }
+
+            if (config.GetUseYearInStructure() == "true")
+            {
+                chkYear.Checked = true;
+            }
+            else
+            {
+                chkYear.Checked = false;
+            }
         }
 
         private void BtnOk_Click(object sender, EventArgs e)

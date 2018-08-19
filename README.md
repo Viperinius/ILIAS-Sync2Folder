@@ -1,7 +1,7 @@
 ILIAS-Sync2Folder
 =================
 ### Summary
-Sync2Folder is a tool to download files from the e-Learning platform ILIAS (currently only FH-Bielefeld).
+Sync2Folder is a tool to download files from the e-Learning platform ILIAS.
 It automatically scans your courses including their content and either shows or downloads the files.
 All features can be found at [Features](#features)
 
@@ -26,7 +26,7 @@ All features can be found at [Features](#features)
 #### Planned Features
 + be able to change the folder structure settings (e.g. turning the "semester structure" on) and move already loaded files to the new structure
 + ~~be able to export your settings and import them on another device~~
-+ changeable servers (for other universities)
++ ~~changeable servers (for other universities)~~
 + switchable language (German <-> English)
 + implement an optional automatic synchronisation (automatically check for new files every x minutes)
 

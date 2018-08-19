@@ -121,17 +121,92 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="openPathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="openPathToolStripMenuItem.Text" xml:space="preserve">
+    <value>Pfad öffnen...</value>
+  </data>
+  <data name="changePathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="changePathToolStripMenuItem.Text" xml:space="preserve">
+    <value>Pfad ändern...</value>
+  </data>
   <data name="localPathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
   <data name="localPathToolStripMenuItem.Text" xml:space="preserve">
     <value>Speicherort</value>
   </data>
+  <data name="coursesLikeILIASToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="coursesLikeILIASToolStripMenuItem.Text" xml:space="preserve">
+    <value>Unverändert</value>
+  </data>
+  <data name="courseOwnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 22</value>
+  </data>
+  <data name="courseOwnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Eigene...</value>
+  </data>
+  <data name="courseNamingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="courseNamingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Kursbenennung</value>
+  </data>
+  <data name="folderLikeILIASToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="folderLikeILIASToolStripMenuItem.Text" xml:space="preserve">
+    <value>Unverändert (wie im ILIAS)</value>
+  </data>
+  <data name="semesterStructureToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="semesterStructureToolStripMenuItem.Text" xml:space="preserve">
+    <value>Semester-Unterordner</value>
+  </data>
+  <data name="konfigurierenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 6</value>
+  </data>
+  <data name="configureFoldersToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="configureFoldersToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Konfigurieren...</value>
+  </data>
+  <data name="folderStructureToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="folderStructureToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ordnerstruktur</value>
+  </data>
   <data name="filesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
   <data name="filesToolStripMenuItem.Text" xml:space="preserve">
     <value>Dateien</value>
+  </data>
+  <data name="serverToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="serverToolStripMenuItem.Text" xml:space="preserve">
+    <value>Server einstellen...</value>
+  </data>
+  <data name="coursesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="coursesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Kurse wählen...</value>
+  </data>
+  <data name="autoSynchronisationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="autoSynchronisationToolStripMenuItem.Text" xml:space="preserve">
+    <value>Automatische Synchronisation...</value>
   </data>
   <data name="synchronisationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -140,25 +215,25 @@
     <value>Synchronisation</value>
   </data>
   <data name="germanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>118, 22</value>
   </data>
   <data name="germanToolStripMenuItem.Text" xml:space="preserve">
     <value>Deutsch</value>
   </data>
   <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>118, 22</value>
   </data>
   <data name="englishToolStripMenuItem.Text" xml:space="preserve">
     <value>Englisch</value>
   </data>
   <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>122, 22</value>
   </data>
   <data name="languageToolStripMenuItem.Text" xml:space="preserve">
     <value>Sprache</value>
   </data>
   <data name="trayIconToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>122, 22</value>
   </data>
   <data name="trayIconToolStripMenuItem.Text" xml:space="preserve">
     <value>Tray Icon</value>
@@ -168,6 +243,18 @@
   </data>
   <data name="overlayToolStripMenuItem.Text" xml:space="preserve">
     <value>Aussehen</value>
+  </data>
+  <data name="exportSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="exportSettingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Einstellungen exportieren...</value>
+  </data>
+  <data name="importSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="importSettingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Einstellungen importieren...</value>
   </data>
   <data name="exportImportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -180,6 +267,18 @@
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="feedbackBugsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="feedbackBugsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Feedback, Bugs</value>
+  </data>
+  <data name="infoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="infoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Info</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -212,240 +311,9 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="openPathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
-  </data>
-  <data name="openPathToolStripMenuItem.Text" xml:space="preserve">
-    <value>Pfad öffnen...</value>
-  </data>
-  <data name="changePathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
-  </data>
-  <data name="changePathToolStripMenuItem.Text" xml:space="preserve">
-    <value>Pfad ändern...</value>
-  </data>
-  <data name="courseNamingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
-  </data>
-  <data name="courseNamingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Kursbenennung</value>
-  </data>
-  <data name="coursesLikeILIASToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="coursesLikeILIASToolStripMenuItem.Text" xml:space="preserve">
-    <value>Unverändert</value>
-  </data>
-  <data name="courseOwnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 22</value>
-  </data>
-  <data name="courseOwnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Eigene...</value>
-  </data>
-  <data name="folderStructureToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
-  </data>
-  <data name="folderStructureToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ordnerstruktur</value>
-  </data>
-  <data name="folderLikeILIASToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 22</value>
-  </data>
-  <data name="folderLikeILIASToolStripMenuItem.Text" xml:space="preserve">
-    <value>Unverändert (wie im ILIAS)</value>
-  </data>
-  <data name="semesterStructureToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 22</value>
-  </data>
-  <data name="semesterStructureToolStripMenuItem.Text" xml:space="preserve">
-    <value>Semester-Unterordner</value>
-  </data>
-  <data name="konfigurierenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 6</value>
-  </data>
-  <data name="configureFoldersToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 22</value>
-  </data>
-  <data name="configureFoldersToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Konfigurieren...</value>
-  </data>
-  <data name="serverToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="serverToolStripMenuItem.Text" xml:space="preserve">
-    <value>Server einstellen...</value>
-  </data>
-  <data name="coursesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="coursesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Kurse wählen...</value>
-  </data>
-  <data name="autoSynchronisationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="autoSynchronisationToolStripMenuItem.Text" xml:space="preserve">
-    <value>Automatische Synchronisation...</value>
-  </data>
-  <data name="exportSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
-  </data>
-  <data name="exportSettingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Einstellungen exportieren...</value>
-  </data>
-  <data name="importSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
-  </data>
-  <data name="importSettingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Einstellungen importieren...</value>
-  </data>
-  <data name="feedbackBugsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="feedbackBugsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Feedback, Bugs</value>
-  </data>
-  <data name="infoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="infoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Info</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="panelHeader.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
-  </data>
-  <data name="&gt;&gt;lbProgAll.Name" xml:space="preserve">
-    <value>lbProgAll</value>
-  </data>
-  <data name="&gt;&gt;lbProgAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbProgAll.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;lbProgAll.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lbProgressAll.Name" xml:space="preserve">
-    <value>lbProgressAll</value>
-  </data>
-  <data name="&gt;&gt;lbProgressAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbProgressAll.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;lbProgressAll.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;progressBarAll.Name" xml:space="preserve">
-    <value>progressBarAll</value>
-  </data>
-  <data name="&gt;&gt;progressBarAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;progressBarAll.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;progressBarAll.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lbProgActiveCourse.Name" xml:space="preserve">
-    <value>lbProgActiveCourse</value>
-  </data>
-  <data name="&gt;&gt;lbProgActiveCourse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbProgActiveCourse.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;lbProgActiveCourse.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lbProgressCourse.Name" xml:space="preserve">
-    <value>lbProgressCourse</value>
-  </data>
-  <data name="&gt;&gt;lbProgressCourse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbProgressCourse.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;lbProgressCourse.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;progressBar.Name" xml:space="preserve">
-    <value>progressBar</value>
-  </data>
-  <data name="&gt;&gt;progressBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;progressBar.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;chkListSyncOptions.Name" xml:space="preserve">
-    <value>chkListSyncOptions</value>
-  </data>
-  <data name="&gt;&gt;chkListSyncOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkListSyncOptions.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;chkListSyncOptions.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;btnSync.Name" xml:space="preserve">
-    <value>btnSync</value>
-  </data>
-  <data name="&gt;&gt;btnSync.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnSync.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;btnSync.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;groupLogin.Name" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;groupLogin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupLogin.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;groupLogin.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="panelHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panelHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <data name="panelHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1212, 96</value>
-  </data>
-  <data name="panelHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;panelHeader.Name" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;panelHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelHeader.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelHeader.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="lbProgAll.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -702,114 +570,6 @@
   <data name="&gt;&gt;btnSync.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;picCheck.Name" xml:space="preserve">
-    <value>picCheck</value>
-  </data>
-  <data name="&gt;&gt;picCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picCheck.Parent" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;picCheck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lbLoggedIn.Name" xml:space="preserve">
-    <value>lbLoggedIn</value>
-  </data>
-  <data name="&gt;&gt;lbLoggedIn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbLoggedIn.Parent" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;lbLoggedIn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnLoginConfirm.Name" xml:space="preserve">
-    <value>btnLoginConfirm</value>
-  </data>
-  <data name="&gt;&gt;btnLoginConfirm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnLoginConfirm.Parent" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;btnLoginConfirm.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtPasswInput.Name" xml:space="preserve">
-    <value>txtPasswInput</value>
-  </data>
-  <data name="&gt;&gt;txtPasswInput.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtPasswInput.Parent" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;txtPasswInput.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lbPassw.Name" xml:space="preserve">
-    <value>lbPassw</value>
-  </data>
-  <data name="&gt;&gt;lbPassw.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbPassw.Parent" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;lbPassw.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;txtUserInput.Name" xml:space="preserve">
-    <value>txtUserInput</value>
-  </data>
-  <data name="&gt;&gt;txtUserInput.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtUserInput.Parent" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;txtUserInput.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lbUser.Name" xml:space="preserve">
-    <value>lbUser</value>
-  </data>
-  <data name="&gt;&gt;lbUser.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbUser.Parent" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;lbUser.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="groupLogin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 13</value>
-  </data>
-  <data name="groupLogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>437, 71</value>
-  </data>
-  <data name="groupLogin.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupLogin.Text" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="&gt;&gt;groupLogin.Name" xml:space="preserve">
-    <value>groupLogin</value>
-  </data>
-  <data name="&gt;&gt;groupLogin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupLogin.Parent" xml:space="preserve">
-    <value>panelHeader</value>
-  </data>
-  <data name="&gt;&gt;groupLogin.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="picCheck.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -1005,29 +765,53 @@
   <data name="&gt;&gt;lbUser.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="listViewData.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="groupLogin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 13</value>
   </data>
-  <data name="listViewData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 120</value>
+  <data name="groupLogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>437, 71</value>
   </data>
-  <data name="listViewData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1212, 497</value>
+  <data name="groupLogin.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="listViewData.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="groupLogin.Text" xml:space="preserve">
+    <value>Login</value>
   </data>
-  <data name="&gt;&gt;listViewData.Name" xml:space="preserve">
-    <value>listViewData</value>
+  <data name="&gt;&gt;groupLogin.Name" xml:space="preserve">
+    <value>groupLogin</value>
   </data>
-  <data name="&gt;&gt;listViewData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;groupLogin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;listViewData.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupLogin.Parent" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;groupLogin.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="panelHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="panelHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1212, 96</value>
+  </data>
+  <data name="panelHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Name" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;listViewData.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;panelHeader.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="colStatus.Text" xml:space="preserve">
     <value>Status</value>
@@ -1061,6 +845,30 @@
   </data>
   <data name="colId.Width" type="System.Int32, mscorlib">
     <value>50</value>
+  </data>
+  <data name="listViewData.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="listViewData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 120</value>
+  </data>
+  <data name="listViewData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1212, 497</value>
+  </data>
+  <data name="listViewData.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;listViewData.Name" xml:space="preserve">
+    <value>listViewData</value>
+  </data>
+  <data name="&gt;&gt;listViewData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listViewData.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;listViewData.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>

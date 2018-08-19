@@ -39,6 +39,7 @@
             this.chkSyncAll = new System.Windows.Forms.CheckBox();
             this.progBar = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // listViewCourses
@@ -54,7 +55,7 @@
             this.colRefIds});
             this.listViewCourses.Location = new System.Drawing.Point(0, 41);
             this.listViewCourses.Name = "listViewCourses";
-            this.listViewCourses.Size = new System.Drawing.Size(595, 589);
+            this.listViewCourses.Size = new System.Drawing.Size(595, 574);
             this.listViewCourses.TabIndex = 0;
             this.listViewCourses.UseCompatibleStateImageBehavior = false;
             this.listViewCourses.View = System.Windows.Forms.View.Details;
@@ -104,7 +105,7 @@
             // 
             this.chkSyncAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSyncAll.AutoSize = true;
-            this.chkSyncAll.Location = new System.Drawing.Point(12, 655);
+            this.chkSyncAll.Location = new System.Drawing.Point(12, 638);
             this.chkSyncAll.Name = "chkSyncAll";
             this.chkSyncAll.Size = new System.Drawing.Size(149, 17);
             this.chkSyncAll.TabIndex = 3;
@@ -125,12 +126,23 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 633);
+            this.label1.Location = new System.Drawing.Point(9, 618);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(508, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Um nur ausgewählte Kurse zu synchronisieren, bitte alle nicht benötigten Kurse un" +
     "d \"Alle Kurse\" abwählen\r\n";
+            // 
+            // chkSelectAll
+            // 
+            this.chkSelectAll.AutoSize = true;
+            this.chkSelectAll.Location = new System.Drawing.Point(12, 661);
+            this.chkSelectAll.Name = "chkSelectAll";
+            this.chkSelectAll.Size = new System.Drawing.Size(123, 17);
+            this.chkSelectAll.TabIndex = 6;
+            this.chkSelectAll.Text = "Alle aus- / abwählen";
+            this.chkSelectAll.UseVisualStyleBackColor = true;
+            this.chkSelectAll.CheckedChanged += new System.EventHandler(this.ChkSelectAll_CheckedChanged);
             // 
             // FormCourses
             // 
@@ -139,6 +151,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(595, 688);
+            this.Controls.Add(this.chkSelectAll);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progBar);
             this.Controls.Add(this.chkSyncAll);
@@ -168,5 +181,6 @@
         private System.Windows.Forms.CheckBox chkSyncAll;
         private System.Windows.Forms.ProgressBar progBar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkSelectAll;
     }
 }
