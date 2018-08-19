@@ -21,12 +21,14 @@ All features can be found at [Features](#features)
 + define, where the downloaded files should be stored
 + progress shown (for each course and in general)
 + export your settings and import them on another device
++ change the server address to get access to your university's version of ILIAS
 - UI currently only in German
 
 #### Planned Features
 + be able to change the folder structure settings (e.g. turning the "semester structure" on) and move already loaded files to the new structure
-+ ~~be able to export your settings and import them on another device~~
-+ ~~changeable servers (for other universities)~~
++ make the update notification optional / receive optional notifications e.g. when sync is done
++ ~~be able to export your settings and import them on another device~~ done.
++ ~~changeable servers (for other universities)~~ done.
 + switchable language (German <-> English)
 + implement an optional automatic synchronisation (automatically check for new files every x minutes)
 
