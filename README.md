@@ -11,6 +11,9 @@ All features can be found at [Features](#features)
 + [Octokit](https://github.com/octokit/octokit.net) (licensed under MIT License)
 + [Wunder.ClickOnceUninstaller](https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller) (licensed under MIT License)
 
+### How to use
+*Coming shortly.*
+
 ### Features
 + download or show files only
 + switch between all files showing and listing new files only
@@ -23,9 +26,14 @@ All features can be found at [Features](#features)
 + change the server address to get access to your university's version of ILIAS
 - UI currently only in German
 
-### Note
+#### Note
 As I'm currently not able to test Sync2Folder with other universities than FH Bielefeld, it is not sure whether or not features like the structured folders will work as they heavily depend on the course naming.
-Example of a naming version that works:	`ELM-4.2-SST, Signal- und Systemtheorie, Battermann, SS2018`, so like `...-SemesterNum.CourseNum, ..., ..., SemesterYear`
+Example of a naming version that works:	
+>ELM-4.2-SST, Signal- und Systemtheorie, Battermann, SS2018
+
+so like 
+
+>...-SemesterNum.CourseNum, ..., ..., SemesterYear
 
 
 #### Planned Features
