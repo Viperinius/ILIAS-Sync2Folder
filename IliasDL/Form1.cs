@@ -88,6 +88,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Check if capslock is active when entering the password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtPasswInput_Enter(object sender, EventArgs e)
         {
             // check if capslock is active and warn user
@@ -98,7 +103,12 @@ namespace IliasDL
             }
         }
 
-
+        /// <summary>
+        /// When login button is clicked, start login worker.
+        /// If already running, cancel its task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnLoginConfirm_Click(object sender, EventArgs e)
         {
             if (loginWorker.IsBusy)
@@ -111,6 +121,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Starts / Stops the sync background worker
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSync_Click(object sender, EventArgs e)
         {
             if (worker.IsBusy)
@@ -131,6 +146,11 @@ namespace IliasDL
 
         }
 
+        /// <summary>
+        /// Open the path form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangePathToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormPath pathForm = new FormPath())
@@ -142,6 +162,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Open the save path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string sPath = config.GetPath();
@@ -155,6 +180,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Open the course selection form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CoursesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormCourses courseForm = new FormCourses(this))
@@ -166,6 +196,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Set course names setting to same as ILIAS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CoursesLikeILIASToolStripMenuItem_Click(object sender, EventArgs e)
         {
             coursesLikeILIASToolStripMenuItem.CheckState = CheckState.Checked;
@@ -173,6 +208,11 @@ namespace IliasDL
             config.SetUseOwnNames(false);
         }
 
+        /// <summary>
+        /// Set course names setting to own
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CourseOwnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (bLoggedIn)
@@ -194,6 +234,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Set folder structure setting to same as ILIAS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FolderLikeILIASToolStripMenuItem_Click(object sender, EventArgs e)
         {
             folderLikeILIASToolStripMenuItem.CheckState = CheckState.Checked;
@@ -202,6 +247,11 @@ namespace IliasDL
             config.SetUseOwnStructure(false);
         }
 
+        /// <summary>
+        /// Set folder structure setting to own
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SemesterStructureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             semesterStructureToolStripMenuItem.CheckState = CheckState.Checked;
@@ -210,6 +260,11 @@ namespace IliasDL
             config.SetUseOwnStructure(true);
         }
 
+        /// <summary>
+        /// Open the folder template form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfigureFoldersToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             using (FormStructure folderForm = new FormStructure())
@@ -221,6 +276,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Open the info form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormInfo infoForm = new FormInfo())
@@ -229,6 +289,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Open the feedback form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FeedbackBugsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormFeedback feedbackForm = new FormFeedback())
@@ -237,6 +302,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Open the settings export form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExportSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormSettingsExport exportForm = new FormSettingsExport())
@@ -248,6 +318,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Open the settings import form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormSettingsImport importForm = new FormSettingsImport())
@@ -259,6 +334,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Change if a tray icon is shown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TrayIconToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (trayIconToolStripMenuItem.CheckState == CheckState.Checked)
@@ -275,6 +355,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Open the server form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ServerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormServer serverForm = new FormServer())
@@ -286,6 +371,15 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Add the given data as a new row to the list view
+        /// </summary>
+        /// <param name="sStatus">Status of the file</param>
+        /// <param name="sName">Name of the file</param>
+        /// <param name="sPath">Path to the file</param>
+        /// <param name="sDate">Creation date of the file</param>
+        /// <param name="sSize">Size of the file</param>
+        /// <param name="sRefId">Ref ID of the file</param>
         private void AddToListView(string sStatus, string sName, string sPath, string sDate, string sSize, string sRefId)
         {
             string[] row = { sStatus, sName, sPath, sDate, sSize, sRefId };
@@ -311,6 +405,9 @@ namespace IliasDL
         }
         public delegate void AddToListViewCallback(string sStatus, string sName, string sPath, string sDate, string sSize, string sRefId);
 
+        /// <summary>
+        /// Remove all elements of the list view
+        /// </summary>
         private void ClearListView()
         {
             if (listViewData.InvokeRequired)
@@ -324,6 +421,12 @@ namespace IliasDL
         }
         public delegate void ClearListViewCallback();
 
+        /// <summary>
+        /// Change an entry in the list view
+        /// </summary>
+        /// <param name="iRow">Row of the item</param>
+        /// <param name="sCategory">Column of the item</param>
+        /// <param name="sNewVal">The new item value</param>
         private void ChangeListViewItem(int iRow, string sCategory, string sNewVal)
         {
             int iColumn = 0;
@@ -373,6 +476,11 @@ namespace IliasDL
         }
         public delegate void ChangeListViewItemCallback(int iRow, string sCategory, string sNewVal);
 
+        /// <summary>
+        /// Build the path to the files and create non existing directories
+        /// </summary>
+        /// <param name="sPath">Path to create</param>
+        /// <param name="sCourseId">Course Id to retrieve own names, if activated</param>
         private void CreateDirectories(ref string sPath, string sCourseId)
         {
             string sTempPath = "";
@@ -430,6 +538,12 @@ namespace IliasDL
             //Console.WriteLine("inner: " + sPath);
         }
 
+        /// <summary>
+        /// Build the path to the files and (optionally) create non existing directories
+        /// </summary>
+        /// <param name="sPath">Path to create</param>
+        /// <param name="sCourseId">Course Id to retrieve own names, if activated</param>
+        /// <param name="bBuildOnlyPath">If false, the directories will be created</param>
         private void CreateDirectories(ref string sPath, string sCourseId, bool bBuildOnlyPath)
         {
             string sTempPath = "";
@@ -490,6 +604,11 @@ namespace IliasDL
             //Console.WriteLine("inner: " + sPath);
         }
 
+        /// <summary>
+        /// Get the semester number from a course name
+        /// </summary>
+        /// <param name="sCourseName">Raw course name</param>
+        /// <returns>semester number or 0 in case of error</returns>
         private int GetSemesterNum(string sCourseName)
         {
             //ELM-4.4-Embe.....
@@ -507,6 +626,11 @@ namespace IliasDL
             }            
         }
 
+        /// <summary>
+        /// Get the semester year of the course
+        /// </summary>
+        /// <param name="sCourseName">Raw Course Name</param>
+        /// <returns>course year or 0 in case of errors</returns>
         private int GetCourseYear(string sCourseName)
         {
             //..., Wetter, SS2018
@@ -534,6 +658,12 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Replace the folder template with semester num and year
+        /// </summary>
+        /// <param name="sCourseName">Raw course name</param>
+        /// <param name="sStructTemplate">Folder template</param>
+        /// <returns>Filled in template</returns>
         private string ReplaceTemplatePlaceholder(string sCourseName, string sStructTemplate)
         {
             int iSemesterNum = GetSemesterNum(sCourseName);
@@ -571,6 +701,11 @@ namespace IliasDL
         //          ILIAS functions
         //------------------------------------    
 
+        /// <summary>
+        /// Get the course information of the user
+        /// </summary>
+        /// <param name="client">ILIAS SOAP webservice client as reference</param>
+        /// <param name="sSessionId">Session ID</param>
         public void GetCourses(ref LIASSoapWebservicePortTypeClient client, string sSessionId)
         {
             List<string> lRoleTitles = new List<string>();
@@ -609,6 +744,13 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Get the name of the given course
+        /// </summary>
+        /// <param name="client">ILIAS SOAP webservice client as reference</param>
+        /// <param name="sSessionId">Session ID</param>
+        /// <param name="sRef">Reference ID of the course</param>
+        /// <returns>Course name</returns>
         public string GetCourseName(ref LIASSoapWebservicePortTypeClient client, string sSessionId, string sRef)
         {
             string xmlCourse = client.getObjectByReference(sSessionId, Int32.Parse(sRef) , iUserId);
@@ -632,6 +774,11 @@ namespace IliasDL
             return temp;
         }
 
+        /// <summary>
+        /// Get names of all users' courses
+        /// </summary>
+        /// <param name="client">ILIAS SOAP webservice client as reference</param>
+        /// <param name="sSessionId">Session ID</param>
         public void GetCourseNames(ref LIASSoapWebservicePortTypeClient client, string sSessionId)
         {
             foreach (string sRef in lCourses)
@@ -640,6 +787,12 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Get the file information, create directories, add to list view and download files
+        /// </summary>
+        /// <param name="client">ILIAS SOAP webservice client as reference</param>
+        /// <param name="iCourseId">Course ID to get the files from</param>
+        /// <param name="sSessionId">Session ID</param>
         private void GetCourseFiles(ref LIASSoapWebservicePortTypeClient client, int iCourseId, string sSessionId)
         {
             List<string> lRefs = new List<string>();
@@ -870,6 +1023,15 @@ namespace IliasDL
             //implement return val?
         }
 
+        /// <summary>
+        /// Download file as uncompressed base64 encoded string
+        /// </summary>
+        /// <param name="client">ILIAS SOAP webservice client as reference</param>
+        /// <param name="iRefId">Ref ID of the file</param>
+        /// <param name="sPath">Path to download to</param>
+        /// <param name="sName">Name of the file</param>
+        /// <param name="sSessionId">Session ID</param>
+        /// <param name="sFileStatus">File status</param>
         private void GetFileByRef(ref LIASSoapWebservicePortTypeClient client, int iRefId, string sPath, string sName, string sSessionId, ref string sFileStatus)
         {
             string sFullPath = "";
@@ -929,6 +1091,15 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Download file as compressed GZIP string
+        /// </summary>
+        /// <param name="client">ILIAS SOAP webservice client as reference</param>
+        /// <param name="iRefId">Ref ID of the file</param>
+        /// <param name="sPath">Path to download to</param>
+        /// <param name="sName">Name of the file</param>
+        /// <param name="sSessionId">Session ID</param>
+        /// <param name="sFileStatus">File status</param>
         private void GetFileByRefGZIP(ref LIASSoapWebservicePortTypeClient client, int iRefId, string sPath, string sName, string sSessionId, ref string sFileStatus)
         {
             string sFullPath = "";
@@ -1013,21 +1184,43 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Log out from ILIAS SOAP
+        /// </summary>
+        /// <param name="client">ILIAS SOAP webservice client as reference</param>
+        /// <param name="sSessionId">Session ID</param>
+        /// <returns>true if logout successful</returns>
         private bool Logout(ref LIASSoapWebservicePortTypeClient client, string sSessionId)
         {
             return client.logout(sSessionId);
         }             
 
+        /// <summary>
+        /// Get the percentage of the given values
+        /// </summary>
+        /// <param name="iCurrent">Current value</param>
+        /// <param name="iMax">Maximum value</param>
+        /// <returns>Percentage</returns>
         private int GetPercentage(int iCurrent, int iMax)
         {
             return (int)(((double)iCurrent / iMax)*100);
         }
 
+        /// <summary>
+        /// Get kibibyte size from byte
+        /// </summary>
+        /// <param name="iSizeInByte">Size in byte</param>
+        /// <returns>Size in KiB</returns>
         private int GetSizeInKiB(int iSizeInByte)
         {
             return (int)((double)iSizeInByte / 1024.0);
         }
 
+        /// <summary>
+        /// Get mebibyte size from byte
+        /// </summary>
+        /// <param name="iSizeInByte">Size in byte</param>
+        /// <returns>Size in MiB</returns>
         private int GetSizeInMiB(int iSizeInByte)
         {
             double dTemp = ((double)iSizeInByte / 1024.0);
@@ -1038,6 +1231,11 @@ namespace IliasDL
         //          update handling
         //------------------------------------
 
+        /// <summary>
+        /// Update notification clicked, call updater
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NotifyIcon1_BalloonTipClicked(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Es wurde ein Update gefunden. Möchten Sie es herunterladen und installieren?", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -1058,6 +1256,11 @@ namespace IliasDL
         //          background workers
         //------------------------------------
 
+        /// <summary>
+        /// Adjust window settings when loading the form, prepare the background workers, check for update
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             txtUserInput.Text = config.GetUser();
@@ -1125,6 +1328,11 @@ namespace IliasDL
 
         }
 
+        /// <summary>
+        /// Sync background worker, manages the synchronisation process
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             //clear old list view data
@@ -1173,6 +1381,11 @@ namespace IliasDL
             e.Result = iResults;
         }
 
+        /// <summary>
+        /// Update the sync progress
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_ProgressChanges(object sender, ProgressChangedEventArgs e)
         {
             progressBar.Value = e.ProgressPercentage;
@@ -1182,12 +1395,22 @@ namespace IliasDL
             lbProgressAll.Text = iCoursesPercentage.ToString() + " %";
         }
 
+        /// <summary>
+        /// Sync is done, reset some values 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             btnSync.Text = "Starte Synchronisation";
             bCoursesDone = false;
         }
 
+        /// <summary>
+        /// login background worker to manage the login to ILIAS SOAP
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             if (bLoggedIn)
@@ -1232,6 +1455,11 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Login is done, check if failed and adjust window settings accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (bLoggedIn && !bLogInFail)
