@@ -12,7 +12,7 @@ All features can be found at [Features](#features)
 + [Wunder.ClickOnceUninstaller](https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller) (licensed under MIT License)
 
 ### How to use
-*Coming shortly.*
+*Coming shortly in wiki section.*
 
 ### Features
 + download or show files only
@@ -23,7 +23,7 @@ All features can be found at [Features](#features)
 + define, where the downloaded files should be stored
 + progress shown (for each course and in general)
 + export your settings and import them on another device
-+ change the server address to get access to your university's version of ILIAS
++ change the server address to get access to your university's version of ILIAS (Default: FH Bielefeld)
 - UI currently only in German
 
 #### Note
