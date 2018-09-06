@@ -1,4 +1,10 @@
-﻿using System;
+﻿//==================================================================
+//
+//    (c) Copyright by Viperinius
+//
+//==================================================================
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

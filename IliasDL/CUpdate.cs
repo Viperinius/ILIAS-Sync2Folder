@@ -1,4 +1,10 @@
-﻿using System;
+﻿//==================================================================
+//
+//    (c) Copyright by Viperinius
+//
+//==================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +48,11 @@ namespace IliasDL
             sRelease = "v0.0.0.0";
         }
 
+        /// <summary>
+        /// Show a notification
+        /// </summary>
+        /// <param name="sTitle">Title of the tip</param>
+        /// <param name="sText">Text to display</param>
         public void DisplayNotification(string sTitle, string sText)
         {
             notifyIcon.BalloonTipTitle = sTitle;
@@ -49,6 +60,10 @@ namespace IliasDL
             notifyIcon.ShowBalloonTip(100);
         }
 
+        /// <summary>
+        /// Checks if the updater programme exists in temp path
+        /// </summary>
+        /// <returns>True if updater is found</returns>
         public bool CheckForUpdater()
         {
             if (File.Exists(Path.GetTempPath() + @"IliasDL_Updater.exe"))
@@ -58,6 +73,10 @@ namespace IliasDL
             return false;
         }
 
+        /// <summary>
+        /// Examines the latest release version on Github
+        /// </summary>
+        /// <returns>Latest version or 0.0.0.0 in case of errors</returns>
         public Version GetReleaseVersion()
         {          
             try
@@ -91,6 +110,10 @@ namespace IliasDL
             }                                  
         }
 
+        /// <summary>
+        /// Checks if the version running is outdated
+        /// </summary>
+        /// <returns>True if update available</returns>
         public bool CheckForUpdate()
         {
             Version versionGithub = GetReleaseVersion();
@@ -106,6 +129,10 @@ namespace IliasDL
             }
         }
 
+        /// <summary>
+        /// Downloads the new version and the updater and launches the latter
+        /// </summary>
+        /// <returns>False if something fails</returns>
         public bool GetUpdate()
         {
             if (iReleaseId != 0)

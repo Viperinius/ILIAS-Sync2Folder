@@ -1,4 +1,10 @@
-﻿using System;
+﻿//==================================================================
+//
+//    (c) Copyright by Viperinius
+//
+//==================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +23,11 @@ namespace IliasDL
         {
         }
 
+        /// <summary>
+        /// Load an appsetting element from app.config
+        /// </summary>
+        /// <param name="key">Entry to look for</param>
+        /// <returns>Value of key</returns>
         private string GetAppSetting(string key)
         {
             //load AppSettings
@@ -34,6 +45,11 @@ namespace IliasDL
             
         }
 
+        /// <summary>
+        /// Store an appsetting element in app.config
+        /// </summary>
+        /// <param name="key">Entry to store to</param>
+        /// <param name="value">Value to be stored</param>
         private void SetAppSetting(string key, string value)
         {
             //load AppSettings
@@ -50,6 +66,10 @@ namespace IliasDL
             config.Save(ConfigurationSaveMode.Modified);
         }
 
+        /// <summary>
+        /// Remove an element from app.config
+        /// </summary>
+        /// <param name="key">Entry to remove</param>
         private void ClearAppSetting(string key)
         {
             //load AppSettings
@@ -63,7 +83,11 @@ namespace IliasDL
             config.Save(ConfigurationSaveMode.Modified);
         }
 
-
+        
+        /// <summary>
+        /// Set the endpoint address of the linked service reference
+        /// </summary>
+        /// <param name="sUrl">New endpoint address</param>
         public void SetIliasReference(string sUrl)
         {
             //load config
@@ -83,6 +107,11 @@ namespace IliasDL
             doc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
         }
 
+        /// <summary>
+        /// Check if the given address is correct
+        /// </summary>
+        /// <param name="sUrl">URL to check</param>
+        /// <returns>True if correct</returns>
         private bool IliasUrlIsCorrect(string sUrl)
         {
             if (sUrl.Contains(@"/webservice/soap/server.php") || sUrl.Contains(@"/login.php"))
@@ -92,6 +121,11 @@ namespace IliasDL
             return false;
         }
 
+        /// <summary>
+        /// Get the client ID of the ILIAS server
+        /// </summary>
+        /// <param name="sUrl">URL to ILIAS</param>
+        /// <returns>Client ID</returns>
         private string IliasGetClientId(string sUrl)
         {
             CookieContainer cookieJar = new CookieContainer();
@@ -103,12 +137,18 @@ namespace IliasDL
 
             Stream dataStream = request.GetRequestStream();
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            var test = response.Cookies;
+            var respCookies = response.Cookies;
             response.Close();
 
-            return test[0].Value;            
+            return respCookies[0].Value;            
         }
 
+        /// <summary>
+        /// Format the given link to fit the endpoint address formatting
+        /// </summary>
+        /// <param name="sUrl">Raw URL</param>
+        /// <param name="sClient">Client ID</param>
+        /// <returns>Formatted URL or an empty string in case of errors</returns>
         public string FormatIliasUrlToWebServiceLink(string sUrl, ref string sClient)
         {         
             if (!IliasUrlIsCorrect(sUrl))
@@ -156,36 +196,64 @@ namespace IliasDL
             return "";
         }
 
+        /// <summary>
+        /// Set the save path setting
+        /// </summary>
+        /// <param name="sPath">Save path</param>
         public void SetPath(string sPath)
         {
             SetAppSetting("path", sPath);
         }
 
+        /// <summary>
+        /// Get the save path setting
+        /// </summary>
+        /// <returns>Save Path</returns>
         public string GetPath()
         {
             return GetAppSetting("path");
         }
 
+        /// <summary>
+        /// Set the server setting
+        /// </summary>
+        /// <param name="sServer">ILIAS server address</param>
         public void SetServer(string sServer)
         {
             SetAppSetting("server", sServer);
         }
 
+        /// <summary>
+        /// Get the server setting
+        /// </summary>
+        /// <returns>ILIAS server address</returns>
         public string GetServer()
         {
             return GetAppSetting("server");
         }
 
+        /// <summary>
+        /// Set the user setting
+        /// </summary>
+        /// <param name="sUser">Username</param>
         public void SetUser(string sUser)
         {
             SetAppSetting("user", sUser);
         }
 
+        /// <summary>
+        /// Get the user setting
+        /// </summary>
+        /// <returns>Username</returns>
         public string GetUser()
         {
             return GetAppSetting("user");
         }
 
+        /// <summary>
+        /// Set the client setting
+        /// </summary>
+        /// <param name="sClient"></param>
         public void SetClient(string sClient)
         {
             SetAppSetting("client", sClient);
