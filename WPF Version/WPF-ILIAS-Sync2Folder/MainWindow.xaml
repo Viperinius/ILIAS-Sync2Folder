@@ -5,6 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_ILIAS_Sync2Folder"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
+        xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        Dialog:DialogParticipation.Register="{Binding}"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
@@ -12,25 +16,47 @@
         SaveWindowPosition="True" 
         Icon="dliconWHITEsquare.ico"
         GlowBrush="{DynamicResource AccentColorBrush}">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="42,35,0,0" VerticalAlignment="Top" Width="75"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="42,71,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="42,102,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="42,146,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+    <dockablz:Layout FloatingItemHeaderMemberPath="Header" FloatingItemDisplayMemberPath="Content" FloatingItemContainerStyle="{DynamicResource MahAppsToolDragablzItemStyle}">
+        <dragablz:TabablzControl>
+            <dragablz:TabablzControl.InterTabController>
+                <dragablz:InterTabController />
+            </dragablz:TabablzControl.InterTabController>
+            <TabItem x:Name="tabSync" Header="Synchronising">
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center">Hello World</Button>
+            </TabItem>
+            <TabItem x:Name="tabCourseConfig" Header="Course Options">
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center">Test</Button>
+            </TabItem>
+        </dragablz:TabablzControl>
+    </dockablz:Layout>
 
-    </Grid>
+    
     <!-- Add more stuff to the title bar: -->
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="settings" Name="BtnSettings" Click="BtnSettings_Click"/>
-            
+            <Button>Connection Status:</Button>
+            <Controls:ProgressRing IsActive="False" Width="20" Height="20" MinWidth="20" MinHeight="20" Foreground="{DynamicResource ControlBackgroundBrush}"/>
+            <Button Name="BtnLogin" Click="BtnLogin_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle  Width="20"
+                                Height="20"
+                                Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_door_enter}" Stretch="Fill" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="Login" />
+                </StackPanel>
+            </Button>
             <Button Name="BtnStyle" Click="BtnStyle_Click">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle  Width="20"
                                 Height="20"
                                 Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_cupcake}" Stretch="Fill" />
+                            <VisualBrush Visual="{StaticResource appbar_draw_brush}" Stretch="Fill" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"

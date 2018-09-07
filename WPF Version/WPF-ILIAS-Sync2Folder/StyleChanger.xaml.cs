@@ -32,7 +32,9 @@ namespace WPF_ILIAS_Sync2Folder
 
             if (selectedAccent != null)
             {
+                //get current app style
                 Tuple<AppTheme, Accent> style = ThemeManager.DetectAppStyle(Application.Current);
+                //set specific accent
                 ThemeManager.ChangeAppStyle(Application.Current, selectedAccent, style.Item1);
             }
         }
@@ -44,7 +46,9 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void ChangeWindowThemeClick(object sender, RoutedEventArgs e)
         {
+            //get current app style
             Tuple<AppTheme, Accent> style = ThemeManager.DetectAppStyle(Application.Current);
+            //set specific theme
             ThemeManager.ChangeAppStyle(Application.Current, style.Item2, ThemeManager.GetAppTheme("Base" + ((Button)sender).Content));
         }
     }

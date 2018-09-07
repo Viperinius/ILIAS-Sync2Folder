@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:WPF_ILIAS_Sync2Folder"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
         mc:Ignorable="d"
         Title="StyleChanger" Height="330.123" Width="495.697">
     <Grid>
