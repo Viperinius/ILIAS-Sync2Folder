@@ -8,6 +8,7 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Dialog:DialogParticipation.Register="{Binding}"
         mc:Ignorable="d"
         Title="ILIAS Sync2Folder" 
@@ -21,9 +22,9 @@
             <dragablz:TabablzControl.InterTabController>
                 <dragablz:InterTabController />
             </dragablz:TabablzControl.InterTabController>
-            <TabItem x:Name="tabSync" Header="Synchronising">               
+            <TabItem x:Name="tabSync" Header="Synchronising">
             </TabItem>
-            <TabItem x:Name="tabCourseConfig" Header="Course Options">                
+            <TabItem x:Name="tabCourseConfig" Header="Course Options">
             </TabItem>
             <TabItem x:Name="tabFolderConfig" Header="Folder Options">
             </TabItem>
@@ -34,24 +35,33 @@
         </dragablz:TabablzControl>
     </dockablz:Layout>
 
-    
     <!-- Add more stuff to the title bar: -->
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button>Connection Status:</Button>
-            <Controls:ProgressRing IsActive="False" Width="20" Height="20" MinWidth="20" MinHeight="20" Foreground="{DynamicResource ControlBackgroundBrush}"/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Connection Status:" Margin="0,0,5,0"/>
+                    <Controls:ProgressRing IsActive="True" Width="20" Height="20" MinWidth="20" MinHeight="20" Foreground="{DynamicResource ControlBackgroundBrush}"/>
+                </StackPanel>
+            </Button>            
             <Button Name="BtnLogin" Click="BtnLogin_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Rectangle  Width="20"
+                    <Rectangle  Name="rectLoginIcon"
+                                Width="20"
                                 Height="20"
                                 Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_door_enter}" Stretch="Fill" />
+                            <VisualBrush Stretch="Fill">
+                                <VisualBrush.Visual>
+                                    <iconPacks:PackIconOcticons Kind="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
-                   VerticalAlignment="Center"
-                   Text="Login/Logout"/>
+                               VerticalAlignment="Center"
+                               Name="textblockLogin"
+                               Text="{Binding BtnLoginText}"/>      
                 </StackPanel>
             </Button>
             <Button Name="BtnStyle" Click="BtnStyle_Click">
@@ -64,8 +74,8 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
-                   VerticalAlignment="Center"
-                   Text="Change style..." />
+                               VerticalAlignment="Center"
+                               Text="Change style..." />    
                 </StackPanel>
             </Button>
         </Controls:WindowCommands>

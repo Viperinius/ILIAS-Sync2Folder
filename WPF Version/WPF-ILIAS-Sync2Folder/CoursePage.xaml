@@ -20,18 +20,27 @@
             <ColumnDefinition Width="170"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Grid.Row="1" Grid.ColumnSpan="4" Margin="10,10" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+        <ListView Name="listviewCourse" Grid.Row="1" Grid.ColumnSpan="4" Margin="10,10" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" SizeChanged="CoursePage_SizeChanged">
             <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
+                <GridView x:Name="gridViewCourse">
+                    <GridViewColumn Header="Synced?">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding CourseChecked}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Course" DisplayMemberBinding="{Binding CourseName}"/>
+                    <GridViewColumn Header="Own Name" DisplayMemberBinding="{Binding CourseOwnName}"/>
+                    <GridViewColumn Header="Ref ID" DisplayMemberBinding="{Binding CourseId}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Controls:ToggleSwitch Grid.Column="0" Header="Sync all:" OnLabel="On" OffLabel="Off" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
-        <Button Grid.Column="0" HorizontalAlignment="Left" Margin="105,35,0,0" VerticalAlignment="Top">(De-)Select all</Button>
-        <Controls:ToggleSwitch Grid.Column="1" Header="Use own names:" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
-        <Button Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">Edit selected course</Button>
-        <Button Grid.Column="2" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="143">Save changes</Button>
+        <Controls:ToggleSwitch Name="toggleSyncAll" Checked="ToggleSyncAll_Checked" Unchecked="ToggleSyncAll_Unchecked" Grid.Column="0" Header="Sync all:" OnLabel="On" OffLabel="Off" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
+        <Button Name="btnDeSelectAll" Click="BtnDeSelectAll_Click" Grid.Column="0" HorizontalAlignment="Left" Margin="105,35,0,0" VerticalAlignment="Top">(De-)Select all</Button>
+        <Controls:ToggleSwitch Name="toggleUseOwnNames" Checked="ToggleUseOwnNames_Checked" Unchecked="ToggleUseOwnNames_Unchecked" Grid.Column="1" Header="Use own names:" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
+        <Button Name="btnEditCourse" Click="BtnEditCourse_Click" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">Edit selected course</Button>
+        <Button Name="btnSaveCourse" Click="BtnSaveCourse_Click" Grid.Column="2" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="143">Save changes</Button>
         <TextBox x:Name="txtCourse" Grid.Column="3" Controls:TextBoxHelper.Watermark="Course" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Controls:TextBoxHelper.UseFloatingWatermark="True" MinWidth="120"/>
         <TextBox x:Name="txtOwnName" Grid.Column="3" Controls:TextBoxHelper.Watermark="Own Name" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Controls:TextBoxHelper.UseFloatingWatermark="True" MinWidth="120"/>
     </Grid>

@@ -19,6 +19,7 @@ using System.Runtime.CompilerServices;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
+using MahApps.Metro.IconPacks;
 
 namespace WPF_ILIAS_Sync2Folder
 {
@@ -29,10 +30,17 @@ namespace WPF_ILIAS_Sync2Folder
     {
         public bool bLoggedIn;
 
+        ChangedPropertyNotifier changedPropertyNotifier = new ChangedPropertyNotifier();
+        
         public MainWindow()
         {
-
+            
             InitializeComponent();
+
+            BtnLogin.Tag = PackIconOcticonsKind.SignIn;
+
+            textblockLogin.DataContext = changedPropertyNotifier;
+            rectLoginIcon.DataContext = changedPropertyNotifier;
 
             tabSync.Content = new SyncPage();
             tabCourseConfig.Content = new CoursePage();
@@ -42,16 +50,27 @@ namespace WPF_ILIAS_Sync2Folder
 
         }
 
-        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        private async void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (!bLoggedIn)
             {
                 ShowLoginDialog();
+                changedPropertyNotifier.ChangeBtnLoginText();
+                bLoggedIn = true;
+                BtnLogin.Tag = PackIconOcticonsKind.SignOut;
             }
             else
             {
-                ShowLogoutDialog();
-            }
+                var metroWindow = (Application.Current.MainWindow as MetroWindow);
+                var result = await metroWindow.ShowMessageAsync("Logout", "Do you want to log out?", MessageDialogStyle.AffirmativeAndNegative);
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    changedPropertyNotifier.ChangeBtnLoginText();
+                    bLoggedIn = false;
+                    BtnLogin.Tag = PackIconOcticonsKind.SignIn;
+                }
+            }            
         }
 
         private void BtnStyle_Click(object sender, RoutedEventArgs e)
@@ -68,19 +87,8 @@ namespace WPF_ILIAS_Sync2Folder
             Console.WriteLine("Pass: " + result.Password);
         }
 
-        public async void ShowLogoutDialog()
-        {
-            var metroWindow = (Application.Current.MainWindow as MetroWindow);
-            var result = await metroWindow.ShowMessageAsync("Logout", "Do you want to log out?", MessageDialogStyle.AffirmativeAndNegative);
-            if (result == MessageDialogResult.Affirmative)
-            {
-                Console.WriteLine("Logout: Yes");
-            }
-            else
-            {
-                Console.WriteLine("Logout: No");
-            }
-            
-        }
+        
+
+        
     }
 }

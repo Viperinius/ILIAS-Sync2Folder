@@ -27,14 +27,14 @@
             <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Destination folder:</Label>
             <Grid Grid.Row="2" Grid.Column="1">
                 <Label VerticalAlignment="Top">Choose a folder to save to:</Label>
-                <TextBox Controls:TextBoxHelper.Watermark="Destination path" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,40,0,0" Width="300" Height="29"></TextBox>
-                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="315,40,0,0">...</Button>
-                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,40,0,0">Open current path</Button>
+                <TextBox Name="txtDestPath" Controls:TextBoxHelper.Watermark="Destination path" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,40,0,0" Width="300" Height="29"></TextBox>
+                <Button Name="btnChoosePath" Click="BtnChoosePath_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="315,40,0,0">...</Button>
+                <Button Name="btnOpenPath" Click="BtnOpenPath_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,40,0,0">Open current path</Button>
             </Grid>
             <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Configure the folder structure:</Label>
             <Grid Grid.Row="4" Grid.Column="1">
-                <Controls:ToggleSwitch Header="Use own folder structure:" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,10,0,0"></Controls:ToggleSwitch>
-                <Controls:ToggleSwitch Header="Include the year:" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,10,0,0"></Controls:ToggleSwitch>
+                <Controls:ToggleSwitch Name="toggleFolderStructure" Checked="ToggleFolderStructure_Checked" Unchecked="ToggleFolderStructure_Unchecked" Header="Use own folder structure:" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,10,0,0"></Controls:ToggleSwitch>
+                <Controls:ToggleSwitch Name="toggleUseYear" Checked="ToggleUseYear_Checked" Unchecked="ToggleUseYear_Unchecked" Header="Include the year:" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,10,0,0"></Controls:ToggleSwitch>
                 <Label VerticalAlignment="Top" Margin="0,80,0,0">
                     <TextBlock TextWrapping="WrapWithOverflow">
                     Please enter a template which should be applied to folder naming. Enter a name, a % as placeholder for the semester number and a $ for the year. 
@@ -45,7 +45,7 @@
                     If a course cannot be assigned a semester, it is saved under "Allgemein".
                     </TextBlock>
                 </Label>
-                <TextBox Controls:TextBoxHelper.Watermark="Template" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,200,0,0" Width="200" Height="20"></TextBox>
+                <TextBox Name="txtTemplate" Controls:TextBoxHelper.Watermark="Template" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,200,0,0" Width="200" Height="20"></TextBox>
             </Grid>
         </Grid>
     </ScrollViewer>
