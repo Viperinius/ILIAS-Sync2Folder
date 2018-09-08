@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="WPF_ILIAS_Sync2Folder.HelpPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_ILIAS_Sync2Folder"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="170"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Help &amp; Feedback:</Label>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Label>
+                    <TextBlock TextWrapping="WrapWithOverflow">
+                    Any questions or problems?<LineBreak/>
+                    Contact us via one of the following ways:<LineBreak/><LineBreak/><LineBreak/><LineBreak/><LineBreak/><LineBreak/><LineBreak/>
+                    Note: If you want to report or bug or some other problem, please attach a screenshot of the problem (if possible).
+                    </TextBlock>
+                </Label>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,50,0,0">
+                <Hyperlink x:Name="linkDiscord" NavigateUri="http://discord.gg/zxDfVpM" RequestNavigate="Hyperlink_RequestNavigate">Discord server</Hyperlink>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,70,0,0">
+                <Hyperlink x:Name="linkMail" NavigateUri="mailto:viperinius@gmx.de?subject=ILIAS%20Sync2Folder%20Feedback" RequestNavigate="Hyperlink_RequestNavigate">Mail to dev</Hyperlink>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,90,0,0">
+                <Hyperlink x:Name="linkIssue" NavigateUri="https://github.com/Viperinius/ILIAS-Sync2Folder/issues/new/choose" RequestNavigate="Hyperlink_RequestNavigate"> Open a Github issue</Hyperlink>
+                </TextBlock>
+            </Grid>
+            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Info:</Label>
+            <Grid Grid.Row="4" Grid.Column="1">
+                <Label>
+                    <TextBlock TextWrapping="WrapWithOverflow">
+                    Made by Viperinius 2018<LineBreak/>
+                    (MIT License)<LineBreak/><LineBreak/><LineBreak/><LineBreak/>
+                    For further help and changelogs please visit our Discord server (link above).<LineBreak/><LineBreak/><LineBreak/>
+                    Licenses / Used libraries:<LineBreak/>
+                    </TextBlock>
+                </Label>
+                <!--CHANGE LABEL CONTENT TO BINDING, remove background colour when done-->
+                <Label Content="Installed version : $.$.$.$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,45,0,0" Background="#FFDE0000"></Label>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,107,0,0">
+                <Hyperlink x:Name="linkGithub" NavigateUri="https://github.com/Viperinius/ILIAS-Sync2Folder" RequestNavigate="Hyperlink_RequestNavigate">Github repository</Hyperlink>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,153,0,0">
+                <Hyperlink x:Name="linkOctokit" NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit (MIT)</Hyperlink>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,173,0,0">
+                <Hyperlink x:Name="linkWunder" NavigateUri="https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller" RequestNavigate="Hyperlink_RequestNavigate">Wunder.ClickOnceUninstaller (MIT)</Hyperlink>
+                </TextBlock>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

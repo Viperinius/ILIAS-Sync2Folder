@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.CompilerServices;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
@@ -25,19 +27,31 @@ namespace WPF_ILIAS_Sync2Folder
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        public bool bLoggedIn;
+
         public MainWindow()
         {
+
             InitializeComponent();
+
             tabSync.Content = new SyncPage();
             tabCourseConfig.Content = new CoursePage();
+            tabFolderConfig.Content = new FolderPage();
+            tabGeneralConfig.Content = new GeneralPage();
+            tabInfo.Content = new HelpPage();
 
-            
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            ShowLoginDialog();
-            //ShowLogoutDialog();
+            if (!bLoggedIn)
+            {
+                ShowLoginDialog();
+            }
+            else
+            {
+                ShowLogoutDialog();
+            }
         }
 
         private void BtnStyle_Click(object sender, RoutedEventArgs e)

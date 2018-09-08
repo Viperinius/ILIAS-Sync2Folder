@@ -20,16 +20,16 @@
             <ColumnDefinition Width="170"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Grid.Row="1" Grid.ColumnSpan="4" Margin="10,10">
+        <ListView Grid.Row="1" Grid.ColumnSpan="4" Margin="10,10" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Controls:ToggleSwitch Grid.Column="0" Header="Sync all" OnLabel="On" OffLabel="Off" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
+        <Controls:ToggleSwitch Grid.Column="0" Header="Sync all:" OnLabel="On" OffLabel="Off" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
         <Button Grid.Column="0" HorizontalAlignment="Left" Margin="105,35,0,0" VerticalAlignment="Top">(De-)Select all</Button>
-        <Controls:ToggleSwitch Grid.Column="1" Header="Use own names" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
+        <Controls:ToggleSwitch Grid.Column="1" Header="Use own names:" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
         <Button Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">Edit selected course</Button>
         <Button Grid.Column="2" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="143">Save changes</Button>
         <TextBox x:Name="txtCourse" Grid.Column="3" Controls:TextBoxHelper.Watermark="Course" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Controls:TextBoxHelper.UseFloatingWatermark="True" MinWidth="120"/>

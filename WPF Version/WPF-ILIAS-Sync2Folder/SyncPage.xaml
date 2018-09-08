@@ -7,6 +7,7 @@
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -20,7 +21,12 @@
             <ColumnDefinition Width="170"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="50" Margin="10,25,0,0">Start synchronisation</Button>
+        <Button Width="200" Height="50" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Margin="10,25,0,0">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconOcticons Kind="Sync" Width="20" Height="20" Spin="True"/>
+                <TextBlock Text="Start synchronisation" Margin="10,0,0,0" TextAlignment="Center"/>
+            </StackPanel>
+        </Button>
         <CheckBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,25,0,0">Show only (no file download)</CheckBox>
         <CheckBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,55,0,0">Only new files are shown</CheckBox>
         <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0">Progress (this course):</Label>
@@ -30,7 +36,7 @@
         <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0">0 %</Label>
         <Controls:MetroProgressBar Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="35,55,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
 
-        <ListView x:Name="listViewSync" Grid.Row="1" Grid.ColumnSpan="4" Margin="10,10">
+        <ListView x:Name="listViewSync" Grid.Row="1" Grid.ColumnSpan="4" Margin="10,10" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -38,6 +44,4 @@
             </ListView.View>
         </ListView>
     </Grid>
-
-
 </UserControl>

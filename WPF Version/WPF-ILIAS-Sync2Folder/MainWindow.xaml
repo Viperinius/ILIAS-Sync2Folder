@@ -10,7 +10,7 @@
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         Dialog:DialogParticipation.Register="{Binding}"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="ILIAS Sync2Folder" 
         Height="450" 
         Width="800" 
         SaveWindowPosition="True" 
@@ -21,11 +21,15 @@
             <dragablz:TabablzControl.InterTabController>
                 <dragablz:InterTabController />
             </dragablz:TabablzControl.InterTabController>
-            <TabItem x:Name="tabSync" Header="Synchronising">
-                <Button HorizontalAlignment="Center" VerticalAlignment="Center">Hello World</Button>
+            <TabItem x:Name="tabSync" Header="Synchronising">               
             </TabItem>
-            <TabItem x:Name="tabCourseConfig" Header="Course Options">
-                <Button HorizontalAlignment="Center" VerticalAlignment="Center">Test</Button>
+            <TabItem x:Name="tabCourseConfig" Header="Course Options">                
+            </TabItem>
+            <TabItem x:Name="tabFolderConfig" Header="Folder Options">
+            </TabItem>
+            <TabItem x:Name="tabGeneralConfig" Header="General Settings">
+            </TabItem>
+            <TabItem x:Name="tabInfo" Header="Help &amp; Info">
             </TabItem>
         </dragablz:TabablzControl>
     </dockablz:Layout>
@@ -47,7 +51,7 @@
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
                    VerticalAlignment="Center"
-                   Text="Login" />
+                   Text="Login/Logout"/>
                 </StackPanel>
             </Button>
             <Button Name="BtnStyle" Click="BtnStyle_Click">

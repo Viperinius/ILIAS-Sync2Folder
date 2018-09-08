@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="WPF_ILIAS_Sync2Folder.GeneralPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_ILIAS_Sync2Folder"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+             xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="390"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Change the language:</Label>
+            <RadioButton Content="English" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+            <RadioButton Content="German" Grid.Column="1" HorizontalAlignment="Left" Margin="10,33,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">ILIAS server options:</Label>
+            <Grid Grid.Row="4" Grid.Column="1">
+                <Label VerticalAlignment="Top">
+                    <TextBlock TextWrapping="WrapWithOverflow">Please enter the link to the ILIAS login page or to the SOAP web service:</TextBlock>
+                </Label>
+                <TextBox Controls:TextBoxHelper.Watermark="Login link" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Width="341"></TextBox>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,70,0,0">Check link</Button>
+                <iconPacks:PackIconEntypo Kind="Check" Width="29" Height="29" Margin="98,70,0,0" Foreground="#FF096800"/>
+                <iconPacks:PackIconFontAwesome Kind="QuestionSolid" Width="29" Height="29" Margin="98,70,0,0" Foreground="#FF096800"/>
+                <iconPacks:PackIconFontAwesome Kind="TimesSolid" Width="29" Height="29" Margin="98,70,0,0" Foreground="#FF950000"/>
+                <TextBox Controls:TextBoxHelper.Watermark="Client ID (only fill in manually if not automatically recognised)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,140,0,0" Controls:TextBoxHelper.UseFloatingWatermark="True"></TextBox>
+            </Grid>
+            <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Import / export settings:</Label>
+            <TextBox Grid.Row="2" Grid.Column="2" Controls:TextBoxHelper.Watermark="Export directory" Controls:TextBoxHelper.UseFloatingWatermark="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,10,0,0" Width="250"></TextBox>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,10,0,0" Width="37" Height="37">...</Button>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="307,10,0,0" Width="62" Height="37">Export</Button>
+            <TextBox Grid.Row="2" Grid.Column="2" Controls:TextBoxHelper.Watermark="Import directory" Controls:TextBoxHelper.UseFloatingWatermark="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Width="250"></TextBox>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,55,0,0" Width="37" Height="37">...</Button>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="307,55,0,0" Height="37">Import</Button>
+            <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Tray icon / notification options:</Label>
+            <Grid Grid.Row="4" Grid.Column="2">
+                <Controls:ToggleSwitch Header="Show tray icon" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0"></Controls:ToggleSwitch>
+                <Controls:ToggleSwitch Header="Search for updates" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,0,0"></Controls:ToggleSwitch>
+                <Controls:ToggleSwitch Header="Notify when done syncing" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,200,0,0"></Controls:ToggleSwitch>
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
