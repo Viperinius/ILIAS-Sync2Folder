@@ -43,6 +43,7 @@ so like
 + ~~changeable servers (for other universities)~~ done.
 + switchable language (German <-> English)
 + implement an optional automatic synchronisation (automatically check for new files every x minutes)
++ switch from WinForms to WPF in v2 with new UI design
 
 ### Support
 If you have any questions, bugs or just feedback, you have multiple possibilities to make contact:
