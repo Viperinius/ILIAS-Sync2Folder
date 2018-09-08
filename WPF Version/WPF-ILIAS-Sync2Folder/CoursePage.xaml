@@ -26,7 +26,7 @@
                     <GridViewColumn Header="Synced?">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding CourseChecked}" HorizontalAlignment="Center"/>
+                                <CheckBox IsChecked="{Binding CourseChecked}" HorizontalAlignment="Center" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

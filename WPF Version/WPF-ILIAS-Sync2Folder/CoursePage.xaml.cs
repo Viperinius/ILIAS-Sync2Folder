@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 using IliasDL;
 
 namespace WPF_ILIAS_Sync2Folder
@@ -31,6 +32,7 @@ namespace WPF_ILIAS_Sync2Folder
             listviewCourse.ItemsSource = lCourseInfos;
 
             lCourseInfos.Add(new CourseInfo() { CourseChecked = true, CourseName = "ET-BS2", CourseOwnName = "BS2", CourseId = "28374" });
+            lCourseInfos.Add(new CourseInfo() { CourseChecked = false, CourseName = "ET", CourseOwnName = "Bla", CourseId = "28323" });
         }
 
         private void ResizeGridViewColumns()
@@ -53,6 +55,10 @@ namespace WPF_ILIAS_Sync2Folder
         private void ToggleSyncAll_Checked(object sender, RoutedEventArgs e)
         {
             config.SetSyncAll(true);
+            foreach (CourseInfo course in lCourseInfos)
+            {
+                course.CourseChecked = true;
+            }
         }
 
         private void ToggleSyncAll_Unchecked(object sender, RoutedEventArgs e)
@@ -70,9 +76,25 @@ namespace WPF_ILIAS_Sync2Folder
             config.SetUseOwnNames(false);
         }
 
-        private void BtnDeSelectAll_Click(object sender, RoutedEventArgs e)
+        private void BtnDeSelectAll_Click(object sender, RoutedEventArgs e)                 //does not work currently, needs propertychanged stuff
         {
-
+            if (lCourseInfos.Count > 0)
+            {
+                if (lCourseInfos.First().CourseChecked)
+                {
+                    foreach (CourseInfo course in lCourseInfos)
+                    {
+                        course.CourseChecked = false;
+                    }
+                }
+                else
+                {
+                    foreach (CourseInfo course in lCourseInfos)
+                    {
+                        course.CourseChecked = true;
+                    }
+                }
+            }
         }
 
         private void BtnEditCourse_Click(object sender, RoutedEventArgs e)
@@ -83,6 +105,28 @@ namespace WPF_ILIAS_Sync2Folder
         private void BtnSaveCourse_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (CourseInfo course in lCourseInfos)
+            {
+                if (course.CourseChecked)
+                {
+                    config.SetCourse(course.CourseId);
+                }
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (CourseInfo course in lCourseInfos)
+            {
+                if (!course.CourseChecked)
+                {
+                    config.ClearCoursesSettings(course.CourseId);
+                }
+            }
         }
     }
 
