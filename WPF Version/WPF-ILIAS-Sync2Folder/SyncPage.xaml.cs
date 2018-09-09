@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace WPF_ILIAS_Sync2Folder
 {
@@ -24,7 +25,7 @@ namespace WPF_ILIAS_Sync2Folder
 
         private bool bSyncStatus;
 
-        List<FileInfo> lFiles = new List<FileInfo>();
+        ObservableCollection<FileInfo> lFiles = new ObservableCollection<FileInfo>();
 
         public SyncPage()
         {
@@ -94,18 +95,5 @@ namespace WPF_ILIAS_Sync2Folder
         }
     }
 
-    public class FileInfo
-    {
-        public string FileStatus { get; set; }
-
-        public string FileName { get; set; }
-
-        public string FilePath { get; set; }
-
-        public string FileDate { get; set; }
-
-        public string FileSize { get; set; }
-
-        public string FileId { get; set; }
-    }
+    
 }

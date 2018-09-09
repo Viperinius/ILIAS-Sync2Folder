@@ -20,6 +20,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.IconPacks;
+using IliasDL;
 
 namespace WPF_ILIAS_Sync2Folder
 {
@@ -30,8 +31,15 @@ namespace WPF_ILIAS_Sync2Folder
     {
         public bool bLoggedIn;
 
-        ChangedPropertyNotifier changedPropertyNotifier = new ChangedPropertyNotifier();
-        
+        private System.Windows.Forms.NotifyIcon notifyIcon = new System.Windows.Forms.NotifyIcon();
+        private ChangedPropertyNotifier changedPropertyNotifier = new ChangedPropertyNotifier();
+        private CConfig config = new CConfig();
+        private CUpdate updater;
+
+        private BackgroundWorker workerLogin;
+        private BackgroundWorker workerSync;
+        private BackgroundWorker workerCourses;
+
         public MainWindow()
         {
             
@@ -48,6 +56,9 @@ namespace WPF_ILIAS_Sync2Folder
             tabGeneralConfig.Content = new GeneralPage();
             tabInfo.Content = new HelpPage();
 
+
+            notifyIcon.Icon = Properties.Resources.dliconWHITEsquare;
+            updater = new CUpdate(notifyIcon);
         }
 
         private async void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -89,6 +100,94 @@ namespace WPF_ILIAS_Sync2Folder
 
         
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            workerLogin = new BackgroundWorker
+            {
+                WorkerReportsProgress = false,
+                WorkerSupportsCancellation = true
+            };
+
+            workerLogin.DoWork += new DoWorkEventHandler(WorkerLogin_DoWork);
+            workerLogin.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerLogin_RunWorkerCompleted);
+
+            workerSync = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+
+            workerSync.DoWork += new DoWorkEventHandler(WorkerSync_DoWork);
+            workerSync.ProgressChanged += new ProgressChangedEventHandler(WorkerSync_ProgressChanges);
+            workerSync.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerSync_RunWorkerCompleted);
+
+            workerCourses = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+
+            workerCourses.DoWork += new DoWorkEventHandler(WorkerCourses_DoWork);
+            workerCourses.ProgressChanged += new ProgressChangedEventHandler(WorkerCourses_ProgressChanges);
+            workerCourses.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerCourses_RunWorkerCompleted);
+
+            //check for update
+            if (updater.CheckForUpdate())
+            {
+                //notify user
+                updater.DisplayNotification("Update available", "A new update for ILIAS Sync2Folder has been found!");
+            }
+        }
+
+
+
+        //-----------------------------
+        //      worker functions
+        //-----------------------------
+
+        private void WorkerLogin_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void WorkerLogin_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void WorkerSync_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void WorkerSync_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void WorkerSync_ProgressChanges(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void WorkerCourses_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void WorkerCourses_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void WorkerCourses_ProgressChanges(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
     }
 }

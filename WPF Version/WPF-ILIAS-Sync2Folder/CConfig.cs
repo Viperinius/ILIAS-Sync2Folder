@@ -114,9 +114,12 @@ namespace IliasDL
         /// <returns>True if correct</returns>
         private bool IliasUrlIsCorrect(string sUrl)
         {
-            if (sUrl.Contains(@"/webservice/soap/server.php") || sUrl.Contains(@"/login.php"))
+            if (Uri.TryCreate(sUrl, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
             {
-                return true;
+                if (sUrl.Contains(@"/webservice/soap/server.php") || sUrl.Contains(@"/login.php"))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -140,7 +143,7 @@ namespace IliasDL
             var respCookies = response.Cookies;
             response.Close();
 
-            return respCookies[0].Value;            
+            return respCookies[0].Value;
         }
 
         /// <summary>
@@ -191,6 +194,7 @@ namespace IliasDL
                 {
                     sResult = sUrl;
                 }
+                sClient = IliasGetClientId(sUrl);
                 return sResult;
             }
             return "";
@@ -230,6 +234,24 @@ namespace IliasDL
         public string GetServer()
         {
             return GetAppSetting("server");
+        }
+
+        /// <summary>
+        /// Set the original server link
+        /// </summary>
+        /// <param name="sLink"></param>
+        public void SetServerLoginLink(string sLink)
+        {
+            SetAppSetting("serverlink", sLink);
+        }
+
+        /// <summary>
+        /// Get the original server link
+        /// </summary>
+        /// <returns></returns>
+        public string GetServerLoginLink()
+        {
+            return GetAppSetting("serverlink");
         }
 
         /// <summary>
@@ -370,6 +392,16 @@ namespace IliasDL
         public string GetUseYearInStructure()
         {
             return GetAppSetting("useyear");
+        }
+
+        public void SetLanguage(string sLanguage)
+        {
+            SetAppSetting("lang", sLanguage);
+        }
+
+        public string GetLanguage()
+        {
+            return GetAppSetting("lang");
         }
 
         public void SetShowTrayIcon(bool bState)

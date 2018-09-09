@@ -35,6 +35,10 @@ so like
 
 >...-SemesterNum.CourseNum, ..., ..., SemesterYear
 
+#### Note 2
+Regarding the server change:
+The link check allows aside from the login page the web service page, too. Due to some connection problems, this ist currently not working.
+So just use the login link to set your ILIAS server for now.
 
 #### Planned Features
 + be able to change the folder structure settings (e.g. turning the "semester structure" on) and move already loaded files to the new structure

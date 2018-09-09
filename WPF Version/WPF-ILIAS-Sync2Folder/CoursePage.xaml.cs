@@ -22,7 +22,7 @@ namespace WPF_ILIAS_Sync2Folder
     /// </summary>
     public partial class CoursePage : UserControl
     {
-        List<CourseInfo> lCourseInfos = new List<CourseInfo>();
+        ObservableCollection<CourseInfo> lCourseInfos = new ObservableCollection<CourseInfo>();
         CConfig config = new CConfig();
 
         public CoursePage()
@@ -30,6 +30,7 @@ namespace WPF_ILIAS_Sync2Folder
             InitializeComponent();
 
             listviewCourse.ItemsSource = lCourseInfos;
+            //listviewCourse.DataContext = changedPropertyNotifier;
 
             lCourseInfos.Add(new CourseInfo() { CourseChecked = true, CourseName = "ET-BS2", CourseOwnName = "BS2", CourseId = "28374" });
             lCourseInfos.Add(new CourseInfo() { CourseChecked = false, CourseName = "ET", CourseOwnName = "Bla", CourseId = "28323" });
@@ -76,7 +77,7 @@ namespace WPF_ILIAS_Sync2Folder
             config.SetUseOwnNames(false);
         }
 
-        private void BtnDeSelectAll_Click(object sender, RoutedEventArgs e)                 //does not work currently, needs propertychanged stuff
+        private void BtnDeSelectAll_Click(object sender, RoutedEventArgs e)
         {
             if (lCourseInfos.Count > 0)
             {
@@ -99,12 +100,26 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void BtnEditCourse_Click(object sender, RoutedEventArgs e)
         {
-
+            if (listviewCourse.SelectedItems.Count > 0)
+            {
+                CourseInfo item = (CourseInfo)listviewCourse.SelectedItems[0];
+                txtCourse.Text = item.CourseName;
+                txtOwnName.Text = item.CourseOwnName;
+            }
+            else
+            {
+                txtCourse.Text = "Please select a course first.";
+            }
         }
 
         private void BtnSaveCourse_Click(object sender, RoutedEventArgs e)
         {
-
+            if (txtCourse.Text != "Please select a course first." && txtCourse.Text != "")
+            {
+                CourseInfo item = lCourseInfos.SingleOrDefault(x => x.CourseName == txtCourse.Text);
+                item.CourseOwnName = txtOwnName.Text;
+                config.SetCourseName(item.CourseId, item.CourseOwnName);
+            }
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -128,16 +143,28 @@ namespace WPF_ILIAS_Sync2Folder
                 }
             }
         }
+
+        private void CoursePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (config.GetSyncAll() == "true")
+            {
+                toggleSyncAll.IsChecked = true;
+            }
+            else
+            {
+                toggleSyncAll.IsChecked = false;
+            }
+
+            if (config.GetUseOwnNames() == "true")
+            {
+                toggleUseOwnNames.IsChecked = true;
+            }
+            else
+            {
+                toggleUseOwnNames.IsChecked = false;
+            }
+        }
     }
 
-    public class CourseInfo
-    {
-        public bool CourseChecked { get; set; }
-
-        public string CourseName { get; set; }
-
-        public string CourseOwnName { get; set; }
-
-        public string CourseId { get; set; }
-    }
+    
 }

@@ -34,7 +34,14 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void BtnChoosePath_Click(object sender, RoutedEventArgs e)
         {
-
+            using (System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    txtDestPath.Text = folderBrowserDialog.SelectedPath;
+                    config.SetPath(txtDestPath.Text);
+                }
+            }
         }
 
         private async void BtnOpenPath_Click(object sender, RoutedEventArgs e)
@@ -69,6 +76,39 @@ namespace WPF_ILIAS_Sync2Folder
         private void ToggleUseYear_Unchecked(object sender, RoutedEventArgs e)
         {
             config.SetUseYearInStructure(false);
+        }
+
+        private void FolderPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtDestPath.Text = config.GetPath();
+
+            if (config.GetStructureTemplate() != "__NO_VAL__")
+            {
+                txtTemplate.Text = config.GetStructureTemplate();
+            }
+
+            if (config.GetUseYearInStructure() == "true")
+            {
+                toggleUseYear.IsChecked = true;
+            }
+            else
+            {
+                toggleUseYear.IsChecked = false;
+            }
+
+            if (config.GetUseOwnStructures() == "true")
+            {
+                toggleFolderStructure.IsChecked = true;
+            }
+            else
+            {
+                toggleFolderStructure.IsChecked = false;
+            }
+        }
+
+        private void TxtTemplate_LostFocus(object sender, RoutedEventArgs e)
+        {
+            config.SetStructureTemplate(txtTemplate.Text);
         }
     }
 }

@@ -16,29 +16,31 @@
         Width="800" 
         SaveWindowPosition="True" 
         Icon="dliconWHITEsquare.ico"
-        GlowBrush="{DynamicResource AccentColorBrush}">
-    <dockablz:Layout FloatingItemHeaderMemberPath="Header" FloatingItemDisplayMemberPath="Content" FloatingItemContainerStyle="{DynamicResource MahAppsToolDragablzItemStyle}">
-        <dragablz:TabablzControl>
-            <dragablz:TabablzControl.InterTabController>
-                <dragablz:InterTabController />
-            </dragablz:TabablzControl.InterTabController>
-            <TabItem x:Name="tabSync" Header="Synchronising">
-            </TabItem>
-            <TabItem x:Name="tabCourseConfig" Header="Course Options">
-            </TabItem>
-            <TabItem x:Name="tabFolderConfig" Header="Folder Options">
-            </TabItem>
-            <TabItem x:Name="tabGeneralConfig" Header="General Settings">
-            </TabItem>
-            <TabItem x:Name="tabInfo" Header="Help &amp; Info">
-            </TabItem>
-        </dragablz:TabablzControl>
-    </dockablz:Layout>
+        GlowBrush="{DynamicResource AccentColorBrush}" Loaded="MainWindow_Loaded">
+    <Grid>
+        <dockablz:Layout FloatingItemHeaderMemberPath="Header" FloatingItemDisplayMemberPath="Content" FloatingItemContainerStyle="{DynamicResource MahAppsToolDragablzItemStyle}">
+            <dragablz:TabablzControl>
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController />
+                </dragablz:TabablzControl.InterTabController>
+                <TabItem x:Name="tabSync" Header="Synchronising">
+                </TabItem>
+                <TabItem x:Name="tabCourseConfig" Header="Course Options">
+                </TabItem>
+                <TabItem x:Name="tabFolderConfig" Header="Folder Options">
+                </TabItem>
+                <TabItem x:Name="tabGeneralConfig" Header="General Settings">
+                </TabItem>
+                <TabItem x:Name="tabInfo" Header="Help &amp; Info">
+                </TabItem>
+            </dragablz:TabablzControl>
+        </dockablz:Layout>
+    </Grid>
 
     <!-- Add more stuff to the title bar: -->
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button>
+            <Button Click="Button_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Connection Status:" Margin="0,0,5,0"/>
                     <Controls:ProgressRing IsActive="True" Width="20" Height="20" MinWidth="20" MinHeight="20" Foreground="{DynamicResource ControlBackgroundBrush}"/>

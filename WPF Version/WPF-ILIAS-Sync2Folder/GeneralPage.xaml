@@ -9,7 +9,7 @@
              xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="GeneralPage_Loaded">
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
@@ -27,12 +27,12 @@
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Change the language:</Label>
-            <RadioButton Name="radioEnglish" Checked="RadioEnglish_Checked" Content="English" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
+            <RadioButton Name="radioEnglish" Checked="RadioEnglish_Checked" Content="English" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
             <RadioButton Name="radioGerman" Checked="RadioGerman_Checked" Content="German" Grid.Column="1" HorizontalAlignment="Left" Margin="10,33,0,0" Grid.Row="2" VerticalAlignment="Top"/>
             <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">ILIAS server options:</Label>
             <Grid Grid.Row="4" Grid.Column="1">
                 <Label VerticalAlignment="Top">
-                    <TextBlock TextWrapping="WrapWithOverflow">Please enter the link to the ILIAS login page or to the SOAP web service:</TextBlock>
+                    <TextBlock TextWrapping="WrapWithOverflow">Please enter the link to the ILIAS login page:</TextBlock>
                 </Label>
                 <TextBox Name="txtLoginLink" Controls:TextBoxHelper.Watermark="Login link" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Width="341"></TextBox>
                 <Button Name="btnCheckLink" Click="BtnCheckLink_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,70,0,0">Check link</Button>
