@@ -196,6 +196,21 @@ namespace WPF_ILIAS_Sync2Folder
 
         }
 
+        public void WorkerSync_ChangeProgress(int iPercentage)
+        {
+            workerSync.ReportProgress(iPercentage);
+        }
+
+        public bool WorkerSync_IsCancelPending()
+        {
+            return workerSync.CancellationPending;
+        }
+
+        public void WorkerSync_Cancel()
+        {
+            workerSync.CancelAsync();
+        }
+
         private void WorkerCourses_DoWork(object sender, DoWorkEventArgs e)
         {
             //get courses
@@ -213,6 +228,16 @@ namespace WPF_ILIAS_Sync2Folder
         private void WorkerCourses_ProgressChanges(object sender, ProgressChangedEventArgs e)
         {
 
+        }
+
+        public void WorkerCourses_ChangeProgress(int iPercentage)
+        {
+            workerCourses.ReportProgress(iPercentage);
+        }
+
+        public bool WorkerCourses_IsCancelPending()
+        {
+            return workerCourses.CancellationPending;
         }
     }
 }

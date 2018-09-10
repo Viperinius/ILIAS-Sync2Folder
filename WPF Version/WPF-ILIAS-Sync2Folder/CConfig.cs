@@ -454,5 +454,39 @@ namespace IliasDL
         {
             return GetAppSetting("syncnotification");
         }
+
+        public void SetShowOnly(bool bState)
+        {
+            if (bState)
+            {
+                SetAppSetting("showonly", "true");
+            }
+            else
+            {
+                SetAppSetting("showonly", "false");
+            }
+        }
+
+        public string GetShowOnly()
+        {
+            return GetAppSetting("showonly");
+        }
+
+        public void SetShowOnlyNew(bool bState)
+        {
+            if (bState)
+            {
+                SetAppSetting("shownew", "true");
+            }
+            else
+            {
+                SetAppSetting("shownew", "false");
+            }
+        }
+
+        public string GetShowOnlyNew()
+        {
+            return GetAppSetting("shownew");
+        }
     }
 }

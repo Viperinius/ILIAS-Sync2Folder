@@ -1,0 +1,2312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:ilUserAdministration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:ilUserAdministration" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:ilUserAdministration">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+      <xsd:complexType name="intArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:int[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="stringArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="doubleArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:double[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ilUserData">
+        <xsd:all>
+          <xsd:element name="usr_id" type="xsd:int" />
+          <xsd:element name="login" type="xsd:string" />
+          <xsd:element name="passwd" type="xsd:string" />
+          <xsd:element name="firstname" type="xsd:string" />
+          <xsd:element name="lastname" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="gender" type="xsd:string" />
+          <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="institution" type="xsd:string" />
+          <xsd:element name="street" type="xsd:string" />
+          <xsd:element name="city" type="xsd:string" />
+          <xsd:element name="zipcode" type="xsd:string" />
+          <xsd:element name="country" type="xsd:string" />
+          <xsd:element name="phone_office" type="xsd:string" />
+          <xsd:element name="last_login" type="xsd:string" />
+          <xsd:element name="last_update" type="xsd:string" />
+          <xsd:element name="create_date" type="xsd:string" />
+          <xsd:element name="hobby" type="xsd:string" />
+          <xsd:element name="department" type="xsd:string" />
+          <xsd:element name="phone_home" type="xsd:string" />
+          <xsd:element name="phone_mobile" type="xsd:string" />
+          <xsd:element name="fax" type="xsd:string" />
+          <xsd:element name="time_limit_owner" type="xsd:int" />
+          <xsd:element name="time_limit_unlimited" type="xsd:int" />
+          <xsd:element name="time_limit_from" type="xsd:int" />
+          <xsd:element name="time_limit_until" type="xsd:int" />
+          <xsd:element name="time_limit_message" type="xsd:int" />
+          <xsd:element name="referral_comment" type="xsd:string" />
+          <xsd:element name="matriculation" type="xsd:string" />
+          <xsd:element name="active" type="xsd:int" />
+          <xsd:element name="accepted_agreement" type="xsd:boolean" />
+          <xsd:element name="approve_date" type="xsd:string" />
+          <xsd:element name="user_skin" type="xsd:string" />
+          <xsd:element name="user_style" type="xsd:string" />
+          <xsd:element name="user_language" type="xsd:string" />
+          <xsd:element name="import_id" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ilOperation">
+        <xsd:all>
+          <xsd:element name="ops_id" type="xsd:int" />
+          <xsd:element name="operation" type="xsd:string" />
+          <xsd:element name="description" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ilOperations">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:ilOperation[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ilOperationIds">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:int[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="loginRequest">
+    <wsdl:part name="client" type="xsd:string" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginResponse">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginCASRequest">
+    <wsdl:part name="client" type="xsd:string" />
+    <wsdl:part name="PT" type="xsd:string" />
+    <wsdl:part name="user" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginCASResponse">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginLDAPRequest">
+    <wsdl:part name="client" type="xsd:string" />
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginLDAPResponse">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="loginStudipUserRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="loginStudipUserResponse">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="logoutRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="logoutResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="lookupUserRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_name" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="lookupUserResponse">
+    <wsdl:part name="usr_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getUserRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getUserResponse">
+    <wsdl:part name="user_data" type="tns:ilUserData" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="addCourseRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="target_id" type="xsd:int" />
+    <wsdl:part name="crs_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addCourseResponse">
+    <wsdl:part name="course_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteCourseRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="course_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteCourseResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="assignCourseMemberRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="course_id" type="xsd:int" />
+    <wsdl:part name="user_id" type="xsd:int" />
+    <wsdl:part name="type" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="assignCourseMemberResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="excludeCourseMemberRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="course_id" type="xsd:int" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="excludeCourseMemberResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="isAssignedToCourseRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="course_id" type="xsd:int" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="isAssignedToCourseResponse">
+    <wsdl:part name="role" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getCourseXMLRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="course_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getCourseXMLResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateCourseRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="course_id" type="xsd:int" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateCourseResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getObjIdByImportIdRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="import_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getObjIdByImportIdResponse">
+    <wsdl:part name="obj_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getRefIdsByImportIdRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="import_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRefIdsByImportIdResponse">
+    <wsdl:part name="ref_ids" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="getRefIdsByObjIdRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="obj_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRefIdsByObjIdResponse">
+    <wsdl:part name="ref_ids" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="getObjectByReferenceRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="reference_id" type="xsd:int" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getObjectByReferenceResponse">
+    <wsdl:part name="object_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getObjectsByTitleRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="title" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getObjectsByTitleResponse">
+    <wsdl:part name="object_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="searchObjectsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="types" type="tns:stringArray" />
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="combination" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="searchObjectsResponse">
+    <wsdl:part name="object_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getTreeChildsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="types" type="tns:stringArray" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getTreeChildsResponse">
+    <wsdl:part name="object_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getXMLTreeRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="types" type="tns:stringArray" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getXMLTreeResponse">
+    <wsdl:part name="object_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addObjectRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="target_id" type="xsd:int" />
+    <wsdl:part name="object_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addObjectResponse">
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateObjectsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="object_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateObjectsResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="addReferenceRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="source_id" type="xsd:int" />
+    <wsdl:part name="target_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="addReferenceResponse">
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteObjectRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="reference_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteObjectResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="removeFromSystemByImportIdRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="import_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="removeFromSystemByImportIdResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="addUserRoleEntryRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+    <wsdl:part name="role_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="addUserRoleEntryResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRoleEntryRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+    <wsdl:part name="role_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserRoleEntryResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getOperationsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getOperationsResponse">
+    <wsdl:part name="operations" type="tns:ilOperations" />
+  </wsdl:message>
+  <wsdl:message name="revokePermissionsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="role_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="revokePermissionsResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="grantPermissionsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="role_id" type="xsd:int" />
+    <wsdl:part name="operations" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="grantPermissionsResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getLocalRolesRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getLocalRolesResponse">
+    <wsdl:part name="role_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserRolesRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getUserRolesResponse">
+    <wsdl:part name="role_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addRoleRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="target_id" type="xsd:int" />
+    <wsdl:part name="obj_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addRoleResponse">
+    <wsdl:part name="role_ids" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="deleteRoleRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="role_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteRoleResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="addRoleFromTemplateRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="target_id" type="xsd:int" />
+    <wsdl:part name="obj_xml" type="xsd:string" />
+    <wsdl:part name="role_template_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="addRoleFromTemplateResponse">
+    <wsdl:part name="role_ids" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="getObjectTreeOperationsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getObjectTreeOperationsResponse">
+    <wsdl:part name="operations" type="tns:ilOperations" />
+  </wsdl:message>
+  <wsdl:message name="addGroupRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="target_id" type="xsd:int" />
+    <wsdl:part name="group_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addGroupResponse">
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="groupExistsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="title" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="groupExistsResponse">
+    <wsdl:part name="exists" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getGroupRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getGroupResponse">
+    <wsdl:part name="group_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="assignGroupMemberRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="group_id" type="xsd:int" />
+    <wsdl:part name="user_id" type="xsd:int" />
+    <wsdl:part name="type" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="assignGroupMemberResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="excludeGroupMemberRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="group_id" type="xsd:int" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="excludeGroupMemberResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="isAssignedToGroupRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="group_id" type="xsd:int" />
+    <wsdl:part name="user_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="isAssignedToGroupResponse">
+    <wsdl:part name="role" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendMailRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="rcp_to" type="xsd:string" />
+    <wsdl:part name="rcp_cc" type="xsd:string" />
+    <wsdl:part name="rcp_bcc" type="xsd:string" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="subject" type="xsd:string" />
+    <wsdl:part name="message" type="xsd:string" />
+    <wsdl:part name="attachments" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendMailResponse">
+    <wsdl:part name="status" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="distributeMailsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="mail_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="distributeMailsResponse">
+    <wsdl:part name="status" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ilCloneRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="copy_identifier" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="ilCloneResponse">
+    <wsdl:part name="new_ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="handleECSTasksRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="server_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="handleECSTasksResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ilCloneDependenciesRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="copy_identifier" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="ilCloneDependenciesResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="saveQuestionResultRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:int" />
+    <wsdl:part name="test_id" type="xsd:int" />
+    <wsdl:part name="question_id" type="xsd:int" />
+    <wsdl:part name="pass" type="xsd:int" />
+    <wsdl:part name="solution" type="tns:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="saveQuestionResultResponse">
+    <wsdl:part name="status" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="saveQuestionRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="active_id" type="xsd:long" />
+    <wsdl:part name="question_id" type="xsd:long" />
+    <wsdl:part name="pass" type="xsd:int" />
+    <wsdl:part name="solution" type="tns:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="saveQuestionResponse">
+    <wsdl:part name="status" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="saveQuestionSolutionRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="active_id" type="xsd:long" />
+    <wsdl:part name="question_id" type="xsd:long" />
+    <wsdl:part name="pass" type="xsd:int" />
+    <wsdl:part name="solution" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="saveQuestionSolutionResponse">
+    <wsdl:part name="status" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getQuestionSolutionRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="active_id" type="xsd:long" />
+    <wsdl:part name="question_id" type="xsd:int" />
+    <wsdl:part name="pass" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getQuestionSolutionResponse">
+    <wsdl:part name="solution" type="tns:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="getTestUserDataRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="active_id" type="xsd:long" />
+  </wsdl:message>
+  <wsdl:message name="getTestUserDataResponse">
+    <wsdl:part name="userdata" type="tns:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="getPositionOfQuestionRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="active_id" type="xsd:long" />
+    <wsdl:part name="question_id" type="xsd:int" />
+    <wsdl:part name="pass" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getPositionOfQuestionResponse">
+    <wsdl:part name="position" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getPreviousReachedPointsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="active_id" type="xsd:long" />
+    <wsdl:part name="question_id" type="xsd:int" />
+    <wsdl:part name="pass" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getPreviousReachedPointsResponse">
+    <wsdl:part name="position" type="tns:doubleArray" />
+  </wsdl:message>
+  <wsdl:message name="getNrOfQuestionsInPassRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="active_id" type="xsd:long" />
+    <wsdl:part name="pass" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getNrOfQuestionsInPassResponse">
+    <wsdl:part name="count" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getStructureObjectsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getStructureObjectsResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="importUsersRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="folder_id" type="xsd:int" />
+    <wsdl:part name="usr_xml" type="xsd:string" />
+    <wsdl:part name="conflict_rule" type="xsd:int" />
+    <wsdl:part name="send_account_mail" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="importUsersResponse">
+    <wsdl:part name="protocol" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRolesRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="role_type" type="xsd:string" />
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRolesResponse">
+    <wsdl:part name="role_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUsersForContainerRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="attach_roles" type="xsd:int" />
+    <wsdl:part name="active" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getUsersForContainerResponse">
+    <wsdl:part name="user_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUsersForRoleRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="role_id" type="xsd:int" />
+    <wsdl:part name="attach_roles" type="xsd:int" />
+    <wsdl:part name="active" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getUsersForRoleResponse">
+    <wsdl:part name="user_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="searchUserRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="key_fields" type="tns:stringArray" />
+    <wsdl:part name="query_operator" type="xsd:string" />
+    <wsdl:part name="key_values" type="tns:stringArray" />
+    <wsdl:part name="attach_roles" type="xsd:int" />
+    <wsdl:part name="active" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="searchUserResponse">
+    <wsdl:part name="user_xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="hasNewMailRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="hasNewMailResponse">
+    <wsdl:part name="status" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getNICRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getNICResponse">
+    <wsdl:part name="xmlresultset" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getExerciseXMLRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="attachment_mode" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getExerciseXMLResponse">
+    <wsdl:part name="exercisexml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addExerciseRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="target_id" type="xsd:int" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addExerciseResponse">
+    <wsdl:part name="refid" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateExerciseRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateExerciseResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getFileXMLRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="attachment_mode" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getFileXMLResponse">
+    <wsdl:part name="filexml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addFileRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="target_id" type="xsd:int" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addFileResponse">
+    <wsdl:part name="refid" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateFileRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateFileResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getUserXMLRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_ids" type="tns:intArray" />
+    <wsdl:part name="attach_roles" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getUserXMLResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getObjIdsByRefIdsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_ids" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="getObjIdsByRefIdsResponse">
+    <wsdl:part name="obj_ids" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="updateGroupRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateGroupResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getIMSManifestXMLRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getIMSManifestXMLResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="hasSCORMCertificateRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="usr_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="hasSCORMCertificateResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getSCORMCompletionStatusRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="usr_id" type="xsd:int" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getSCORMCompletionStatusResponse">
+    <wsdl:part name="status" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="copyObjectRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="copyObjectResponse">
+    <wsdl:part name="xml" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="moveObjectRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="target_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="moveObjectResponse">
+    <wsdl:part name="result" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getTestResultsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="sum_only" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getTestResultsResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="removeTestResultsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="user_ids" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="removeTestResultsResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getCoursesForUserRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="parameters" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getCoursesForUserResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getGroupsForUserRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="parameters" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getGroupsForUserResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getPathForRefIdRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getPathForRefIdResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="searchRolesRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="combination" type="xsd:string" />
+    <wsdl:part name="role_type" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="searchRolesResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getInstallationInfoXMLRequest" />
+  <wsdl:message name="getInstallationInfoXMLResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getClientInfoXMLRequest">
+    <wsdl:part name="clientid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getClientInfoXMLResponse">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSkillCompletionDateForTriggerRefIdRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSkillCompletionDateForTriggerRefIdResponse">
+    <wsdl:part name="dates" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="checkSkillUserCertificateForTriggerRefIdRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="checkSkillUserCertificateForTriggerRefIdResponse">
+    <wsdl:part name="have_certificates" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSkillTriggerOfAllCertificatesRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSkillTriggerOfAllCertificatesResponse">
+    <wsdl:part name="certificate_triggers" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserIdBySidRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserIdBySidResponse">
+    <wsdl:part name="usr_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteExpiredDualOptInUserObjectsRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="usr_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deleteExpiredDualOptInUserObjectsResponse">
+    <wsdl:part name="status" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="readWebLinkRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="readWebLinkResponse">
+    <wsdl:part name="weblinkxml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createWebLinkRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="target_id" type="xsd:int" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createWebLinkResponse">
+    <wsdl:part name="refid" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateWebLinkRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateWebLinkResponse">
+    <wsdl:part name="success" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getLearningProgressChangesRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="timestamp" type="xsd:string" />
+    <wsdl:part name="include_ref_ids" type="xsd:boolean" />
+    <wsdl:part name="type_filter" type="tns:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="getLearningProgressChangesResponse">
+    <wsdl:part name="lp_data" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteProgressRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_ids" type="tns:intArray" />
+    <wsdl:part name="usr_ids" type="tns:intArray" />
+    <wsdl:part name="type_filter" type="tns:stringArray" />
+    <wsdl:part name="progress_filter" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="deleteProgressResponse">
+    <wsdl:part name="status" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getProgressInfoRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="progress_filter" type="tns:intArray" />
+  </wsdl:message>
+  <wsdl:message name="getProgressInfoResponse">
+    <wsdl:part name="user_results" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="exportDataCollectionContentRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="ref_id" type="xsd:int" />
+    <wsdl:part name="table_id" type="xsd:int" />
+    <wsdl:part name="format" type="xsd:string" />
+    <wsdl:part name="filepath" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="exportDataCollectionContentResponse">
+    <wsdl:part name="export_path" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="processBackgroundTaskRequest">
+    <wsdl:part name="sid" type="xsd:string" />
+    <wsdl:part name="task_id" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="processBackgroundTaskResponse">
+    <wsdl:part name="status" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="ILIASSoapWebservicePortType">
+    <wsdl:operation name="login">
+      <documentation>ILIAS login function</documentation>
+      <wsdl:input message="tns:loginRequest" />
+      <wsdl:output message="tns:loginResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="loginCAS">
+      <documentation>ILIAS login function via CAS</documentation>
+      <wsdl:input message="tns:loginCASRequest" />
+      <wsdl:output message="tns:loginCASResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="loginLDAP">
+      <documentation>ILIAS login function via LDAP</documentation>
+      <wsdl:input message="tns:loginLDAPRequest" />
+      <wsdl:output message="tns:loginLDAPResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="loginStudipUser">
+      <documentation>ILIAS login function for Stud.IP-Connection. DEPRECATED: this method will be removed in ILIAS 5.3.</documentation>
+      <wsdl:input message="tns:loginStudipUserRequest" />
+      <wsdl:output message="tns:loginStudipUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <documentation>ILIAS logout function</documentation>
+      <wsdl:input message="tns:logoutRequest" />
+      <wsdl:output message="tns:logoutResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="lookupUser">
+      <documentation>ILIAS lookupUser(): check if username exists. Return usr_id or 0 if lookup fails.</documentation>
+      <wsdl:input message="tns:lookupUserRequest" />
+      <wsdl:output message="tns:lookupUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <documentation>ILIAS getUser(): get complete set of user data. DEPRECATED with release 5.2, will be deleted with 5.3. Use searchUsers() instead.</documentation>
+      <wsdl:input message="tns:getUserRequest" />
+      <wsdl:output message="tns:getUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <documentation>ILIAS deleteUser(). Deletes all user related data (Bookmarks, Mails ...). DEPRECATED: Use importUsers() for deletion of user data.</documentation>
+      <wsdl:input message="tns:deleteUserRequest" />
+      <wsdl:output message="tns:deleteUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addCourse">
+      <documentation>ILIAS addCourse(). Course import. See ilias_course_0_1.dtd for details about course xml structure</documentation>
+      <wsdl:input message="tns:addCourseRequest" />
+      <wsdl:output message="tns:addCourseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteCourse">
+      <documentation>ILIAS deleteCourse(). Deletes a course. Delete courses are stored in "Trash" and can be undeleted in  the ILIAS administration. </documentation>
+      <wsdl:input message="tns:deleteCourseRequest" />
+      <wsdl:output message="tns:deleteCourseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="assignCourseMember">
+      <documentation>ILIAS assignCourseMember(). Assigns an user to an existing course. Type should be "Admin", "Tutor" or "Member"</documentation>
+      <wsdl:input message="tns:assignCourseMemberRequest" />
+      <wsdl:output message="tns:assignCourseMemberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="excludeCourseMember">
+      <documentation>ILIAS excludeCourseMember(). Excludes an user from an existing course.</documentation>
+      <wsdl:input message="tns:excludeCourseMemberRequest" />
+      <wsdl:output message="tns:excludeCourseMemberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isAssignedToCourse">
+      <documentation>ILIAS isAssignedToCourse(). Checks whether an user is assigned to a given course. Returns 0 =&gt; not assigned, 1 =&gt; course admin, 2 =&gt; course member or 3 =&gt; course tutor</documentation>
+      <wsdl:input message="tns:isAssignedToCourseRequest" />
+      <wsdl:output message="tns:isAssignedToCourseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCourseXML">
+      <documentation>ILIAS getCourseXML(). Get a xml description of a specific course.</documentation>
+      <wsdl:input message="tns:getCourseXMLRequest" />
+      <wsdl:output message="tns:getCourseXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateCourse">
+      <documentation>ILIAS updateCourse(). Update course settings, assigned members, tutors, administrators with a given xml description</documentation>
+      <wsdl:input message="tns:updateCourseRequest" />
+      <wsdl:output message="tns:updateCourseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjIdByImportId">
+      <documentation>ILIAS getObjIdByImportId(). Get the obj_id of an ILIAS obj by a given import id.</documentation>
+      <wsdl:input message="tns:getObjIdByImportIdRequest" />
+      <wsdl:output message="tns:getObjIdByImportIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getRefIdsByImportId">
+      <documentation>ILIAS getRefIdsByImportId(). Get all reference ids by a given import id.</documentation>
+      <wsdl:input message="tns:getRefIdsByImportIdRequest" />
+      <wsdl:output message="tns:getRefIdsByImportIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getRefIdsByObjId">
+      <documentation>ILIAS getRefIdsByObjId(). Get all reference ids by a given object id.</documentation>
+      <wsdl:input message="tns:getRefIdsByObjIdRequest" />
+      <wsdl:output message="tns:getRefIdsByObjIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjectByReference">
+      <documentation>ILIAS getObjectByReference(). Get XML-description of an ILIAS object. If a user id is given, this methods also checks the permissions of that user on the object.</documentation>
+      <wsdl:input message="tns:getObjectByReferenceRequest" />
+      <wsdl:output message="tns:getObjectByReferenceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjectsByTitle">
+      <documentation>ILIAS getObjectsByTitle(). Get XML-description of an ILIAS object with given title. If a user id is given this method also checks the permissions of that user on the object.</documentation>
+      <wsdl:input message="tns:getObjectsByTitleRequest" />
+      <wsdl:output message="tns:getObjectsByTitleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchObjects">
+      <documentation>ILIAS searchObjects(): Searches for objects. Key is within "title" or "description" Typical calls are searchObject($sid,array("lm","crs"),"\"this and that\"","and");  If an optional user id is given, this methods also return the permissions for that user on the found objects</documentation>
+      <wsdl:input message="tns:searchObjectsRequest" />
+      <wsdl:output message="tns:searchObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTreeChilds">
+      <documentation>ILIAS getTreeChilds(): Get all child objects of a given object.Choose array of types to filter the output. Choose empty type array to receive all object types</documentation>
+      <wsdl:input message="tns:getTreeChildsRequest" />
+      <wsdl:output message="tns:getTreeChildsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getXMLTree">
+      <documentation>ILIAS getXMLTree(): Returns a xml stream with the subtree objects.</documentation>
+      <wsdl:input message="tns:getXMLTreeRequest" />
+      <wsdl:output message="tns:getXMLTreeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addObject">
+      <documentation>ILIAS addObject. Create new object based on xml description under a given node ("category,course,group or folder). Return created reference id of the new object.</documentation>
+      <wsdl:input message="tns:addObjectRequest" />
+      <wsdl:output message="tns:addObjectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateObjects">
+      <documentation>ILIAS updateObjects. Update object data (title,description,owner)</documentation>
+      <wsdl:input message="tns:updateObjectsRequest" />
+      <wsdl:output message="tns:updateObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addReference">
+      <documentation>ILIAS addReference. Create new link of given object to new object. Return the new reference id</documentation>
+      <wsdl:input message="tns:addReferenceRequest" />
+      <wsdl:output message="tns:addReferenceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteObject">
+      <documentation>ILIAS deleteObject. Stores object in trash. If multiple references exist, only the reference is deleted </documentation>
+      <wsdl:input message="tns:deleteObjectRequest" />
+      <wsdl:output message="tns:deleteObjectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="removeFromSystemByImportId">
+      <documentation>ILIAS removeFromSystemByImportId(). Removes an object identified by its import id permanently from the system. All data will be deleted. There will be no possibility to restore it from the trash. Do not use this function for deleting roles or users. Use deleteUser() or deleteRole() instead.</documentation>
+      <wsdl:input message="tns:removeFromSystemByImportIdRequest" />
+      <wsdl:output message="tns:removeFromSystemByImportIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addUserRoleEntry">
+      <documentation>ILIAS addUserRoleEntry. Assign user to role.</documentation>
+      <wsdl:input message="tns:addUserRoleEntryRequest" />
+      <wsdl:output message="tns:addUserRoleEntryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserRoleEntry">
+      <documentation>ILIAS deleteUserRoleEntry. Deassign user from role.</documentation>
+      <wsdl:input message="tns:deleteUserRoleEntryRequest" />
+      <wsdl:output message="tns:deleteUserRoleEntryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOperations">
+      <documentation>ILIAS getOperations(): get complete set of RBAC operations.</documentation>
+      <wsdl:input message="tns:getOperationsRequest" />
+      <wsdl:output message="tns:getOperationsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="revokePermissions">
+      <documentation>ILIAS revokePermissions(): Revoke all permissions for a specific role on an object.</documentation>
+      <wsdl:input message="tns:revokePermissionsRequest" />
+      <wsdl:output message="tns:revokePermissionsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="grantPermissions">
+      <documentation>ILIAS grantPermissions(): Grant permissions for a specific role on an object. (Substitutes existing permission settings)</documentation>
+      <wsdl:input message="tns:grantPermissionsRequest" />
+      <wsdl:output message="tns:grantPermissionsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLocalRoles">
+      <documentation>ILIAS getLocalRoles(): Get all local roles assigned to an specific object.</documentation>
+      <wsdl:input message="tns:getLocalRolesRequest" />
+      <wsdl:output message="tns:getLocalRolesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserRoles">
+      <documentation>ILIAS getUserRoles(): Get all local roles assigned to an specific user. </documentation>
+      <wsdl:input message="tns:getUserRolesRequest" />
+      <wsdl:output message="tns:getUserRolesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addRole">
+      <documentation>ILIAS addRole(): Creates new role under given node. "target_id" is the reference id of an ILIAS ILIAS object. E.g ref_id of crs,grp. If no role folder exists, a new role folder will be created.</documentation>
+      <wsdl:input message="tns:addRoleRequest" />
+      <wsdl:output message="tns:addRoleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteRole">
+      <documentation>ILIAS deleteRole(): Deletes an role and all user assignments. Fails if it is the last role of an user</documentation>
+      <wsdl:input message="tns:deleteRoleRequest" />
+      <wsdl:output message="tns:deleteRoleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addRoleFromTemplate">
+      <documentation>ILIAS addRole(): Creates new role under given node. "target_id" is the reference id of an ILIAS ILIAS object. E.g ref_id of crs,grp. If no role folder exists, a new role folder will be created. In addition to addRole the template permissions will be copied from the given role template</documentation>
+      <wsdl:input message="tns:addRoleFromTemplateRequest" />
+      <wsdl:output message="tns:addRoleFromTemplateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjectTreeOperations">
+      <documentation>ILIAS getObjectTreeOperations(): Get all granted permissions for all references of an object for a specific user. Returns array of granted operations or empty array</documentation>
+      <wsdl:input message="tns:getObjectTreeOperationsRequest" />
+      <wsdl:output message="tns:getObjectTreeOperationsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addGroup">
+      <documentation>ILIAS addGroup(): Add grop according to valid group XML @See ilias_group_0_1.dtd</documentation>
+      <wsdl:input message="tns:addGroupRequest" />
+      <wsdl:output message="tns:addGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="groupExists">
+      <documentation>ILIAS addGroup(): Check if group with given name exists. </documentation>
+      <wsdl:input message="tns:groupExistsRequest" />
+      <wsdl:output message="tns:groupExistsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getGroup">
+      <documentation>ILIAS getGroup(): get xml description of grouip with given reference id.</documentation>
+      <wsdl:input message="tns:getGroupRequest" />
+      <wsdl:output message="tns:getGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="assignGroupMember">
+      <documentation>ILIAS assignGroupMember(). Assigns an user to an existing group. Type should be "Admin","Member"</documentation>
+      <wsdl:input message="tns:assignGroupMemberRequest" />
+      <wsdl:output message="tns:assignGroupMemberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="excludeGroupMember">
+      <documentation>ILIAS excludeGroupMember(). Excludes an user from an existing group.</documentation>
+      <wsdl:input message="tns:excludeGroupMemberRequest" />
+      <wsdl:output message="tns:excludeGroupMemberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isAssignedToGroup">
+      <documentation>ILIAS isAssignedToGroup(). Checks whether an user is assigned to a given group. Returns 0 =&gt; not assigned, 1 =&gt; group admin, 2 =&gt; group member</documentation>
+      <wsdl:input message="tns:isAssignedToGroupRequest" />
+      <wsdl:output message="tns:isAssignedToGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMail">
+      <documentation>ILIAS sendMail(): Send mime mails according to xml description. Only for internal usage Syntax, parameters may change in future releases</documentation>
+      <wsdl:input message="tns:sendMailRequest" />
+      <wsdl:output message="tns:sendMailResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="distributeMails">
+      <documentation>ILIAS distributeMails(): Distribute ILIAS mails according according to the mail setting of the recipients as ILIAS internal mail or as e-mail.</documentation>
+      <wsdl:input message="tns:distributeMailsRequest" />
+      <wsdl:output message="tns:distributeMailsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ilClone">
+      <documentation>ILIAS ilClone(): Only for internal usage.Syntax, parameters may change in future releases. </documentation>
+      <wsdl:input message="tns:ilCloneRequest" />
+      <wsdl:output message="tns:ilCloneResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="handleECSTasks">
+      <documentation>ILIAS handleECSTasks(): Only for internal usage.Syntax, parameters may change in future releases. </documentation>
+      <wsdl:input message="tns:handleECSTasksRequest" />
+      <wsdl:output message="tns:handleECSTasksResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ilCloneDependencies">
+      <documentation>ILIAS ilCloneDependencies(): Only for internal usage.Syntax, parameters may change in future releases. </documentation>
+      <wsdl:input message="tns:ilCloneDependenciesRequest" />
+      <wsdl:output message="tns:ilCloneDependenciesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveQuestionResult">
+      <documentation>ILIAS saveQuesionResult: Typically called from an external assessment question to save the user input. DEPRECATED since ILIAS 3.9</documentation>
+      <wsdl:input message="tns:saveQuestionResultRequest" />
+      <wsdl:output message="tns:saveQuestionResultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveQuestion">
+      <documentation>ILIAS saveQuestion: Saves the result of a question in a given test pass for the active test user. The active user is identified by the active ID, which assigns a user to a test.</documentation>
+      <wsdl:input message="tns:saveQuestionRequest" />
+      <wsdl:output message="tns:saveQuestionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveQuestionSolution">
+      <documentation>ILIAS saveQuestionSolution: Saves the result of a question in a given test pass for the active test user. The active user is identified by the active ID, which assigns a user to a test. The solution has to be an XML string which contains &amp;lt;values&amp;gt;&amp;lt;value&amp;gt;VALUE&amp;lt;/value&amp;gt;&amp;lt;value&amp;gt;VALUE&amp;lt;/value&amp;gt;&amp;lt;points&amp;gt;POINTS&amp;lt;/points&amp;gt;...&amp;lt;/values&amp;gt; where the triplet (value,value,points) can repeat n times. The result string is either TRUE or it contains an error message.</documentation>
+      <wsdl:input message="tns:saveQuestionSolutionRequest" />
+      <wsdl:output message="tns:saveQuestionSolutionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getQuestionSolution">
+      <documentation>ILIAS getQuestionSolution: Typically called from external assessment questions to retrieve the previous input of a user.</documentation>
+      <wsdl:input message="tns:getQuestionSolutionRequest" />
+      <wsdl:output message="tns:getQuestionSolutionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTestUserData">
+      <documentation>ILIAS getTestUserData: Typically called from external assessment questions to retrieve data of the active user. The returned string array values are fullname, title, firstname, lastname, login.</documentation>
+      <wsdl:input message="tns:getTestUserDataRequest" />
+      <wsdl:output message="tns:getTestUserDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPositionOfQuestion">
+      <documentation>ILIAS getPositionOfQuestion: Returns the position of a given question for a given user in a given test pass.</documentation>
+      <wsdl:input message="tns:getPositionOfQuestionRequest" />
+      <wsdl:output message="tns:getPositionOfQuestionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPreviousReachedPoints">
+      <documentation>ILIAS getPreviousReachedPoints: Returns an array of reached points for the previous questions in a given test pass.</documentation>
+      <wsdl:input message="tns:getPreviousReachedPointsRequest" />
+      <wsdl:output message="tns:getPreviousReachedPointsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getNrOfQuestionsInPass">
+      <documentation>ILIAS getNrOfQuestionsInPass: Returns the question count for a given test user in a given pass.</documentation>
+      <wsdl:input message="tns:getNrOfQuestionsInPassRequest" />
+      <wsdl:output message="tns:getNrOfQuestionsInPassResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getStructureObjects">
+      <documentation>ILIAS getStructureObjects: delivers structure of content objects like learning modules (chapters/pages) or glossary (terms)</documentation>
+      <wsdl:input message="tns:getStructureObjectsRequest" />
+      <wsdl:output message="tns:getStructureObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="importUsers">
+      <documentation>ILIAS import users into folder id, which should be ref_id of folder or user folder (-1:System user folder, 0: checks access at user level, otherwise refid): conflict_rule: IL_FAIL_ON_CONFLICT = 1, IL_UPDATE_ON_CONFLICT = 2, IL_IGNORE_ON_CONFLICT = 3. The Return-Value is a protocol with the columns userid, login, action, message, following xmlresultset dtd. Send Account Mail = 0 deactivates sending a mail to each user, 1 activates it</documentation>
+      <wsdl:input message="tns:importUsersRequest" />
+      <wsdl:output message="tns:importUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getRoles">
+      <documentation>ILIAS getRoles():if id equals -1, get all roles specified by type (global|local|user|user_login|template or empty), if type is empty all roles with all types are delivered, if id &gt; -1 and role_type &lt;&gt; user or user_login, delivers all roles which belong to a repository object with specified ref_id, if roletype is user a numeric id is interpreted as userid, if roletype is user_login it is interpreted as login,if roletype is template all role templates will be listed</documentation>
+      <wsdl:input message="tns:getRolesRequest" />
+      <wsdl:output message="tns:getRolesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUsersForContainer">
+      <documentation>ILIAS getUsersForContainer(): get all users of a specific ref_id, which can be crs, group, category or user folder (value: -1). Choose if all roles of a user should be attached (1) or not (0). set active to -1 to get all, 0, to get inactive users only, 1 to get active users only</documentation>
+      <wsdl:input message="tns:getUsersForContainerRequest" />
+      <wsdl:output message="tns:getUsersForContainerResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUsersForRole">
+      <documentation>ILIAS getUsersForRole(): get all users of a role with specified id, specify attach_roles to 1, to attach all role assignmnents; specify active: 1, to import active only, 0: inactive only, -1: both</documentation>
+      <wsdl:input message="tns:getUsersForRoleRequest" />
+      <wsdl:output message="tns:getUsersForRoleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchUser">
+      <documentation>ILIAS searchUser(): get all users, which match a query, consisting of the keyfields, matched with values of the field values, concatenated with the logical query operator. Specify attach_roles to 1, to attach all role assignmnents; specify active: 1, to import active only, 0: inactive only, -1: both</documentation>
+      <wsdl:input message="tns:searchUserRequest" />
+      <wsdl:output message="tns:searchUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="hasNewMail">
+      <documentation>ILIAS hasNewMail(): Checks whether the current authenticated user has a new mail.</documentation>
+      <wsdl:input message="tns:hasNewMailRequest" />
+      <wsdl:output message="tns:hasNewMailResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getNIC">
+      <documentation>ILIAS getNIC(): DEPRECATED: use getClientInfoXML instead. was: return client information from current client as xml result set containing installation_id, installation_version, installation_url, installation_description, installation_language_default as columns</documentation>
+      <wsdl:input message="tns:getNICRequest" />
+      <wsdl:output message="tns:getNICResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getExerciseXML">
+      <documentation>ILIAS getExerciseXML(): returns xml description of exercise. Attachment mode: 0 - no file contents, 1 - plain content (base64encoded), 2 zlib + base64, 3 gzip + base64)</documentation>
+      <wsdl:input message="tns:getExerciseXMLRequest" />
+      <wsdl:output message="tns:getExerciseXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addExercise">
+      <documentation>ILIAS addExercise(): create exercise, put it into target (ref_id) and update exercise properties from xml (see ilias_exercise_3_8.dtd for details). Obj_id must not be set!</documentation>
+      <wsdl:input message="tns:addExerciseRequest" />
+      <wsdl:output message="tns:addExerciseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateExercise">
+      <documentation>ILIAS updateExercise():update existing exercise, update exercise properties from xml (see ilias_exercise_3_8.dtd for details). obj_id in xml must match according obj id of refid.!</documentation>
+      <wsdl:input message="tns:updateExerciseRequest" />
+      <wsdl:output message="tns:updateExerciseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getFileXML">
+      <documentation>ILIAS getFileXML(): returns xml description of file. Attachment mode: 0 - no file contents, 1 - plain content (base64encoded), 2 zlib + base64, 3 gzip + base64)</documentation>
+      <wsdl:input message="tns:getFileXMLRequest" />
+      <wsdl:output message="tns:getFileXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addFile">
+      <documentation>ILIAS addFile(): create file, put it into target (ref_id) and update file properties from xml (see ilias_file_3_8.dtd for details). Obj_id must not be set!</documentation>
+      <wsdl:input message="tns:addFileRequest" />
+      <wsdl:output message="tns:addFileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateFile">
+      <documentation>ILIAS updateFile():update existing file, update file properties from xml (see ilias_file_3_8.dtd for details). obj_id in xml must match according obj id of refid.!</documentation>
+      <wsdl:input message="tns:updateFileRequest" />
+      <wsdl:output message="tns:updateFileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserXML">
+      <documentation>ILIAS getUserXML(): get xml records for user ids, e.g. retrieved vom members of course xml. Returns user xml dtds. ids are numeric ids of user</documentation>
+      <wsdl:input message="tns:getUserXMLRequest" />
+      <wsdl:output message="tns:getUserXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjIdsByRefIds">
+      <documentation>ILIAS getObjIdsForRefIds: Returns a array of object ids which match the references id, given by a comma seperated string. Returns an array of ref ids, in the same order as object ids. Therefore, there might by duplicates</documentation>
+      <wsdl:input message="tns:getObjIdsByRefIdsRequest" />
+      <wsdl:output message="tns:getObjIdsByRefIdsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateGroup">
+      <documentation>ILIAS updateGroup(): update existing group using ref id and group xml (see DTD).</documentation>
+      <wsdl:input message="tns:updateGroupRequest" />
+      <wsdl:output message="tns:updateGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getIMSManifestXML">
+      <documentation>ILIAS getIMSManifestXML(): returns xml of ims manifest file (scorm learning module) referred by refid</documentation>
+      <wsdl:input message="tns:getIMSManifestXMLRequest" />
+      <wsdl:output message="tns:getIMSManifestXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="hasSCORMCertificate">
+      <documentation>ILIAS hasSCORMCertificate(): returns true if a certficate is available for a user referred by usr_id in a SCORM learning module referred by ref_id</documentation>
+      <wsdl:input message="tns:hasSCORMCertificateRequest" />
+      <wsdl:output message="tns:hasSCORMCertificateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSCORMCompletionStatus">
+      <documentation>ILIAS getSCORMCompletionStatus(): returns a completion status of a scorm module</documentation>
+      <wsdl:input message="tns:getSCORMCompletionStatusRequest" />
+      <wsdl:output message="tns:getSCORMCompletionStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="copyObject">
+      <documentation>ILIAS copyObject(): returns reference of copy, if copy is created directly, or the ref id of the target if copy is in progress.</documentation>
+      <wsdl:input message="tns:copyObjectRequest" />
+      <wsdl:output message="tns:copyObjectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="moveObject">
+      <documentation>ILIAS moveObject(): returns true, if object with refid could be successfully moved to target id, other it raises an error.</documentation>
+      <wsdl:input message="tns:moveObjectRequest" />
+      <wsdl:output message="tns:moveObjectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTestResults">
+      <documentation>ILIAS getTestResults(): returns XMLResultSet with 
+									 sum only = true: user_id, login, firstname, lastname, matriculation, maximum points, received points
+	 								 sum only = false: user_id, login, firstname, lastname, matriculation, question id, question title, question points, received points</documentation>
+      <wsdl:input message="tns:getTestResultsRequest" />
+      <wsdl:output message="tns:getTestResultsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="removeTestResults">
+      <documentation>ILIAS removeTestResults(): remove test results for the chosen users</documentation>
+      <wsdl:input message="tns:removeTestResultsRequest" />
+      <wsdl:output message="tns:removeTestResultsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCoursesForUser">
+      <documentation>ILIAS getTestResults(): returns XMLResultSet with columns ref_id, course xml. $parameters has to contain a column user_id and a column status. Status is a logical AND combined value of (MEMBER = 1, TUTOR = 2, ADMIN = 4, OWNER = 8) and determines which courses should be returned.</documentation>
+      <wsdl:input message="tns:getCoursesForUserRequest" />
+      <wsdl:output message="tns:getCoursesForUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getGroupsForUser">
+      <documentation>ILIAS getTestResults(): returns XMLResultSet with columns ref_id, group xml. $parameters has to contain a column user_id and a column status. Status is a logical AND combined value of (MEMBER = 1, TUTOR = 2, OWNER = 4) and determines which groups should be returned.</documentation>
+      <wsdl:input message="tns:getGroupsForUserRequest" />
+      <wsdl:output message="tns:getGroupsForUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPathForRefId">
+      <documentation>ILIAS getPathForRefId(): returns XMLResultSet with columns ref_id, type and title.</documentation>
+      <wsdl:input message="tns:getPathForRefIdRequest" />
+      <wsdl:output message="tns:getPathForRefIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchRoles">
+      <documentation>ILIAS searchRoles(): returns XML following role dtd with search results for given role type and search terms.</documentation>
+      <wsdl:input message="tns:searchRolesRequest" />
+      <wsdl:output message="tns:searchRolesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getInstallationInfoXML">
+      <documentation>ILIAS getInstallationInfoXML(): returns XML following installation_info dtd</documentation>
+      <wsdl:input message="tns:getInstallationInfoXMLRequest" />
+      <wsdl:output message="tns:getInstallationInfoXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getClientInfoXML">
+      <documentation>ILIAS getClientInfoXML(): returns XML following installation_info dtd, contains the client the data of given client id</documentation>
+      <wsdl:input message="tns:getClientInfoXMLRequest" />
+      <wsdl:output message="tns:getClientInfoXMLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSkillCompletionDateForTriggerRefId">
+      <documentation>ILIAS getSkillCompletionDateForTriggerRefId(). Get completion dates for skill trigger ref ids.</documentation>
+      <wsdl:input message="tns:getSkillCompletionDateForTriggerRefIdRequest" />
+      <wsdl:output message="tns:getSkillCompletionDateForTriggerRefIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkSkillUserCertificateForTriggerRefId">
+      <documentation>ILIAS checkSkillUserCertificateForTriggerRefId(). Check user certificates for trigger ref ids.</documentation>
+      <wsdl:input message="tns:checkSkillUserCertificateForTriggerRefIdRequest" />
+      <wsdl:output message="tns:checkSkillUserCertificateForTriggerRefIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSkillTriggerOfAllCertificates">
+      <documentation>ILIAS getSkillTriggerOfAllCertificates(). Check get all trigger with certificate for a user.</documentation>
+      <wsdl:input message="tns:getSkillTriggerOfAllCertificatesRequest" />
+      <wsdl:output message="tns:getSkillTriggerOfAllCertificatesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserIdBySid">
+      <documentation>ILIAS getUserIdBySid(): returns an ILIAS usr_id for the given sid</documentation>
+      <wsdl:input message="tns:getUserIdBySidRequest" />
+      <wsdl:output message="tns:getUserIdBySidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteExpiredDualOptInUserObjects">
+      <documentation>ILIAS deleteExpiredDualOptInUserObjects(): Deletes expired user accounts caused by unconfirmed registration links in "dual opt in" registration method</documentation>
+      <wsdl:input message="tns:deleteExpiredDualOptInUserObjectsRequest" />
+      <wsdl:output message="tns:deleteExpiredDualOptInUserObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="readWebLink">
+      <documentation>ILIAS readWebLink(): returns xml description of a weblink container.</documentation>
+      <wsdl:input message="tns:readWebLinkRequest" />
+      <wsdl:output message="tns:readWebLinkResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createWebLink">
+      <documentation>ILIAS createWebLink(): create web link container, put it into target (ref_id) and update weblink container from xml (see ilias_weblink_4_0.dtd for details). Obj_id must not be set!</documentation>
+      <wsdl:input message="tns:createWebLinkRequest" />
+      <wsdl:output message="tns:createWebLinkResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateWebLink">
+      <documentation>ILIAS updateWebLink():update existing weblink, update weblink properties from xml (see ilias_weblink_4_0.dtd for details).</documentation>
+      <wsdl:input message="tns:updateWebLinkRequest" />
+      <wsdl:output message="tns:updateWebLinkResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLearningProgressChanges">
+      <documentation>ILIAS getLearningProgressChanges(): Get learning progress changes after a given timestamp.</documentation>
+      <wsdl:input message="tns:getLearningProgressChangesRequest" />
+      <wsdl:output message="tns:getLearningProgressChangesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteProgress">
+      <documentation>Delete user progress data of objects. </documentation>
+      <wsdl:input message="tns:deleteProgressRequest" />
+      <wsdl:output message="tns:deleteProgressResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getProgressInfo">
+      <documentation>Get object learning progress information</documentation>
+      <wsdl:input message="tns:getProgressInfoRequest" />
+      <wsdl:output message="tns:getProgressInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="exportDataCollectionContent">
+      <documentation>Generate DataCollectionContent Export</documentation>
+      <wsdl:input message="tns:exportDataCollectionContentRequest" />
+      <wsdl:output message="tns:exportDataCollectionContentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="processBackgroundTask">
+      <documentation>Process task in background</documentation>
+      <wsdl:input message="tns:processBackgroundTaskRequest" />
+      <wsdl:output message="tns:processBackgroundTaskResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ILIASSoapWebserviceBinding" type="tns:ILIASSoapWebservicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="login">
+      <soap:operation soapAction="urn:ilUserAdministration#login" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginCAS">
+      <soap:operation soapAction="urn:ilUserAdministration#loginCAS" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginLDAP">
+      <soap:operation soapAction="urn:ilUserAdministration#login" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginStudipUser">
+      <soap:operation soapAction="urn:ilUserAdministration#loginStudipUser" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <soap:operation soapAction="urn:ilUserAdministration#logout" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lookupUser">
+      <soap:operation soapAction="urn:ilUserAdministration#lookupUser" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <soap:operation soapAction="urn:ilUserAdministration#getUser" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <soap:operation soapAction="urn:ilUserAdministration#deleteUser" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCourse">
+      <soap:operation soapAction="urn:ilUserAdministration#addCourse" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCourse">
+      <soap:operation soapAction="urn:ilUserAdministration#deleteCourse" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="assignCourseMember">
+      <soap:operation soapAction="urn:ilUserAdministration#assignCourseMember" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="excludeCourseMember">
+      <soap:operation soapAction="urn:ilUserAdministration#excludeCourseMember" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isAssignedToCourse">
+      <soap:operation soapAction="urn:ilUserAdministration#isAssignedToCourse" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCourseXML">
+      <soap:operation soapAction="urn:ilUserAdministration#getCourseXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCourse">
+      <soap:operation soapAction="urn:ilUserAdministration#updateCourse" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjIdByImportId">
+      <soap:operation soapAction="urn:ilUserAdministration#getCourseIdByImportId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRefIdsByImportId">
+      <soap:operation soapAction="urn:ilUserAdministration#getRefIdsByImportId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRefIdsByObjId">
+      <soap:operation soapAction="urn:ilUserAdministration#getRefIdsByObjId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjectByReference">
+      <soap:operation soapAction="urn:ilUserAdministration#getObjectByReference" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjectsByTitle">
+      <soap:operation soapAction="urn:ilUserAdministration#getObjectsByTitle" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchObjects">
+      <soap:operation soapAction="urn:ilUserAdministration#searchObjects" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTreeChilds">
+      <soap:operation soapAction="urn:ilUserAdministration#getTreeChilds" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getXMLTree">
+      <soap:operation soapAction="urn:ilUserAdministration#getXMLTree" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addObject">
+      <soap:operation soapAction="urn:ilUserAdministration#addObject" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateObjects">
+      <soap:operation soapAction="urn:ilUserAdministration#updateObjects" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addReference">
+      <soap:operation soapAction="urn:ilUserAdministration#addReference" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteObject">
+      <soap:operation soapAction="urn:ilUserAdministration#deleteObject" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeFromSystemByImportId">
+      <soap:operation soapAction="urn:ilUserAdministration#removeFromSystemByImportId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addUserRoleEntry">
+      <soap:operation soapAction="urn:ilUserAdministration#addUserRoleEntry" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserRoleEntry">
+      <soap:operation soapAction="urn:ilUserAdministration#deleteUserRoleEntry" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOperations">
+      <soap:operation soapAction="urn:ilUserAdministration#getOperations" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="revokePermissions">
+      <soap:operation soapAction="urn:ilUserAdministration#revokePermissions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="grantPermissions">
+      <soap:operation soapAction="urn:ilUserAdministration#grantPermissions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLocalRoles">
+      <soap:operation soapAction="urn:ilUserAdministration#getLocalRoles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserRoles">
+      <soap:operation soapAction="urn:ilUserAdministration#getLocalRoles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRole">
+      <soap:operation soapAction="urn:ilUserAdministration#addRole" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRole">
+      <soap:operation soapAction="urn:ilUserAdministration#deleteRole" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRoleFromTemplate">
+      <soap:operation soapAction="urn:ilUserAdministration#addRole" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjectTreeOperations">
+      <soap:operation soapAction="urn:ilUserAdministration#getPermissionsForObject" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addGroup">
+      <soap:operation soapAction="urn:ilUserAdministration#addGroup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="groupExists">
+      <soap:operation soapAction="urn:ilUserAdministration#groupExists" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGroup">
+      <soap:operation soapAction="urn:ilUserAdministration#getGroup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="assignGroupMember">
+      <soap:operation soapAction="urn:ilUserAdministration#assignGroupMember" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="excludeGroupMember">
+      <soap:operation soapAction="urn:ilUserAdministration#excludeGroupMember" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isAssignedToGroup">
+      <soap:operation soapAction="urn:ilUserAdministration#isAssignedToGroup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendMail">
+      <soap:operation soapAction="urn:ilUserAdministration#sendMail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="distributeMails">
+      <soap:operation soapAction="urn:ilUserAdministration#sendMail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ilClone">
+      <soap:operation soapAction="urn:ilUserAdministration#ilClone" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="handleECSTasks">
+      <soap:operation soapAction="urn:ilUserAdministration#handleECSTasks" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ilCloneDependencies">
+      <soap:operation soapAction="urn:ilUserAdministration#ilCloneDependencies" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveQuestionResult">
+      <soap:operation soapAction="urn:ilUserAdministration#saveQuestionResult" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveQuestion">
+      <soap:operation soapAction="urn:ilUserAdministration#saveQuestion" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveQuestionSolution">
+      <soap:operation soapAction="urn:ilUserAdministration#saveQuestionSolution" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQuestionSolution">
+      <soap:operation soapAction="urn:ilUserAdministration#getQuestionSolution" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTestUserData">
+      <soap:operation soapAction="urn:ilUserAdministration#getTestUserData" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPositionOfQuestion">
+      <soap:operation soapAction="urn:ilUserAdministration#getPositionOfQuestion" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPreviousReachedPoints">
+      <soap:operation soapAction="urn:ilUserAdministration#getPreviousReachedPoints" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNrOfQuestionsInPass">
+      <soap:operation soapAction="urn:ilUserAdministration#getNrOfQuestionsInPass" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStructureObjects">
+      <soap:operation soapAction="urn:ilUserAdministration#getStructureObjects" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="importUsers">
+      <soap:operation soapAction="urn:ilUserAdministration#importUsers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRoles">
+      <soap:operation soapAction="urn:ilUserAdministration#getRoles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersForContainer">
+      <soap:operation soapAction="urn:ilUserAdministration#getUsersForContainer" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersForRole">
+      <soap:operation soapAction="urn:ilUserAdministration#getUsersForRole" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchUser">
+      <soap:operation soapAction="urn:ilUserAdministration#searchUsers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hasNewMail">
+      <soap:operation soapAction="urn:ilUserAdministration#hasNewMail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNIC">
+      <soap:operation soapAction="urn:ilUserAdministration#getNIC" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getExerciseXML">
+      <soap:operation soapAction="urn:ilUserAdministration#getExerciseXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addExercise">
+      <soap:operation soapAction="urn:ilUserAdministration#addExercise" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateExercise">
+      <soap:operation soapAction="urn:ilUserAdministration#updateExercise" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFileXML">
+      <soap:operation soapAction="urn:ilUserAdministration#getFileXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addFile">
+      <soap:operation soapAction="urn:ilUserAdministration#addFile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateFile">
+      <soap:operation soapAction="urn:ilUserAdministration#updateFile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserXML">
+      <soap:operation soapAction="urn:ilUserAdministration#resolveUsers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjIdsByRefIds">
+      <soap:operation soapAction="urn:ilUserAdministration#getRefIdsByImportId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateGroup">
+      <soap:operation soapAction="urn:ilUserAdministration#updateGroup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getIMSManifestXML">
+      <soap:operation soapAction="urn:ilUserAdministration#getIMSManifestXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hasSCORMCertificate">
+      <soap:operation soapAction="urn:ilUserAdministration#hasSCORMCertificate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSCORMCompletionStatus">
+      <soap:operation soapAction="urn:ilUserAdministration#getSCORMCompletionStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="copyObject">
+      <soap:operation soapAction="urn:ilUserAdministration#copyObject" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="moveObject">
+      <soap:operation soapAction="urn:ilUserAdministration#moveObject" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTestResults">
+      <soap:operation soapAction="urn:ilUserAdministration#getTestResults" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeTestResults">
+      <soap:operation soapAction="urn:ilUserAdministration#removeTestResults" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCoursesForUser">
+      <soap:operation soapAction="urn:ilUserAdministration#getCoursesForUser" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGroupsForUser">
+      <soap:operation soapAction="urn:ilUserAdministration#getGroupsForUser" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPathForRefId">
+      <soap:operation soapAction="urn:ilUserAdministration#getPathForRefId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchRoles">
+      <soap:operation soapAction="urn:ilUserAdministration#searchRoles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInstallationInfoXML">
+      <soap:operation soapAction="urn:ilUserAdministration#getInstallationInfoXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClientInfoXML">
+      <soap:operation soapAction="urn:ilUserAdministration#getClientInfoXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSkillCompletionDateForTriggerRefId">
+      <soap:operation soapAction="urn:ilUserAdministration#getSkillCompletionDateForTriggerRefId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkSkillUserCertificateForTriggerRefId">
+      <soap:operation soapAction="urn:ilUserAdministration#checkSkillUserCertificateForTriggerRefId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSkillTriggerOfAllCertificates">
+      <soap:operation soapAction="urn:ilUserAdministration#getSkillTriggerOfAllCertificates" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserIdBySid">
+      <soap:operation soapAction="urn:ilUserAdministration#getUserIdBySid" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteExpiredDualOptInUserObjects">
+      <soap:operation soapAction="urn:ilUserAdministration#deleteExpiredDualOptInUserObjects" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readWebLink">
+      <soap:operation soapAction="urn:ilUserAdministration#readWebLink" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createWebLink">
+      <soap:operation soapAction="urn:ilUserAdministration#createWebLink" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWebLink">
+      <soap:operation soapAction="urn:ilUserAdministration#updateWebLink" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLearningProgressChanges">
+      <soap:operation soapAction="urn:ilUserAdministration#getLearningProgressChanges" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProgress">
+      <soap:operation soapAction="urn:ilUserAdministration#deleteProgress" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProgressInfo">
+      <soap:operation soapAction="urn:ilUserAdministration#getProgressInfo" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="exportDataCollectionContent">
+      <soap:operation soapAction="urn:ilUserAdministration#exportDataCollectionTableContent" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processBackgroundTask">
+      <soap:operation soapAction="urn:ilUserAdministration#processBackgroundTask" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ilUserAdministration" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ILIASSoapWebservice">
+    <wsdl:port name="ILIASSoapWebservicePort" binding="tns:ILIASSoapWebserviceBinding">
+      <soap:address location="https://nbl.fh-bielefeld.de:443/webservice/soap/server.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

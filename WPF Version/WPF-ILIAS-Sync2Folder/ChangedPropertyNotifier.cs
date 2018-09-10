@@ -143,6 +143,8 @@ namespace WPF_ILIAS_Sync2Folder
         private string _sFileSize = "";
         private string _sFileId = "";
 
+        private bool _bFileIsVisible = true;
+
         public string FileStatus
         {
             get { return _sFileStatus; }
@@ -200,6 +202,16 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 _sFileId = value;
                 OnPropertyChanged("FileId");
+            }
+        }
+
+        public bool FileIsVisible
+        {
+            get { return _bFileIsVisible; }
+            set
+            {
+                _bFileIsVisible = value;
+                OnPropertyChanged("FileIsVisible");
             }
         }
 

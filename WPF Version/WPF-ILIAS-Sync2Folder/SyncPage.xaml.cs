@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using IliasDL;
 
 namespace WPF_ILIAS_Sync2Folder
 {
@@ -22,6 +23,7 @@ namespace WPF_ILIAS_Sync2Folder
     public partial class SyncPage : UserControl
     {
         ChangedPropertyNotifier changedPropertyNotifier = new ChangedPropertyNotifier();
+        CConfig config = new CConfig();
 
         private bool bSyncStatus;
 
@@ -76,22 +78,35 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void CheckShowOnly_Checked(object sender, RoutedEventArgs e)
         {
-
+            config.SetShowOnly(true);
         }
 
         private void CheckShowOnly_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            config.SetShowOnly(false);
         }
 
         private void CheckShowOnlyNew_Checked(object sender, RoutedEventArgs e)
         {
-
+            config.SetShowOnlyNew(true);
         }
 
         private void CheckShowOnlyNew_Unchecked(object sender, RoutedEventArgs e)
         {
+            config.SetShowOnlyNew(false);
+        }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (config.GetShowOnly() == "true")
+            {
+                checkShowOnly.IsChecked = true;
+            }
+
+            if (config.GetShowOnlyNew() == "true")
+            {
+                checkShowOnlyNew.IsChecked = true;
+            }
         }
     }
 
