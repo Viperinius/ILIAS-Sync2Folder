@@ -420,5 +420,39 @@ namespace IliasDL
         {
             return GetAppSetting("trayicon");
         }
+
+        public void SetUpdateCheck(bool bState)
+        {
+            if (bState)
+            {
+                SetAppSetting("updatecheck", "true");
+            }
+            else
+            {
+                SetAppSetting("updatecheck", "false");
+            }
+        }
+
+        public string GetUpdateCheck()
+        {
+            return GetAppSetting("updatecheck");
+        }
+
+        public void SetSyncNotify(bool bState)
+        {
+            if (bState)
+            {
+                SetAppSetting("syncnotification", "true");
+            }
+            else
+            {
+                SetAppSetting("syncnotification", "false");
+            }
+        }
+
+        public string GetSyncNotify()
+        {
+            return GetAppSetting("syncnotification");
+        }
     }
 }

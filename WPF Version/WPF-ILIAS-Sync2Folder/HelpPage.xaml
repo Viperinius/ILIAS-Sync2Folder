@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_ILIAS_Sync2Folder"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="HelpPage_Loaded">
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
@@ -51,7 +51,7 @@
                     </TextBlock>
                 </Label>
                 <!--CHANGE LABEL CONTENT TO BINDING, remove background colour when done-->
-                <Label Content="Installed version : $.$.$.$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,45,0,0" Background="#FFDE0000"></Label>
+                <Label Name="lbVersion" Content="Installed version : $" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,45,0,0"></Label>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,107,0,0">
                 <Hyperlink x:Name="linkGithub" NavigateUri="https://github.com/Viperinius/ILIAS-Sync2Folder" RequestNavigate="Hyperlink_RequestNavigate">Github repository</Hyperlink>
                 </TextBlock>

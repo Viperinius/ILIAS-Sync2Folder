@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Deployment.Application;
+using System.Reflection;
 
 namespace WPF_ILIAS_Sync2Folder
 {
@@ -30,6 +32,23 @@ namespace WPF_ILIAS_Sync2Folder
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        private void HelpPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            lbVersion.Content = lbVersion.Content.ToString().Replace("$", GetAppVersion().ToString());
+        }
+
+        public Version GetAppVersion()
+        {
+            try
+            {
+                return ApplicationDeployment.CurrentDeployment.CurrentVersion;
+            }
+            catch (Exception)
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version;
+            }
         }
     }
 }

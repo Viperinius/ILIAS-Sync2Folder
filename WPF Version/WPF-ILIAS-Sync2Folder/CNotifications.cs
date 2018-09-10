@@ -87,8 +87,8 @@ namespace IliasDL
                 //var latest = client.Repository.Release.GetLatest("Viperinius", "ILIAS-Sync2Folder").Result;
                 var latest = client.Repository.Release.GetAll("Viperinius", "ILIAS-Sync2Folder").Result;
 
-                Console.WriteLine(latest[0].TagName);
-                Console.WriteLine(latest[0].Name);
+                //Console.WriteLine(latest[0].TagName);
+                //Console.WriteLine(latest[0].Name);
                 //Console.WriteLine(latest.TagName);
 
                 iReleaseId = latest[0].Id;

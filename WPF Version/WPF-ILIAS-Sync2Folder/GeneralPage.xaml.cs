@@ -177,22 +177,22 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void ToggleUpdates_Checked(object sender, RoutedEventArgs e)
         {
-
+            config.SetUpdateCheck(true);
         }
 
         private void ToggleUpdates_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            config.SetUpdateCheck(false);
         }
 
         private void ToggleSyncNotify_Checked(object sender, RoutedEventArgs e)
         {
-
+            config.SetSyncNotify(true);
         }
 
         private void ToggleSyncNotify_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            config.SetSyncNotify(false);
         }
 
         private void GeneralPage_Loaded(object sender, RoutedEventArgs e)
@@ -204,6 +204,21 @@ namespace WPF_ILIAS_Sync2Folder
             else
             {
                 radioGerman.IsChecked = true;
+            }
+
+            if (config.GetShowTrayIcon() == "true")
+            {
+                toggleTrayIcon.IsChecked = true;
+            }
+
+            if (config.GetUpdateCheck() == "true")
+            {
+                toggleUpdates.IsChecked = true;
+            }
+
+            if (config.GetSyncNotify() == "true")
+            {
+                toggleSyncNotify.IsChecked = true;
             }
 
             txtLoginLink.Text = config.GetServerLoginLink();

@@ -116,6 +116,11 @@ namespace WPF_ILIAS_Sync2Folder
             workerLogin.DoWork += new DoWorkEventHandler(WorkerLogin_DoWork);
             workerLogin.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerLogin_RunWorkerCompleted);
 
+            if (workerLogin.IsBusy)
+            {
+                workerLogin.CancelAsync();
+            }
+
             workerSync = new BackgroundWorker
             {
                 WorkerReportsProgress = true,
@@ -125,6 +130,11 @@ namespace WPF_ILIAS_Sync2Folder
             workerSync.DoWork += new DoWorkEventHandler(WorkerSync_DoWork);
             workerSync.ProgressChanged += new ProgressChangedEventHandler(WorkerSync_ProgressChanges);
             workerSync.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerSync_RunWorkerCompleted);
+
+            if (workerSync.IsBusy)
+            {
+                workerSync.CancelAsync();
+            }
 
             workerCourses = new BackgroundWorker
             {
@@ -136,11 +146,22 @@ namespace WPF_ILIAS_Sync2Folder
             workerCourses.ProgressChanged += new ProgressChangedEventHandler(WorkerCourses_ProgressChanges);
             workerCourses.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerCourses_RunWorkerCompleted);
 
-            //check for update
-            if (updater.CheckForUpdate())
+            if (workerCourses.IsBusy)
             {
-                //notify user
-                updater.DisplayNotification("Update available", "A new update for ILIAS Sync2Folder has been found!");
+                workerCourses.CancelAsync();
+            }
+
+            //-----------------------------
+            //      check for update
+            //-----------------------------
+
+            if (config.GetUpdateCheck() == "true")
+            {
+                if (updater.CheckForUpdate())
+                {
+                    //notify user
+                    updater.DisplayNotification("Update available", "A new update for ILIAS Sync2Folder has been found!");
+                }
             }
         }
 
@@ -177,6 +198,10 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerCourses_DoWork(object sender, DoWorkEventArgs e)
         {
+            //get courses
+
+
+            //print courses
 
         }
 
