@@ -29,16 +29,19 @@ namespace WPF_ILIAS_Sync2Folder
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public bool bLoggedIn;
-
         private System.Windows.Forms.NotifyIcon notifyIcon = new System.Windows.Forms.NotifyIcon();
         private ChangedPropertyNotifier changedPropertyNotifier = new ChangedPropertyNotifier();
         private CConfig config = new CConfig();
         private CUpdate updater;
+        private CIliasHandling iliasHandling;
 
         private BackgroundWorker workerLogin;
         private BackgroundWorker workerSync;
         private BackgroundWorker workerCourses;
+
+        private string sUsername;
+        private string sPassword;
+        private bool bLoginSuccess;
 
         public MainWindow()
         {
@@ -59,29 +62,33 @@ namespace WPF_ILIAS_Sync2Folder
 
             notifyIcon.Icon = Properties.Resources.dliconWHITEsquare;
             updater = new CUpdate(notifyIcon);
+            iliasHandling = new CIliasHandling(this);
         }
 
-        private async void BtnLogin_Click(object sender, RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (!bLoggedIn)
+            if (!iliasHandling.bLoggedIn)
             {
                 ShowLoginDialog();
-                changedPropertyNotifier.ChangeBtnLoginText();
-                bLoggedIn = true;
-                BtnLogin.Tag = PackIconOcticonsKind.SignOut;
+
+                
+                bLoginSuccess = iliasHandling.IliasLogin(sUsername, sPassword);
+
+                if (!bLoginSuccess)
+                {
+                    var metroWindow = (Application.Current.MainWindow as MetroWindow);
+                    var result = metroWindow.ShowMessageAsync("Error", "An error occured while logging in...", MessageDialogStyle.Affirmative).Result;
+                }
+                else
+                {
+                    changedPropertyNotifier.ChangeBtnLoginText();
+                    BtnLogin.Tag = PackIconOcticonsKind.SignOut;
+                }
             }
             else
             {
-                var metroWindow = (Application.Current.MainWindow as MetroWindow);
-                var result = await metroWindow.ShowMessageAsync("Logout", "Do you want to log out?", MessageDialogStyle.AffirmativeAndNegative);
-
-                if (result == MessageDialogResult.Affirmative)
-                {
-                    changedPropertyNotifier.ChangeBtnLoginText();
-                    bLoggedIn = false;
-                    BtnLogin.Tag = PackIconOcticonsKind.SignIn;
-                }
-            }            
+                ShowLogoutDialog();
+            }
         }
 
         private void BtnStyle_Click(object sender, RoutedEventArgs e)
@@ -90,12 +97,41 @@ namespace WPF_ILIAS_Sync2Folder
             styleChanger.Show();
         }
 
-        public async void ShowLoginDialog()
+        /// <summary>
+        /// Open the login dialog
+        /// </summary>
+        private void ShowLoginDialog()
         {
             var metroWindow = (Application.Current.MainWindow as MetroWindow);
-            var result = await metroWindow.ShowLoginAsync("ILIAS Login", "Please log in with your ILIAS credentials");
-            Console.WriteLine("User: " + result.Username);
-            Console.WriteLine("Pass: " + result.Password);
+            var result = metroWindow.ShowLoginAsync("ILIAS Login", "Please log in with your ILIAS credentials").Result;
+            Console.WriteLine(result.Username + " " + result.Password);
+
+            sUsername = result.Username;
+            sPassword = result.Password;
+        }
+
+        /// <summary>
+        /// Open a dialog for logout
+        /// </summary>
+        private void ShowLogoutDialog()
+        {
+            var metroWindow = (Application.Current.MainWindow as MetroWindow);
+            var result = metroWindow.ShowMessageAsync("Logout", "Do you want to log out?", MessageDialogStyle.AffirmativeAndNegative).Result;
+
+            if (result == MessageDialogResult.Affirmative)
+            {
+                bool bSuccess = iliasHandling.IliasLogout();
+
+                if (!bSuccess)
+                {
+                    metroWindow.ShowMessageAsync("Error", "An error occured while logging out...", MessageDialogStyle.Affirmative);
+                }
+                else
+                {
+                    changedPropertyNotifier.ChangeBtnLoginText();
+                    BtnLogin.Tag = PackIconOcticonsKind.SignIn;
+                }
+            }
         }
 
         
@@ -173,7 +209,14 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerLogin_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            if (!iliasHandling.bLoggedIn)
+            {
+                bLoginSuccess = iliasHandling.IliasLogin(sUsername, sPassword);
+            }
+            else
+            {
+                bLoginSuccess = true;
+            }
         }
 
         private void WorkerLogin_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

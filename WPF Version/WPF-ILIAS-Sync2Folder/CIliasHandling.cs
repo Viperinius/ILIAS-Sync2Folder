@@ -29,11 +29,61 @@ namespace WPF_ILIAS_Sync2Folder
         private int iFilePercentage = 0;
         private int iCoursePercentage = 0;
         private int iCurrentCourseNum = 0;
+        public bool bLoggedIn;
 
         private MainWindow window;
         public CIliasHandling(MainWindow mainWindow)
         {
             window = mainWindow;
+        }
+
+        /// <summary>
+        /// Log in to ILIAS SOAP, returns false if not successful
+        /// </summary>
+        /// <param name="sUser">Username</param>
+        /// <param name="sPassword">Password</param>
+        /// <returns></returns>
+        public bool IliasLogin(string sUser, string sPassword)
+        {
+            if (bLoggedIn)
+            {
+                return true;
+            }
+            else
+            {
+                if (sUser != "" && sPassword != "")
+                {
+                    config.SetUser(sUser);
+
+                    //connect to ILIAS SOAP
+                    try
+                    {
+                        //get session id / log in
+                        sSessionId = client.loginLDAP(config.GetClient(), sUser, sPassword);
+                        bLoggedIn = true;
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        bLoggedIn = false;
+                        return false;
+                    }
+                }
+                else
+                {
+                    bLoggedIn = false;
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Log out from ILIAS SOAP
+        /// </summary>
+        /// <returns></returns>
+        public bool IliasLogout()
+        {
+            return client.logout(sSessionId);
         }
 
         /// <summary>
@@ -105,7 +155,9 @@ namespace WPF_ILIAS_Sync2Folder
             return temp;
         }
 
-
+        /// <summary>
+        /// Get names of all users' courses
+        /// </summary>
         public void GetCourseNames()
         {
             string sRef = "";
@@ -116,7 +168,10 @@ namespace WPF_ILIAS_Sync2Folder
             }
         }
 
-
+        /// <summary>
+        /// Get the file information, create directories, add to list view and download files
+        /// </summary>
+        /// <param name="iCourseId">Current course ID</param>
         public void GetCourseFiles(int iCourseId)
         {
             string tmpPathCrs = "";
@@ -219,15 +274,22 @@ namespace WPF_ILIAS_Sync2Folder
             iFilePercentage = cSimple.GetPercentage(0, iFileCount);
             iCourseCount = cSimple.GetPercentage(iCurrentCourseNum, iCourseCount);
 
+            DownloadFiles(iCourseId, iFileCount);
 
+            
 
         }
 
-
-        private void DownloadFiles(int iCourseId)
+        /// <summary>
+        /// Show each file on listview and download them (if setting is set)
+        /// </summary>
+        /// <param name="iCourseId">Current course ID</param>
+        /// <param name="iFileCount">Count of all files in the current course</param>
+        private void DownloadFiles(int iCourseId, int iFileCount)
         {
             string sStatus = "Not present";
 
+            int iCounter = 0;
             foreach (FileInfo file in lFiles)
             {
                 window.WorkerSync_ChangeProgress(iFilePercentage);
@@ -237,6 +299,7 @@ namespace WPF_ILIAS_Sync2Folder
                 }
 
                 file.FileStatus = sStatus;
+                file.FileIsVisible = false;
 
                 //create path directories
                 string sPath = file.FilePath;
@@ -278,6 +341,7 @@ namespace WPF_ILIAS_Sync2Folder
                     return;
                 }
 
+                
                 bool bNewFile = false;
                 if (config.GetShowOnly() == "false")
                 {
@@ -287,12 +351,30 @@ namespace WPF_ILIAS_Sync2Folder
                         sStatus = "Loading...";
                         bNewFile = true;
                         file.FileStatus = sStatus;
+                        file.FileIsVisible = true;
                     }
 
                     GetFileByRefGZIP(Int32.Parse(file.FileId), file.FilePath, file.FileName, ref sStatus);
                     file.FileStatus = sStatus;
                 }
 
+                if (bNewFile)
+                {
+                    file.FileStatus = sStatus;
+                    file.FileIsVisible = true;
+                }
+                else if (config.GetShowOnlyNew() == "true" && (sStatus == "Not present" || sStatus == "New"))
+                {
+                    file.FileStatus = sStatus;
+                    file.FileIsVisible = true;
+                }
+                else if (config.GetShowOnlyNew() == "false")
+                {
+                    file.FileIsVisible = true;
+                }
+
+                iFilePercentage = cSimple.GetPercentage(iCounter + 1, iFileCount);
+                window.WorkerSync_ChangeProgress(iFilePercentage);
             }
         }
 

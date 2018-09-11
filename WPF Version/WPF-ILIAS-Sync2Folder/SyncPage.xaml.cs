@@ -39,7 +39,7 @@ namespace WPF_ILIAS_Sync2Folder
             listViewSync.ItemsSource = lFiles;
 
             lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "Test.pdf", FilePath = @"Test\Test2\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "12345" });
-            lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "First.pdf", FilePath = @"Test\OMG\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "882184" });
+            lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "First.pdf", FilePath = @"Test\OMG\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "882184", FileIsVisible = false });
             lFiles.Add(new FileInfo() { FileStatus = "Syncing", FileName = "Ohreally.pdf", FilePath = @"Test\Test2\", FileDate = "01.01.9999", FileSize = "420 MB", FileId = "9875" });
             
         }
