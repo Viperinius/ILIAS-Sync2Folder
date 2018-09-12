@@ -63,8 +63,15 @@ namespace WPF_ILIAS_Sync2Folder
                         bLoggedIn = true;
                         return true;
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
+                        Console.WriteLine(e.Message);
+
+                        if (e.Message == "err_wrong_login")
+                        {
+                            //maybe implement own message (wrong credentials) to display in message
+                        }
+
                         bLoggedIn = false;
                         return false;
                     }
@@ -83,7 +90,15 @@ namespace WPF_ILIAS_Sync2Folder
         /// <returns></returns>
         public bool IliasLogout()
         {
-            return client.logout(sSessionId);
+            if (bLoggedIn)
+            {
+                bLoggedIn = false;
+                return client.logout(sSessionId);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>

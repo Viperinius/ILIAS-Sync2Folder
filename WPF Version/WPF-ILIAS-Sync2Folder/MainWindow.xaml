@@ -43,7 +43,8 @@
             <Button Click="Button_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Connection Status:" Margin="0,0,5,0"/>
-                    <Controls:ProgressRing IsActive="True" Width="20" Height="20" MinWidth="20" MinHeight="20" Foreground="{DynamicResource ControlBackgroundBrush}"/>
+                    <Controls:ProgressRing Name="progressRing" IsActive="True" Visibility="Visible" Width="20" Height="20" MinWidth="20" MinHeight="20" Foreground="{DynamicResource ControlBackgroundBrush}"/>
+                    <iconPacks:PackIconEntypo Name="iconCheck" Kind="Check" Visibility="Collapsed" Width="20" Height="20" MinWidth="20" MinHeight="20" Foreground="{DynamicResource ControlBackgroundBrush}"/>
                 </StackPanel>
             </Button>            
             <Button Name="BtnLogin" Click="BtnLogin_Click">

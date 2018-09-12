@@ -70,20 +70,22 @@ namespace WPF_ILIAS_Sync2Folder
             if (!iliasHandling.bLoggedIn)
             {
                 ShowLoginDialog();
-
-                
-                bLoginSuccess = iliasHandling.IliasLogin(sUsername, sPassword);
-
-                if (!bLoginSuccess)
+                /*
+                if (result.IsCompleted)
                 {
-                    var metroWindow = (Application.Current.MainWindow as MetroWindow);
-                    var result = metroWindow.ShowMessageAsync("Error", "An error occured while logging in...", MessageDialogStyle.Affirmative).Result;
-                }
-                else
-                {
-                    changedPropertyNotifier.ChangeBtnLoginText();
-                    BtnLogin.Tag = PackIconOcticonsKind.SignOut;
-                }
+                    bLoginSuccess = iliasHandling.IliasLogin(sUsername, sPassword);
+
+                    if (!bLoginSuccess)
+                    {
+                        var metroWindow = (Application.Current.MainWindow as MetroWindow);
+                        await metroWindow.ShowMessageAsync("Error", "An error occured while logging in...", MessageDialogStyle.Affirmative);
+                    }
+                    else
+                    {
+                        changedPropertyNotifier.ChangeBtnLoginText();
+                        BtnLogin.Tag = PackIconOcticonsKind.SignOut;
+                    }
+                } */               
             }
             else
             {
@@ -100,23 +102,25 @@ namespace WPF_ILIAS_Sync2Folder
         /// <summary>
         /// Open the login dialog
         /// </summary>
-        private void ShowLoginDialog()
+        private async void ShowLoginDialog()
         {
             var metroWindow = (Application.Current.MainWindow as MetroWindow);
-            var result = metroWindow.ShowLoginAsync("ILIAS Login", "Please log in with your ILIAS credentials").Result;
+            var result = await metroWindow.ShowLoginAsync("ILIAS Login", "Please log in with your ILIAS credentials", new LoginDialogSettings { InitialUsername = config.GetUser() });
             Console.WriteLine(result.Username + " " + result.Password);
 
             sUsername = result.Username;
             sPassword = result.Password;
+
+            workerLogin.RunWorkerAsync();
         }
 
         /// <summary>
         /// Open a dialog for logout
         /// </summary>
-        private void ShowLogoutDialog()
+        private async void ShowLogoutDialog()
         {
             var metroWindow = (Application.Current.MainWindow as MetroWindow);
-            var result = metroWindow.ShowMessageAsync("Logout", "Do you want to log out?", MessageDialogStyle.AffirmativeAndNegative).Result;
+            var result = await metroWindow.ShowMessageAsync("Logout", "Do you want to log out?", MessageDialogStyle.AffirmativeAndNegative);
 
             if (result == MessageDialogResult.Affirmative)
             {
@@ -124,12 +128,14 @@ namespace WPF_ILIAS_Sync2Folder
 
                 if (!bSuccess)
                 {
-                    metroWindow.ShowMessageAsync("Error", "An error occured while logging out...", MessageDialogStyle.Affirmative);
+                    await metroWindow.ShowMessageAsync("Error", "An error occured while logging out...", MessageDialogStyle.Affirmative);
                 }
                 else
                 {
                     changedPropertyNotifier.ChangeBtnLoginText();
                     BtnLogin.Tag = PackIconOcticonsKind.SignIn;
+                    progressRing.Visibility = Visibility.Visible;
+                    iconCheck.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -145,12 +151,13 @@ namespace WPF_ILIAS_Sync2Folder
         {
             workerLogin = new BackgroundWorker
             {
-                WorkerReportsProgress = false,
+                WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
 
             workerLogin.DoWork += new DoWorkEventHandler(WorkerLogin_DoWork);
             workerLogin.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerLogin_RunWorkerCompleted);
+            workerLogin.ProgressChanged += new ProgressChangedEventHandler(WorkerLogin_ProgressChanged);
 
             if (workerLogin.IsBusy)
             {
@@ -217,11 +224,29 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 bLoginSuccess = true;
             }
+
+            workerLogin.ReportProgress(0);
         }
 
         private void WorkerLogin_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            progressRing.Visibility = Visibility.Collapsed;
+            iconCheck.Visibility = Visibility.Visible;
+        }
 
+        private void WorkerLogin_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (!bLoginSuccess)
+            {
+                this.ShowMessageAsync("Error", "An error occured while logging in...", MessageDialogStyle.Affirmative);
+                progressRing.Visibility = Visibility.Visible;
+                iconCheck.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                changedPropertyNotifier.ChangeBtnLoginText();
+                BtnLogin.Tag = PackIconOcticonsKind.SignOut;
+            }
         }
 
         private void WorkerSync_DoWork(object sender, DoWorkEventArgs e)
