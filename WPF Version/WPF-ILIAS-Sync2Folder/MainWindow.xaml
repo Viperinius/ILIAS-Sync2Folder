@@ -17,9 +17,17 @@
         SaveWindowPosition="True" 
         Icon="dliconWHITEsquare.ico"
         GlowBrush="{DynamicResource AccentColorBrush}" Loaded="MainWindow_Loaded">
+    <Controls:MetroWindow.Resources>
+        <ContextMenu x:Key="NotifyContextMenu" Placement="MousePoint">
+            <MenuItem Header="Open ILIAS Sync2Folder"/>
+            
+            <MenuItem Header="Exit" />
+        </ContextMenu>
+    </Controls:MetroWindow.Resources>
+    
     <Grid>
         <dockablz:Layout FloatingItemHeaderMemberPath="Header" FloatingItemDisplayMemberPath="Content" FloatingItemContainerStyle="{DynamicResource MahAppsToolDragablzItemStyle}">
-            <dragablz:TabablzControl>
+            <dragablz:TabablzControl Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController />
                 </dragablz:TabablzControl.InterTabController>

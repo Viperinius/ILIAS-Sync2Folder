@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
@@ -30,6 +31,7 @@ namespace WPF_ILIAS_Sync2Folder
     public partial class MainWindow : MetroWindow
     {
         private System.Windows.Forms.NotifyIcon notifyIcon = new System.Windows.Forms.NotifyIcon();
+        private System.Windows.Forms.ContextMenu contextMenu = new System.Windows.Forms.ContextMenu();
         private ChangedPropertyNotifier changedPropertyNotifier = new ChangedPropertyNotifier();
         private CConfig config = new CConfig();
         private CUpdate updater;
@@ -53,39 +55,34 @@ namespace WPF_ILIAS_Sync2Folder
             textblockLogin.DataContext = changedPropertyNotifier;
             rectLoginIcon.DataContext = changedPropertyNotifier;
 
-            tabSync.Content = new SyncPage();
-            tabCourseConfig.Content = new CoursePage();
+            iliasHandling = new CIliasHandling(this);
+
+            tabSync.Content = new SyncPage(iliasHandling);
+            tabCourseConfig.Content = new CoursePage(iliasHandling, changedPropertyNotifier);
             tabFolderConfig.Content = new FolderPage();
             tabGeneralConfig.Content = new GeneralPage();
             tabInfo.Content = new HelpPage();
 
 
             notifyIcon.Icon = Properties.Resources.dliconWHITEsquare;
-            updater = new CUpdate(notifyIcon);
-            iliasHandling = new CIliasHandling(this);
+            notifyIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(NotifyIcon_MouseDown);
+            updater = new CUpdate(notifyIcon, contextMenu);
+        }
+
+        private void NotifyIcon_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                ContextMenu menu = (ContextMenu)this.FindResource("NotifyContextMenu");
+                menu.IsOpen = true;
+            }
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (!iliasHandling.bLoggedIn)
             {
-                ShowLoginDialog();
-                /*
-                if (result.IsCompleted)
-                {
-                    bLoginSuccess = iliasHandling.IliasLogin(sUsername, sPassword);
-
-                    if (!bLoginSuccess)
-                    {
-                        var metroWindow = (Application.Current.MainWindow as MetroWindow);
-                        await metroWindow.ShowMessageAsync("Error", "An error occured while logging in...", MessageDialogStyle.Affirmative);
-                    }
-                    else
-                    {
-                        changedPropertyNotifier.ChangeBtnLoginText();
-                        BtnLogin.Tag = PackIconOcticonsKind.SignOut;
-                    }
-                } */               
+                ShowLoginDialog();               
             }
             else
             {
@@ -105,7 +102,15 @@ namespace WPF_ILIAS_Sync2Folder
         private async void ShowLoginDialog()
         {
             var metroWindow = (Application.Current.MainWindow as MetroWindow);
-            var result = await metroWindow.ShowLoginAsync("ILIAS Login", "Please log in with your ILIAS credentials", new LoginDialogSettings { InitialUsername = config.GetUser() });
+            LoginDialogData result;
+            if (config.GetUser() != "__NO_VAL__")
+            {
+                result = await metroWindow.ShowLoginAsync("ILIAS Login", "Please log in with your ILIAS credentials", new LoginDialogSettings { InitialUsername = config.GetUser() });
+            }
+            else
+            {
+                result = await metroWindow.ShowLoginAsync("ILIAS Login", "Please log in with your ILIAS credentials", new LoginDialogSettings { InitialUsername = "" });
+            }
             Console.WriteLine(result.Username + " " + result.Password);
 
             sUsername = result.Username;
@@ -140,7 +145,16 @@ namespace WPF_ILIAS_Sync2Folder
             }
         }
 
-        
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (tabControl.SelectedItem == tabCourseConfig)
+            {
+                if (!iliasHandling.lCourseInfos.Any())
+                {
+                    workerCourses.RunWorkerAsync();
+                }
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -208,7 +222,15 @@ namespace WPF_ILIAS_Sync2Folder
             }
         }
 
+        private ObservableCollection<CourseInfo> ListToObservableCollection(List<CourseInfo> list)
+        {
+            return new ObservableCollection<CourseInfo>(list);
+        }
 
+        private ObservableCollection<FileInfo> ListToObservableCollection(List<FileInfo> list)
+        {
+            return new ObservableCollection<FileInfo>(list);
+        }
 
         //-----------------------------
         //      worker functions
@@ -282,10 +304,25 @@ namespace WPF_ILIAS_Sync2Folder
         private void WorkerCourses_DoWork(object sender, DoWorkEventArgs e)
         {
             //get courses
+            iliasHandling.GetCourses();
+            workerCourses.ReportProgress(33);
+            iliasHandling.GetCourseNames();
+            workerCourses.ReportProgress(66);
+            string sTemp = "";
+            foreach (CourseInfo course in iliasHandling.listCourseInfos)
+            {
+                if ((config.GetCourse(course.CourseId) == course.CourseId) || config.GetSyncAll() == "true")
+                {
+                    course.CourseChecked = true;
+                }
 
-
-            //print courses
-
+                sTemp = config.GetCourseName(course.CourseId);
+                if (sTemp != "__NO_VAL__")
+                {
+                    course.CourseOwnName = sTemp;
+                }
+            }
+            workerCourses.ReportProgress(100);
         }
 
         private void WorkerCourses_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -295,7 +332,19 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerCourses_ProgressChanges(object sender, ProgressChangedEventArgs e)
         {
+            if (e.ProgressPercentage > 99)
+            {
+                foreach (CourseInfo course in iliasHandling.listCourseInfos)
+                {
+                    iliasHandling.lCourseInfos.Add(course);
+                }
 
+                changedPropertyNotifier.CourseProgBarVal = 100;
+            }
+            else
+            {
+                changedPropertyNotifier.CourseProgBarVal = e.ProgressPercentage;
+            }
         }
 
         public void WorkerCourses_ChangeProgress(int iPercentage)
@@ -307,5 +356,7 @@ namespace WPF_ILIAS_Sync2Folder
         {
             return workerCourses.CancellationPending;
         }
+
+        
     }
 }

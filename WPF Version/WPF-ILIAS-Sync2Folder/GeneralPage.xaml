@@ -39,6 +39,9 @@
                 <iconPacks:PackIconEntypo Name="iconCheck" Kind="Check" Width="29" Height="29" Margin="98,70,0,0" Foreground="#FF096800"/>
                 <iconPacks:PackIconFontAwesome Name="iconQuestion" Kind="QuestionSolid" Width="29" Height="29" Margin="98,70,0,0" Foreground="#FF096800"/>
                 <iconPacks:PackIconFontAwesome Name="iconFail" Kind="TimesSolid" Width="29" Height="29" Margin="98,70,0,0" Foreground="#FF950000"/>
+                <Label VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,110,0,0">
+                    <TextBlock TextWrapping="WrapWithOverflow">You might need to restart to apply the changes.</TextBlock>
+                </Label>
                 <TextBox Name="txtClientId" Controls:TextBoxHelper.Watermark="Client ID (only fill in manually if not automatically recognised)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,140,0,0" Controls:TextBoxHelper.UseFloatingWatermark="True"></TextBox>
             </Grid>
             <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Import / export settings:</Label>

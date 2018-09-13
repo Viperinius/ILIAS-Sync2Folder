@@ -80,7 +80,10 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void FolderPage_Loaded(object sender, RoutedEventArgs e)
         {
-            txtDestPath.Text = config.GetPath();
+            if (config.GetPath() != "__NO_VAL__")
+            {
+                txtDestPath.Text = config.GetPath();
+            }
 
             if (config.GetStructureTemplate() != "__NO_VAL__")
             {

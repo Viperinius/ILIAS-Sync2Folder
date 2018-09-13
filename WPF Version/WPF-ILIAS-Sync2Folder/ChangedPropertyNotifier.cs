@@ -13,6 +13,7 @@ namespace WPF_ILIAS_Sync2Folder
     {
         private string _BtnLoginText = "Login";
         private string _BtnSyncText = "Start synchronisation";
+        private int _CourseProgBarVal = 0;
 
         public string BtnLoginText
         {
@@ -34,7 +35,15 @@ namespace WPF_ILIAS_Sync2Folder
             }
         }
 
-
+        public int CourseProgBarVal
+        {
+            get { return _CourseProgBarVal; }
+            set
+            {
+                _CourseProgBarVal = value;
+                OnPropertyChanged("CourseProgBarVal");
+            }
+        }
         
 
         public void ChangeBtnLoginText()

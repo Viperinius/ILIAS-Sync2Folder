@@ -22,18 +22,23 @@ namespace WPF_ILIAS_Sync2Folder
     /// </summary>
     public partial class CoursePage : UserControl
     {
-        ObservableCollection<CourseInfo> lCourseInfos = new ObservableCollection<CourseInfo>();
         CConfig config = new CConfig();
+        CIliasHandling iliasHandling;
+        ChangedPropertyNotifier changedPropertyNotifier;
 
-        public CoursePage()
+        public CoursePage(CIliasHandling mainIliasHandling, ChangedPropertyNotifier changedPropNotifier)
         {
             InitializeComponent();
 
-            listviewCourse.ItemsSource = lCourseInfos;
+            iliasHandling = mainIliasHandling;
+            changedPropertyNotifier = changedPropNotifier;
+
+            listviewCourse.ItemsSource = iliasHandling.lCourseInfos;
+            progressBar.DataContext = changedPropertyNotifier;
             //listviewCourse.DataContext = changedPropertyNotifier;
 
-            lCourseInfos.Add(new CourseInfo() { CourseChecked = true, CourseName = "ET-BS2", CourseOwnName = "BS2", CourseId = "28374" });
-            lCourseInfos.Add(new CourseInfo() { CourseChecked = false, CourseName = "ET", CourseOwnName = "Bla", CourseId = "28323" });
+            //iliasHandling.lCourseInfos.Add(new CourseInfo() { CourseChecked = true, CourseName = "ET-BS2", CourseOwnName = "BS2", CourseId = "28374" });
+            //iliasHandling.lCourseInfos.Add(new CourseInfo() { CourseChecked = false, CourseName = "ET", CourseOwnName = "Bla", CourseId = "28323" });
         }
 
         private void ResizeGridViewColumns()
@@ -56,7 +61,7 @@ namespace WPF_ILIAS_Sync2Folder
         private void ToggleSyncAll_Checked(object sender, RoutedEventArgs e)
         {
             config.SetSyncAll(true);
-            foreach (CourseInfo course in lCourseInfos)
+            foreach (CourseInfo course in iliasHandling.lCourseInfos)
             {
                 course.CourseChecked = true;
             }
@@ -79,18 +84,18 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void BtnDeSelectAll_Click(object sender, RoutedEventArgs e)
         {
-            if (lCourseInfos.Count > 0)
+            if (iliasHandling.lCourseInfos.Count > 0)
             {
-                if (lCourseInfos.First().CourseChecked)
+                if (iliasHandling.lCourseInfos.First().CourseChecked)
                 {
-                    foreach (CourseInfo course in lCourseInfos)
+                    foreach (CourseInfo course in iliasHandling.lCourseInfos)
                     {
                         course.CourseChecked = false;
                     }
                 }
                 else
                 {
-                    foreach (CourseInfo course in lCourseInfos)
+                    foreach (CourseInfo course in iliasHandling.lCourseInfos)
                     {
                         course.CourseChecked = true;
                     }
@@ -116,7 +121,7 @@ namespace WPF_ILIAS_Sync2Folder
         {
             if (txtCourse.Text != "Please select a course first." && txtCourse.Text != "")
             {
-                CourseInfo item = lCourseInfos.SingleOrDefault(x => x.CourseName == txtCourse.Text);
+                CourseInfo item = iliasHandling.lCourseInfos.SingleOrDefault(x => x.CourseName == txtCourse.Text);
                 item.CourseOwnName = txtOwnName.Text;
                 config.SetCourseName(item.CourseId, item.CourseOwnName);
             }
@@ -124,18 +129,21 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            foreach (CourseInfo course in lCourseInfos)
+            if (config.GetSyncAll() == "false")
             {
-                if (course.CourseChecked)
+                foreach (CourseInfo course in iliasHandling.lCourseInfos)
                 {
-                    config.SetCourse(course.CourseId);
+                    if (course.CourseChecked)
+                    {
+                        config.SetCourse(course.CourseId);
+                    }
                 }
             }
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            foreach (CourseInfo course in lCourseInfos)
+            foreach (CourseInfo course in iliasHandling.lCourseInfos)
             {
                 if (!course.CourseChecked)
                 {

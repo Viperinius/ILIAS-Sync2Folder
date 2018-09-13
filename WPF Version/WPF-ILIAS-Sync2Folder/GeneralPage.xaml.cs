@@ -197,13 +197,13 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void GeneralPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (config.GetLanguage() == "English")
+            if (config.GetLanguage() == "German")
             {
-                radioEnglish.IsChecked = true;
+                radioGerman.IsChecked = true;
             }
             else
             {
-                radioGerman.IsChecked = true;
+                radioEnglish.IsChecked = true;
             }
 
             if (config.GetShowTrayIcon() == "true")

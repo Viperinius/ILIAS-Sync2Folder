@@ -25,6 +25,7 @@ namespace WPF_ILIAS_Sync2Folder
 
         public ObservableCollection<FileInfo> lFiles = new ObservableCollection<FileInfo>();
         public ObservableCollection<CourseInfo> lCourseInfos = new ObservableCollection<CourseInfo>();
+        public List<CourseInfo> listCourseInfos = new List<CourseInfo>();
 
         private int iFilePercentage = 0;
         private int iCoursePercentage = 0;
@@ -60,6 +61,7 @@ namespace WPF_ILIAS_Sync2Folder
                     {
                         //get session id / log in
                         sSessionId = client.loginLDAP(config.GetClient(), sUser, sPassword);
+                        iUserId = client.getUserIdBySid(sSessionId);
                         bLoggedIn = true;
                         return true;
                     }
@@ -106,6 +108,13 @@ namespace WPF_ILIAS_Sync2Folder
         /// </summary>
         public void GetCourses()
         {
+            listCourseInfos.Clear();
+
+            if (!bLoggedIn)
+            {
+                return;
+            }
+
             List<string> lRoleTitles = new List<string>();
             string xmlUserRoles = client.getUserRoles(sSessionId, iUserId);
             string[] tmp = new string[4];
@@ -134,8 +143,8 @@ namespace WPF_ILIAS_Sync2Folder
                     tmp = role.Split('_');
                     if (tmp[3] != "39643")
                     {
-                        //if course is not "FSR" course (only accurate for FH Bielefeld, might need some other workaround
-                        lCourseInfos.Add(new CourseInfo() { CourseId = tmp[3] });
+                        //if course is not "FSR" course (only accurate for FH Bielefeld, might need some other workaround)
+                        listCourseInfos.Add(new CourseInfo() { CourseId = tmp[3] });
                     }
 
                 }
@@ -176,7 +185,7 @@ namespace WPF_ILIAS_Sync2Folder
         public void GetCourseNames()
         {
             string sRef = "";
-            foreach (var course in lCourseInfos)
+            foreach (CourseInfo course in listCourseInfos)
             {
                 sRef = course.CourseId;
                 course.CourseName = GetCourseName(sRef);
@@ -284,7 +293,7 @@ namespace WPF_ILIAS_Sync2Folder
 
             //calculate percentages for progress bars
             int iFileCount = lFiles.Count;
-            int iCourseCount = lCourseInfos.Count;
+            int iCourseCount = listCourseInfos.Count;
 
             iFilePercentage = cSimple.GetPercentage(0, iFileCount);
             iCourseCount = cSimple.GetPercentage(iCurrentCourseNum, iCourseCount);

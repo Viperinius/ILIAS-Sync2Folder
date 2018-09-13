@@ -24,6 +24,7 @@ namespace IliasDL
     class CUpdate
     {
         private System.Windows.Forms.NotifyIcon notifyIcon = new System.Windows.Forms.NotifyIcon();
+        private System.Windows.Forms.ContextMenu contextMenu = new System.Windows.Forms.ContextMenu();
 
         private CConfig config = new CConfig();
 
@@ -33,11 +34,12 @@ namespace IliasDL
         private int iReleaseId;
         private string sSeparator;
 
-        public CUpdate(System.Windows.Forms.NotifyIcon notify)
+        public CUpdate(System.Windows.Forms.NotifyIcon notify, System.Windows.Forms.ContextMenu conMenu)
         {
             notifyIcon = notify;
 
             notifyIcon.Text = @"ILIAS Sync2Folder";
+
             if (config.GetShowTrayIcon() == "true")
             {
                 notifyIcon.Visible = true;
