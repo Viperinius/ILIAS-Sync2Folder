@@ -14,6 +14,10 @@ namespace WPF_ILIAS_Sync2Folder
         private string _BtnLoginText = "Login";
         private string _BtnSyncText = "Start synchronisation";
         private int _CourseProgBarVal = 0;
+        private int _SyncProgBarFileVal = 0;
+        private int _SyncProgBarCourseVal = 0;
+        private string _SyncLbProgFile = "0 %";
+        private string _SyncLbProgCourses = "0 %";
 
         public string BtnLoginText
         {
@@ -44,7 +48,47 @@ namespace WPF_ILIAS_Sync2Folder
                 OnPropertyChanged("CourseProgBarVal");
             }
         }
-        
+
+        public int SyncProgBarFileVal
+        {
+            get { return _SyncProgBarFileVal; }
+            set
+            {
+                _SyncProgBarFileVal = value;
+                OnPropertyChanged("SyncProgBarFileVal");
+            }
+        }
+
+        public int SyncProgBarCourseVal
+        {
+            get { return _SyncProgBarCourseVal; }
+            set
+            {
+                _SyncProgBarCourseVal = value;
+                OnPropertyChanged("SyncProgBarCourseVal");
+            }
+        }
+
+        public string SyncLbProgFile
+        {
+            get { return _SyncLbProgFile; }
+            set
+            {
+                _SyncLbProgFile = value;
+                OnPropertyChanged("SyncLbProgFile");
+            }
+        }
+
+        public string SyncLbProgCourses
+        {
+            get { return _SyncLbProgCourses; }
+            set
+            {
+                _SyncLbProgCourses = value;
+                OnPropertyChanged("SyncLbProgCourses");
+            }
+        }
+
 
         public void ChangeBtnLoginText()
         {

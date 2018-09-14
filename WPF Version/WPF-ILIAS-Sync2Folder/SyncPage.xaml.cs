@@ -22,28 +22,35 @@ namespace WPF_ILIAS_Sync2Folder
     /// </summary>
     public partial class SyncPage : UserControl
     {
-        ChangedPropertyNotifier changedPropertyNotifier = new ChangedPropertyNotifier();
+        ChangedPropertyNotifier changedPropertyNotifier;
         CConfig config = new CConfig();
         CIliasHandling iliasHandling;
+        MainWindow window;
 
         private bool bSyncStatus;
 
         ObservableCollection<FileInfo> lFiles = new ObservableCollection<FileInfo>();
 
-        public SyncPage(CIliasHandling mainIliasHandling)
+        public SyncPage(MainWindow mainWindow, CIliasHandling mainIliasHandling, ChangedPropertyNotifier changedPropNotifier)
         {
             InitializeComponent();
 
+            window = mainWindow;
             iliasHandling = mainIliasHandling;
+            changedPropertyNotifier = changedPropNotifier;
 
             stackSyncButton.DataContext = changedPropertyNotifier;
             iconSync.DataContext = changedPropertyNotifier;
+            progBarFile.DataContext = changedPropertyNotifier;
+            progBarCourses.DataContext = changedPropertyNotifier;
+            lbProgFile.DataContext = changedPropertyNotifier;
+            lbProgCourses.DataContext = changedPropertyNotifier;
 
             listViewSync.ItemsSource = iliasHandling.lFiles;
 
-            iliasHandling.lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "Test.pdf", FilePath = @"Test\Test2\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "12345" });
-            iliasHandling.lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "First.pdf", FilePath = @"Test\OMG\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "882184", FileIsVisible = false });
-            iliasHandling.lFiles.Add(new FileInfo() { FileStatus = "Syncing", FileName = "Ohreally.pdf", FilePath = @"Test\Test2\", FileDate = "01.01.9999", FileSize = "420 MB", FileId = "9875" });
+            //iliasHandling.lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "Test.pdf", FilePath = @"Test\Test2\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "12345" });
+            //iliasHandling.lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "First.pdf", FilePath = @"Test\OMG\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "882184", FileIsVisible = false });
+            //iliasHandling.lFiles.Add(new FileInfo() { FileStatus = "Syncing", FileName = "Ohreally.pdf", FilePath = @"Test\Test2\", FileDate = "01.01.9999", FileSize = "420 MB", FileId = "9875" });
             
         }
 
@@ -66,11 +73,14 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 iconSync.Spin = false;
                 bSyncStatus = false;
+                window.WorkerSync_Cancel();
             }
             else
             {
                 iconSync.Spin = true;
                 bSyncStatus = true;
+                iliasHandling.lFiles.Clear();
+                window.WorkerSync_RunAsync();
             }
 
         }

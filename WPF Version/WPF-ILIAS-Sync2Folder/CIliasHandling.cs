@@ -25,12 +25,14 @@ namespace WPF_ILIAS_Sync2Folder
 
         public ObservableCollection<FileInfo> lFiles = new ObservableCollection<FileInfo>();
         public ObservableCollection<CourseInfo> lCourseInfos = new ObservableCollection<CourseInfo>();
+        public List<FileInfo> listFiles = new List<FileInfo>();
         public List<CourseInfo> listCourseInfos = new List<CourseInfo>();
 
-        private int iFilePercentage = 0;
-        private int iCoursePercentage = 0;
-        private int iCurrentCourseNum = 0;
+        public int iFilePercentage = 0;
+        public int iCoursePercentage = 0;
+        public int iCurrentCourseNum = 0;
         public bool bLoggedIn;
+        public bool bCoursesDone;
 
         private MainWindow window;
         public CIliasHandling(MainWindow mainWindow)
@@ -198,6 +200,8 @@ namespace WPF_ILIAS_Sync2Folder
         /// <param name="iCourseId">Current course ID</param>
         public void GetCourseFiles(int iCourseId)
         {
+            listFiles.Clear();
+
             string tmpPathCrs = "";
             string tmpPathDownwards = "";
             string tmpPath = "";
@@ -229,9 +233,9 @@ namespace WPF_ILIAS_Sync2Folder
                             foreach (XElement subElement in element.Descendants("References"))
                             {
                                 //add ref id
-                                lFiles.Add(new FileInfo() { FileId = (string)subElement.Attribute("ref_id") });
+                                listFiles.Add(new FileInfo() { FileId = (string)subElement.Attribute("ref_id") });
                                 //note current file for later use (filling the remaining info)
-                                currentFile = lFiles.Last();
+                                currentFile = listFiles.Last();
                                 //find path
                                 foreach (XElement subSubElement in subElement.Descendants("Path"))
                                 {
@@ -254,9 +258,9 @@ namespace WPF_ILIAS_Sync2Folder
                                 }
                             }
 
-                            currentFile = lFiles.Last();                                                                    //test if still the same as above
+                            currentFile = listFiles.Last();                                                                    //test if still the same as above
 
-                            //find file extension & size
+                            //find file size
                             foreach (XElement subElement in element.Descendants("Properties"))
                             {
                                 foreach (XElement subSubElement in subElement.Descendants("Property"))
@@ -278,7 +282,6 @@ namespace WPF_ILIAS_Sync2Folder
                             {
                                 currentFile.FileName = subElement.Value;
                             }
-
                         }
                         tmpPathDownwards = "";
                         tmpPath = "";
@@ -292,7 +295,7 @@ namespace WPF_ILIAS_Sync2Folder
             }
 
             //calculate percentages for progress bars
-            int iFileCount = lFiles.Count;
+            int iFileCount = listFiles.Count;
             int iCourseCount = listCourseInfos.Count;
 
             iFilePercentage = cSimple.GetPercentage(0, iFileCount);
@@ -314,7 +317,7 @@ namespace WPF_ILIAS_Sync2Folder
             string sStatus = "Not present";
 
             int iCounter = 0;
-            foreach (FileInfo file in lFiles)
+            foreach (FileInfo file in listFiles)
             {
                 window.WorkerSync_ChangeProgress(iFilePercentage);
                 if (window.WorkerSync_IsCancelPending())
@@ -366,6 +369,7 @@ namespace WPF_ILIAS_Sync2Folder
                 }
 
                 
+                
                 bool bNewFile = false;
                 if (config.GetShowOnly() == "false")
                 {
@@ -376,6 +380,8 @@ namespace WPF_ILIAS_Sync2Folder
                         bNewFile = true;
                         file.FileStatus = sStatus;
                         file.FileIsVisible = true;
+                        //report progress with fake percentage to add the current file to listview
+                        window.WorkerSync_ChangeProgress(500, listFiles.IndexOf(file).ToString());
                     }
 
                     GetFileByRefGZIP(Int32.Parse(file.FileId), file.FilePath, file.FileName, ref sStatus);
@@ -386,15 +392,21 @@ namespace WPF_ILIAS_Sync2Folder
                 {
                     file.FileStatus = sStatus;
                     file.FileIsVisible = true;
+                    //report progress with fake percentage to change the current file in listview
+                    window.WorkerSync_ChangeProgress(501, listFiles.IndexOf(file).ToString());
                 }
                 else if (config.GetShowOnlyNew() == "true" && (sStatus == "Not present" || sStatus == "New"))
                 {
                     file.FileStatus = sStatus;
                     file.FileIsVisible = true;
+                    //report progress with fake percentage to add the current file to listview
+                    window.WorkerSync_ChangeProgress(500, listFiles.IndexOf(file).ToString());
                 }
                 else if (config.GetShowOnlyNew() == "false")
                 {
                     file.FileIsVisible = true;
+                    //report progress with fake percentage to add the current file to listview
+                    window.WorkerSync_ChangeProgress(500, listFiles.IndexOf(file).ToString());
                 }
 
                 iFilePercentage = cSimple.GetPercentage(iCounter + 1, iFileCount);

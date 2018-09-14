@@ -27,7 +27,7 @@
                     <TextBlock TextWrapping="WrapWithOverflow">
                     Any questions or problems?<LineBreak/>
                     Contact us via one of the following ways:<LineBreak/><LineBreak/><LineBreak/><LineBreak/><LineBreak/><LineBreak/><LineBreak/>
-                    Note: If you want to report or bug or some other problem, please attach a screenshot of the problem (if possible).
+                    Note: If you want to report a bug or some other problem, please attach a screenshot of the problem (if possible).
                     </TextBlock>
                 </Label>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,50,0,0">

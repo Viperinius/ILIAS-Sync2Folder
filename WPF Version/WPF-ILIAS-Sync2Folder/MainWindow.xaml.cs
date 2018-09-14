@@ -57,7 +57,7 @@ namespace WPF_ILIAS_Sync2Folder
 
             iliasHandling = new CIliasHandling(this);
 
-            tabSync.Content = new SyncPage(iliasHandling);
+            tabSync.Content = new SyncPage(this, iliasHandling, changedPropertyNotifier);
             tabCourseConfig.Content = new CoursePage(iliasHandling, changedPropertyNotifier);
             tabFolderConfig.Content = new FolderPage();
             tabGeneralConfig.Content = new GeneralPage();
@@ -222,16 +222,6 @@ namespace WPF_ILIAS_Sync2Folder
             }
         }
 
-        private ObservableCollection<CourseInfo> ListToObservableCollection(List<CourseInfo> list)
-        {
-            return new ObservableCollection<CourseInfo>(list);
-        }
-
-        private ObservableCollection<FileInfo> ListToObservableCollection(List<FileInfo> list)
-        {
-            return new ObservableCollection<FileInfo>(list);
-        }
-
         //-----------------------------
         //      worker functions
         //-----------------------------
@@ -273,22 +263,112 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerSync_DoWork(object sender, DoWorkEventArgs e)
         {
+            if (!iliasHandling.bLoggedIn)
+            {
+                workerSync.CancelAsync();
+                return;
+            }
 
-        }
+            //clear any old data
+            iliasHandling.listFiles.Clear();
+            //reset progress
+            workerSync.ReportProgress(0, 0);
+            iliasHandling.iFilePercentage = 0;
+            iliasHandling.iCoursePercentage = 0;
+            iliasHandling.iCurrentCourseNum = 0;
+
+            if (!iliasHandling.listCourseInfos.Any())
+            {
+                iliasHandling.GetCourses();
+            }
+
+            if (!workerSync.CancellationPending && !iliasHandling.bCoursesDone)
+            {
+                workerSync.ReportProgress(iliasHandling.iFilePercentage, iliasHandling.iCoursePercentage);
+
+                iliasHandling.iCurrentCourseNum = 1;
+                if (config.GetSyncAll() == "true")
+                {
+                    foreach (CourseInfo course in iliasHandling.listCourseInfos)
+                    {
+                        iliasHandling.GetCourseFiles(Int32.Parse(course.CourseId));
+                        iliasHandling.iCurrentCourseNum++;
+                    }
+                }
+                else if (config.GetSyncAll() == "false")
+                {
+                    foreach (CourseInfo course in iliasHandling.listCourseInfos)
+                    {
+                        if (config.GetCourse(course.CourseId) == course.CourseId)
+                        {
+                            iliasHandling.GetCourseFiles(Int32.Parse(course.CourseId));
+                            iliasHandling.iCurrentCourseNum++;
+                        }
+                    }
+                }
+
+                iliasHandling.bCoursesDone = true;
+                iliasHandling.iCoursePercentage = 100;
+            }
+
+
+
+    }
 
         private void WorkerSync_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            iliasHandling.bCoursesDone = false;
+            if (!iliasHandling.lCourseInfos.Any())
+            {
+                foreach (CourseInfo course in iliasHandling.listCourseInfos)
+                {
+                    iliasHandling.lCourseInfos.Add(course);
+                }
+            }
         }
 
         private void WorkerSync_ProgressChanges(object sender, ProgressChangedEventArgs e)
         {
+            if (e.ProgressPercentage > 100 && e.UserState is string)
+            {
+                if (e.ProgressPercentage == 500)
+                {
+                    iliasHandling.lFiles.Add(iliasHandling.listFiles[Int32.Parse(e.UserState.ToString())]);
+                }
+                else if (e.ProgressPercentage == 501)
+                {
+                    FileInfo currentCollectionFile = iliasHandling.lFiles[Int32.Parse(e.UserState.ToString())];
+                    FileInfo currentListFile = iliasHandling.listFiles[Int32.Parse(e.UserState.ToString())];
 
+                    currentCollectionFile.FileStatus = currentListFile.FileStatus;
+                    currentCollectionFile.FileIsVisible = currentListFile.FileIsVisible;
+                }
+            }
+            else
+            {
+                changedPropertyNotifier.SyncProgBarFileVal = e.ProgressPercentage;
+                changedPropertyNotifier.SyncLbProgFile = e.ProgressPercentage.ToString() + " %";
+                if (e.UserState is int)
+                {
+                    changedPropertyNotifier.SyncProgBarCourseVal = (int)e.UserState;
+                    changedPropertyNotifier.SyncLbProgCourses = e.UserState.ToString() + " %";
+                }
+            }
+        }
+
+        public void WorkerSync_RunAsync()
+        {
+            workerSync.RunWorkerAsync();
         }
 
         public void WorkerSync_ChangeProgress(int iPercentage)
         {
             workerSync.ReportProgress(iPercentage);
+        }
+
+        public void WorkerSync_ChangeProgress(int iPercentage, object userState)
+        {
+            workerSync.ReportProgress(iPercentage, userState);
         }
 
         public bool WorkerSync_IsCancelPending()

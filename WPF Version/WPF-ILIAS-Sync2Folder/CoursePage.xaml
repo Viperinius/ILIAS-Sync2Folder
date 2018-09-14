@@ -11,7 +11,8 @@
              d:DesignHeight="450" d:DesignWidth="800" Loaded="CoursePage_Loaded">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="95"/>
+            <RowDefinition Height="5" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -20,7 +21,7 @@
             <ColumnDefinition Width="170"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Name="listviewCourse" Grid.Row="1" Grid.ColumnSpan="4" Margin="10,10" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" SizeChanged="CoursePage_SizeChanged">
+        <ListView Name="listviewCourse" Grid.Row="2" Grid.ColumnSpan="4" Margin="10,10" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" SizeChanged="CoursePage_SizeChanged">
             <ListView.View>
                 <GridView x:Name="gridViewCourse">
                     <GridViewColumn Header="Synced?">
@@ -40,9 +41,9 @@
         <Button Name="btnDeSelectAll" Click="BtnDeSelectAll_Click" Grid.Column="0" HorizontalAlignment="Left" Margin="110,35,0,0" VerticalAlignment="Top">(De-)Select all</Button>
         <Controls:ToggleSwitch Name="toggleUseOwnNames" Checked="ToggleUseOwnNames_Checked" Unchecked="ToggleUseOwnNames_Unchecked" Grid.Column="1" Header="Use own names:" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
         <Button Name="btnEditCourse" Click="BtnEditCourse_Click" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">Edit selected course</Button>
-        <Button Name="btnSaveCourse" Click="BtnSaveCourse_Click" Grid.Column="2" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="143">Save changes</Button>
+        <Button Name="btnSaveCourse" Click="BtnSaveCourse_Click" Grid.Column="2" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="143">Save changes</Button>
         <TextBox x:Name="txtCourse" Grid.Column="3" Controls:TextBoxHelper.Watermark="Course" IsReadOnly="True" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Controls:TextBoxHelper.UseFloatingWatermark="True" MinWidth="120"/>
-        <TextBox x:Name="txtOwnName" Grid.Column="3" Controls:TextBoxHelper.Watermark="Own Name" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Controls:TextBoxHelper.UseFloatingWatermark="True" MinWidth="120"/>
-        <Controls:MetroProgressBar Name="progressBar" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="20" Margin="135,40,0,0" Value="{Binding CourseProgBarVal}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <TextBox x:Name="txtOwnName" Grid.Column="3" Controls:TextBoxHelper.Watermark="Own Name" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Controls:TextBoxHelper.UseFloatingWatermark="True" MinWidth="120"/>
+        <Controls:MetroProgressBar Name="progressBar" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,0,10,0" Value="{Binding CourseProgBarVal}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
     </Grid>
 </UserControl>
