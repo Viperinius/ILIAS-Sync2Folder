@@ -32,6 +32,7 @@ namespace WPF_ILIAS_Sync2Folder
         public int iCoursePercentage = 0;
         public int iCurrentCourseNum = 0;
         public bool bLoggedIn;
+        public bool bSyncRunning;
         public bool bCoursesDone;
 
         private MainWindow window;
@@ -296,10 +297,24 @@ namespace WPF_ILIAS_Sync2Folder
 
             //calculate percentages for progress bars
             int iFileCount = listFiles.Count;
-            int iCourseCount = listCourseInfos.Count;
+            int iCourseCount = 0;
+            if (config.GetSyncAll() == "true")
+            {
+                iCourseCount = listCourseInfos.Count;
+            }
+            else
+            {
+                foreach (CourseInfo course in listCourseInfos)
+                {
+                    if (course.CourseChecked)
+                    {
+                        iCourseCount++;
+                    }
+                }
+            }
 
             iFilePercentage = cSimple.GetPercentage(0, iFileCount);
-            iCourseCount = cSimple.GetPercentage(iCurrentCourseNum, iCourseCount);
+            iCoursePercentage = cSimple.GetPercentage(iCurrentCourseNum, iCourseCount);
 
             DownloadFiles(iCourseId, iFileCount);
 
@@ -411,6 +426,7 @@ namespace WPF_ILIAS_Sync2Folder
 
                 iFilePercentage = cSimple.GetPercentage(iCounter + 1, iFileCount);
                 window.WorkerSync_ChangeProgress(iFilePercentage);
+                iCounter++;
             }
         }
 

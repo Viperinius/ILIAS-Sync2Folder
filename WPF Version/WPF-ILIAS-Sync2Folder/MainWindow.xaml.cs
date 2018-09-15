@@ -151,7 +151,10 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 if (!iliasHandling.lCourseInfos.Any())
                 {
-                    workerCourses.RunWorkerAsync();
+                    if (!workerCourses.IsBusy)
+                    {
+                        workerCourses.RunWorkerAsync();
+                    }
                 }
             }
         }
@@ -263,6 +266,8 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerSync_DoWork(object sender, DoWorkEventArgs e)
         {
+            iliasHandling.bSyncRunning = true;
+
             if (!iliasHandling.bLoggedIn)
             {
                 workerSync.CancelAsync();
@@ -308,7 +313,11 @@ namespace WPF_ILIAS_Sync2Folder
                 }
 
                 iliasHandling.bCoursesDone = true;
-                iliasHandling.iCoursePercentage = 100;
+                if (!workerSync.CancellationPending)
+                {
+                    iliasHandling.iCoursePercentage = 100;
+                }
+                workerSync.ReportProgress(iliasHandling.iFilePercentage, iliasHandling.iCoursePercentage);
             }
 
 
@@ -320,11 +329,21 @@ namespace WPF_ILIAS_Sync2Folder
             iliasHandling.bCoursesDone = false;
             if (!iliasHandling.lCourseInfos.Any())
             {
+                if (!workerCourses.IsBusy)
+                {
+                    workerCourses.RunWorkerAsync();
+                }
+                /*
                 foreach (CourseInfo course in iliasHandling.listCourseInfos)
                 {
                     iliasHandling.lCourseInfos.Add(course);
                 }
+                */
             }
+
+            iliasHandling.bSyncRunning = false;
+            changedPropertyNotifier.BtnSyncIconSpin = false;
+            changedPropertyNotifier.BtnSyncText = "Start synchronisation";
         }
 
         private void WorkerSync_ProgressChanges(object sender, ProgressChangedEventArgs e)
@@ -383,26 +402,29 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerCourses_DoWork(object sender, DoWorkEventArgs e)
         {
-            //get courses
-            iliasHandling.GetCourses();
-            workerCourses.ReportProgress(33);
-            iliasHandling.GetCourseNames();
-            workerCourses.ReportProgress(66);
-            string sTemp = "";
-            foreach (CourseInfo course in iliasHandling.listCourseInfos)
+            if (iliasHandling.bLoggedIn)
             {
-                if ((config.GetCourse(course.CourseId) == course.CourseId) || config.GetSyncAll() == "true")
+                //get courses
+                iliasHandling.GetCourses();
+                workerCourses.ReportProgress(33);
+                iliasHandling.GetCourseNames();
+                workerCourses.ReportProgress(66);
+                string sTemp = "";
+                foreach (CourseInfo course in iliasHandling.listCourseInfos)
                 {
-                    course.CourseChecked = true;
-                }
+                    if ((config.GetCourse(course.CourseId) == course.CourseId) || config.GetSyncAll() == "true")
+                    {
+                        course.CourseChecked = true;
+                    }
 
-                sTemp = config.GetCourseName(course.CourseId);
-                if (sTemp != "__NO_VAL__")
-                {
-                    course.CourseOwnName = sTemp;
+                    sTemp = config.GetCourseName(course.CourseId);
+                    if (sTemp != "__NO_VAL__")
+                    {
+                        course.CourseOwnName = sTemp;
+                    }
                 }
+                workerCourses.ReportProgress(100);
             }
-            workerCourses.ReportProgress(100);
         }
 
         private void WorkerCourses_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

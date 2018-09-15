@@ -27,8 +27,6 @@ namespace WPF_ILIAS_Sync2Folder
         CIliasHandling iliasHandling;
         MainWindow window;
 
-        private bool bSyncStatus;
-
         ObservableCollection<FileInfo> lFiles = new ObservableCollection<FileInfo>();
 
         public SyncPage(MainWindow mainWindow, CIliasHandling mainIliasHandling, ChangedPropertyNotifier changedPropNotifier)
@@ -69,16 +67,14 @@ namespace WPF_ILIAS_Sync2Folder
         private void BtnSync_Click(object sender, RoutedEventArgs e)
         {
             changedPropertyNotifier.ChangeBtnSyncText();
-            if (bSyncStatus)
+            if (iliasHandling.bSyncRunning)
             {
-                iconSync.Spin = false;
-                bSyncStatus = false;
+                changedPropertyNotifier.BtnSyncIconSpin = false;
                 window.WorkerSync_Cancel();
             }
             else
             {
-                iconSync.Spin = true;
-                bSyncStatus = true;
+                changedPropertyNotifier.BtnSyncIconSpin = true;
                 iliasHandling.lFiles.Clear();
                 window.WorkerSync_RunAsync();
             }
