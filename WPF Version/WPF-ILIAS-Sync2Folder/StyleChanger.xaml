@@ -9,17 +9,18 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
         mc:Ignorable="d"
-        Title="StyleChanger" Height="330.123" Width="495.697">
+        Title="StyleChanger" Height="221.123" Width="223.697" Icon="dliconWHITEsquare.ico" Topmost="True" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
     <Grid>
         <Button x:Name="btnDarkTheme" Content="Dark" HorizontalAlignment="Left" Margin="30,49,0,0" VerticalAlignment="Top" Width="75" Click="ChangeWindowThemeClick"/>
         <Label x:Name="lbChangeTheme" Content="Change Theme:" HorizontalAlignment="Left" Margin="30,18,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbChangeAccent" Content="Change Accent:" HorizontalAlignment="Left" Margin="30,81,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnLightTheme" Content="Light" HorizontalAlignment="Left" Margin="110,49,0,0" VerticalAlignment="Top" Width="75" Click="ChangeWindowThemeClick"/>
         <ComboBox x:Name="AccentSelector"
-                Margin="187,99,164,162"
-                VerticalAlignment="Center"
+                Margin="30,112,30,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
                 SelectionChanged="AccentSelector_SelectionChanged"
-                ItemsSource="{x:Static metro:ThemeManager.Accents}" Height="38" BorderThickness="1,1,1,2">
+                ItemsSource="{x:Static metro:ThemeManager.Accents}" Height="38" BorderThickness="1,1,1,2" Width="155">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />

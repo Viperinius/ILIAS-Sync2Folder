@@ -136,6 +136,10 @@ namespace WPF_ILIAS_Sync2Folder
                     if (course.CourseChecked)
                     {
                         config.SetCourse(course.CourseId);
+                        if (config.GetUseOwnNames() == "true" && config.GetCourseName(course.CourseId) == "__NO_VAL__")
+                        {
+                            config.SetCourseName(course.CourseId, course.CourseName);
+                        }
                     }
                 }
             }

@@ -103,6 +103,9 @@
                         <DataTrigger Binding="{Binding FileIsVisible}" Value="False">
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding FileStatus}" Value="Path too long!">
+                            <Setter Property="Background" Value="Firebrick"/>
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>

@@ -285,6 +285,7 @@ namespace WPF_ILIAS_Sync2Folder
             if (!iliasHandling.listCourseInfos.Any())
             {
                 iliasHandling.GetCourses();
+                iliasHandling.GetCourseNames();
             }
 
             if (!workerSync.CancellationPending && !iliasHandling.bCoursesDone)

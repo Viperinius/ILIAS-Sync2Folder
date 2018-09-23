@@ -306,7 +306,7 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 foreach (CourseInfo course in listCourseInfos)
                 {
-                    if (course.CourseChecked)
+                    if (config.GetCourse(course.CourseId) == course.CourseId)
                     {
                         iCourseCount++;
                     }
@@ -316,6 +316,7 @@ namespace WPF_ILIAS_Sync2Folder
             iFilePercentage = cSimple.GetPercentage(0, iFileCount);
             iCoursePercentage = cSimple.GetPercentage(iCurrentCourseNum, iCourseCount);
 
+            window.WorkerSync_ChangeProgress(iFilePercentage, iCoursePercentage);
             DownloadFiles(iCourseId, iFileCount);
 
             
