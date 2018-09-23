@@ -621,7 +621,7 @@ namespace WPF_ILIAS_Sync2Folder
         /// </summary>
         /// <param name="sCourseName">Raw Course Name</param>
         /// <returns>course year or 0 in case of errors</returns>
-        public int GetCourseYear(string sCourseName)
+        public string GetCourseYear(string sCourseName)
         {
             //..., Wetter, SS2018
             string[] sTmpArray = sCourseName.Split(',');
@@ -632,19 +632,19 @@ namespace WPF_ILIAS_Sync2Folder
                 {
                     string[] sTmpArray2 = sTmpArray[3].Split('S');
                     //2018
-                    return Int32.Parse(sTmpArray2[2]);
+                    return sTmpArray2[2];
                 }
                 else
                 {
                     string[] sTmpArray2 = sTmpArray[3].Split('S');
                     //2017-18
-                    return Int32.Parse(sTmpArray2[1]);
+                    return sTmpArray2[1];
                 }
 
             }
             catch (IndexOutOfRangeException)
             {
-                return 0;
+                return "";
             }
         }
 
@@ -662,7 +662,7 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 bUseYear = true;
             }
-            int iCourseYear = GetCourseYear(sCourseName);
+            string sCourseYear = GetCourseYear(sCourseName);
 
             if (iSemesterNum == 0)
             {
@@ -672,13 +672,13 @@ namespace WPF_ILIAS_Sync2Folder
             string sTmp = sStructTemplate.Replace("%", iSemesterNum.ToString());
             if (bUseYear)
             {
-                if (iCourseYear == 0)
+                if (sCourseYear == "")
                 {
                     return sTmp.Replace("$", "");
                 }
                 else
                 {
-                    return sTmp.Replace("$", iCourseYear.ToString());
+                    return sTmp.Replace("$", sCourseYear);
                 }
             }
             else

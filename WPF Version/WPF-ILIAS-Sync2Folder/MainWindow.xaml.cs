@@ -111,7 +111,7 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 result = await metroWindow.ShowLoginAsync("ILIAS Login", "Please log in with your ILIAS credentials", new LoginDialogSettings { InitialUsername = "" });
             }
-            Console.WriteLine(result.Username + " " + result.Password);
+            //Console.WriteLine(result.Username + " " + result.Password);
 
             sUsername = result.Username;
             sPassword = result.Password;

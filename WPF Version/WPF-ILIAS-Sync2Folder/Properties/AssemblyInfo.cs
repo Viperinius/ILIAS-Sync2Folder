@@ -7,13 +7,13 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("WPF-ILIAS-Sync2Folder")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ILIAS Sync2Folder")]
+[assembly: AssemblyDescription("Download ILIAS files")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WPF-ILIAS-Sync2Folder")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Viperinius")]
+[assembly: AssemblyProduct("ILIAS Sync2Folder")]
+[assembly: AssemblyCopyright("Copyright © Viperinius 2018")]
+[assembly: AssemblyTrademark("Viperinius Studios")]
 [assembly: AssemblyCulture("")]
 
 // Durch Festlegen von ComVisible auf FALSE werden die Typen in dieser Assembly
@@ -53,3 +53,5 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2.0.0.0")]
 [assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: NeutralResourcesLanguage("en")]
+
