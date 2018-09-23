@@ -1326,12 +1326,13 @@ namespace IliasDL
             //      check for update
             //-----------------------------
 
+            /*
             if (updater.CheckForUpdate())
             {
                 //notify user
                 updater.DisplayNotification("Update verfügbar", "Es ist ein Update für ILIAS Sync2Folder verfügbar!");
             }
-
+            */
         }
 
         /// <summary>
