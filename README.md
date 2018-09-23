@@ -24,7 +24,7 @@ All features can be found at [Features](#features)
 + progress shown (for each course and in general)
 + export your settings and import them on another device
 + change the server address to get access to your university's version of ILIAS (Default: FH Bielefeld)
-- UI currently only in German
+- UI currently only in German (new UI version only in English)
 
 #### Note
 As I'm currently not able to test Sync2Folder with other universities than FH Bielefeld, it is not sure whether or not features like the structured folders will work as they heavily depend on the course naming.
@@ -37,8 +37,8 @@ so like
 
 #### Note 2
 Regarding the server change:
-The link check allows aside from the login page the web service page, too. Due to some connection problems, this ist currently not working.
-So just use the login link to set your ILIAS server for now.
+The link check allows aside from the login page the web service page, too. Due to some connection problems, this is currently not working.
+So just stick to use the login link to set your ILIAS server for now.
 
 #### Planned Features
 + be able to change the folder structure settings (e.g. turning the "semester structure" on) and move already loaded files to the new structure
