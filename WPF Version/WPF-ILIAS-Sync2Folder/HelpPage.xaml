@@ -50,16 +50,21 @@
                     Licenses / Used libraries:<LineBreak/>
                     </TextBlock>
                 </Label>
-                <!--CHANGE LABEL CONTENT TO BINDING, remove background colour when done-->
                 <Label Name="lbVersion" Content="Installed version : $" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,45,0,0"></Label>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,107,0,0">
-                <Hyperlink x:Name="linkGithub" NavigateUri="https://github.com/Viperinius/ILIAS-Sync2Folder" RequestNavigate="Hyperlink_RequestNavigate">Github repository</Hyperlink>
+                    <Hyperlink x:Name="linkGithub" NavigateUri="https://github.com/Viperinius/ILIAS-Sync2Folder" RequestNavigate="Hyperlink_RequestNavigate">Github repository</Hyperlink>
                 </TextBlock>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,153,0,0">
-                <Hyperlink x:Name="linkOctokit" NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit (MIT)</Hyperlink>
+                    <Hyperlink x:Name="linkOctokit" NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit (MIT)</Hyperlink>
                 </TextBlock>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,173,0,0">
-                <Hyperlink x:Name="linkWunder" NavigateUri="https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller" RequestNavigate="Hyperlink_RequestNavigate">Wunder.ClickOnceUninstaller (MIT)</Hyperlink>
+                    <Hyperlink x:Name="linkWunder" NavigateUri="https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller" RequestNavigate="Hyperlink_RequestNavigate">Wunder.ClickOnceUninstaller (MIT)</Hyperlink>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,153,0,0">
+                    <Hyperlink x:Name="linkDragablz" NavigateUri="https://github.com/ButchersBoy/Dragablz" RequestNavigate="Hyperlink_RequestNavigate">Dragablz (MIT)</Hyperlink>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,173,0,0">
+                    <Hyperlink x:Name="linkMahapps" NavigateUri="https://github.com/MahApps/MahApps.Metro" RequestNavigate="Hyperlink_RequestNavigate">MahApps.Metro (MIT)</Hyperlink>
                 </TextBlock>
             </Grid>
         </Grid>

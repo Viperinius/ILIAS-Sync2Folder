@@ -298,7 +298,11 @@ namespace WPF_ILIAS_Sync2Folder
                     foreach (CourseInfo course in iliasHandling.listCourseInfos)
                     {
                         iliasHandling.GetCourseFiles(Int32.Parse(course.CourseId));
-                        iliasHandling.iCurrentCourseNum++;
+                        if (workerSync.CancellationPending)
+                        {
+                            return;
+                        }
+                        iliasHandling.iCurrentCourseNum++;                        
                     }
                 }
                 else if (config.GetSyncAll() == "false")
@@ -308,6 +312,10 @@ namespace WPF_ILIAS_Sync2Folder
                         if (config.GetCourse(course.CourseId) == course.CourseId)
                         {
                             iliasHandling.GetCourseFiles(Int32.Parse(course.CourseId));
+                            if (workerSync.CancellationPending)
+                            {
+                                return;
+                            }
                             iliasHandling.iCurrentCourseNum++;
                         }
                     }
@@ -404,6 +412,7 @@ namespace WPF_ILIAS_Sync2Folder
         public void WorkerSync_Cancel()
         {
             workerSync.CancelAsync();
+            iliasHandling.bSyncRunning = false;
         }
 
         private void WorkerCourses_DoWork(object sender, DoWorkEventArgs e)

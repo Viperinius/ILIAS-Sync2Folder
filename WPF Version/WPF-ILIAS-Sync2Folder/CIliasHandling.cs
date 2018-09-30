@@ -313,7 +313,14 @@ namespace WPF_ILIAS_Sync2Folder
                 }
             }
 
-            iFilePercentage = cSimple.GetPercentage(0, iFileCount);
+            if (iFileCount > 0)
+            {
+                iFilePercentage = cSimple.GetPercentage(0, iFileCount);
+            }
+            else
+            {
+                iFilePercentage = 0;
+            }
             iCoursePercentage = cSimple.GetPercentage(iCurrentCourseNum, iCourseCount);
 
             window.WorkerSync_ChangeProgress(iFilePercentage, iCoursePercentage);
@@ -330,6 +337,11 @@ namespace WPF_ILIAS_Sync2Folder
         /// <param name="iFileCount">Count of all files in the current course</param>
         private void DownloadFiles(int iCourseId, int iFileCount)
         {
+            if (window.WorkerSync_IsCancelPending())
+            {
+                return;
+            }
+
             string sStatus = "Not present";
 
             int iCounter = 0;

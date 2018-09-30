@@ -10,9 +10,14 @@ All features can be found at [Features](#features)
 ### Used libraries
 + [Octokit](https://github.com/octokit/octokit.net) (licensed under MIT License)
 + [Wunder.ClickOnceUninstaller](https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller) (licensed under MIT License)
++ [Dragablz](https://github.com/ButchersBoy/Dragablz) (licensed under MIT License)
++ [MahApps.Metro](https://github.com/MahApps/MahApps.Metro) (licensed under MIT License)
 
 ### How to use
 *Coming shortly in wiki section.*
+
+### Installation
+Download the vX.X.X.X.zip from the latest release. Extract the zip and run the setup.exe. Your instance should start automatically after installation is finished.
 
 ### Features
 + download or show files only
@@ -24,6 +29,7 @@ All features can be found at [Features](#features)
 + progress shown (for each course and in general)
 + export your settings and import them on another device
 + change the server address to get access to your university's version of ILIAS (Default: FH Bielefeld)
++ optional update notification / receive optional notifications when sync is done
 - UI currently only in German (new UI version only in English)
 
 #### Note
@@ -42,7 +48,7 @@ So just stick to use the login link to set your ILIAS server for now.
 
 #### Planned Features
 + be able to change the folder structure settings (e.g. turning the "semester structure" on) and move already loaded files to the new structure
-+ make the update notification optional / receive optional notifications e.g. when sync is done
++ ~~make the update notification optional / receive optional notifications e.g. when sync is done~~ done.
 + ~~be able to export your settings and import them on another device~~ done.
 + ~~changeable servers (for other universities)~~ done.
 + switchable language (German <-> English)
