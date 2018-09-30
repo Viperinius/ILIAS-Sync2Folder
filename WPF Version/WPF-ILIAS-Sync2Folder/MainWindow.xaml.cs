@@ -345,6 +345,11 @@ namespace WPF_ILIAS_Sync2Folder
             iliasHandling.bSyncRunning = false;
             changedPropertyNotifier.BtnSyncIconSpin = false;
             changedPropertyNotifier.BtnSyncText = "Start synchronisation";
+
+            if (config.GetSyncNotify() == "true")
+            {
+                updater.DisplayNotification("Synchronisation finished", "The synchronisation of the selected courses has finished!");
+            }
         }
 
         private void WorkerSync_ProgressChanges(object sender, ProgressChangedEventArgs e)

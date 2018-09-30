@@ -27,8 +27,8 @@
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Change the language:</Label>
-            <RadioButton Name="radioEnglish" Checked="RadioEnglish_Checked" Content="English" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-            <RadioButton Name="radioGerman" Checked="RadioGerman_Checked" Content="German" Grid.Column="1" HorizontalAlignment="Left" Margin="10,33,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+            <RadioButton Name="radioEnglish" IsEnabled="False" Checked="RadioEnglish_Checked" Content="English" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+            <RadioButton Name="radioGerman" IsEnabled="False" Checked="RadioGerman_Checked" Content="German" Grid.Column="1" HorizontalAlignment="Left" Margin="10,33,0,0" Grid.Row="2" VerticalAlignment="Top"/>
             <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">ILIAS server options:</Label>
             <Grid Grid.Row="4" Grid.Column="1">
                 <Label VerticalAlignment="Top">

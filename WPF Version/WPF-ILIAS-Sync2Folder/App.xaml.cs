@@ -13,5 +13,10 @@ namespace WPF_ILIAS_Sync2Folder
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = new System.Globalization.CultureInfo("de-DE");
+        }
     }
 }

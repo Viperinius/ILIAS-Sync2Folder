@@ -9,6 +9,11 @@
         xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:LocalizeDictionary.OutputMissingKeys="True"
+        lex:ResxLocalizationProvider.DefaultAssembly="WPF-ILIAS-Sync2Folder"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
         Dialog:DialogParticipation.Register="{Binding}"
         mc:Ignorable="d"
         Title="ILIAS Sync2Folder" 
@@ -24,7 +29,7 @@
             <MenuItem Header="Exit" />
         </ContextMenu>
     </Controls:MetroWindow.Resources>
-    
+
     <Grid>
         <dockablz:Layout FloatingItemHeaderMemberPath="Header" FloatingItemDisplayMemberPath="Content" FloatingItemContainerStyle="{DynamicResource MahAppsToolDragablzItemStyle}">
             <dragablz:TabablzControl Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
