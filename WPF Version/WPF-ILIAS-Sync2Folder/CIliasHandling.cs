@@ -640,15 +640,15 @@ namespace WPF_ILIAS_Sync2Folder
             //SS2018 (or WS2017-18)
             try
             {
-                if (sTmpArray[3].Contains("SS"))
+                if (sTmpArray[sTmpArray.Length - 1].Contains("SS"))
                 {
-                    string[] sTmpArray2 = sTmpArray[3].Split('S');
+                    string[] sTmpArray2 = sTmpArray[sTmpArray.Length - 1].Split('S');
                     //2018
                     return sTmpArray2[2];
                 }
                 else
                 {
-                    string[] sTmpArray2 = sTmpArray[3].Split('S');
+                    string[] sTmpArray2 = sTmpArray[sTmpArray.Length - 1].Split('S');
                     //2017-18
                     return sTmpArray2[1];
                 }

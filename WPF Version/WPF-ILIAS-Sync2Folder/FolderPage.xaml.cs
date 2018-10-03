@@ -36,6 +36,11 @@ namespace WPF_ILIAS_Sync2Folder
         {
             using (System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog())
             {
+                if (config.GetPath() != "__NO_VAL__")
+                {
+                    folderBrowserDialog.SelectedPath = config.GetPath();
+                }
+
                 if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     txtDestPath.Text = folderBrowserDialog.SelectedPath;

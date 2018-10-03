@@ -122,9 +122,9 @@ namespace WPF_ILIAS_Sync2Folder
                 return;
             }
 
-            if (File.Exists(sSettingsPath + "WPF-ILIAS-Sync2Folder.exe.config"))
+            if (File.Exists(sSettingsPath + "IliasSync2Folder.exe.config"))
             {
-                File.Copy(sSettingsPath + "WPF-ILIAS-Sync2Folder.exe.config", sExportPath + "WPF-ILIAS-Sync2Folder.exe.config", overwrite: true);
+                File.Copy(sSettingsPath + "IliasSync2Folder.exe.config", sExportPath + "IliasSync2Folder.exe.config", overwrite: true);
             }
             else
             {
@@ -152,9 +152,9 @@ namespace WPF_ILIAS_Sync2Folder
                 return;
             }
 
-            if (File.Exists(sSettingsPath + "WPF-ILIAS-Sync2Folder.exe.config") && File.Exists(sImportPath + "WPF-ILIAS-Sync2Folder.exe.config"))
+            if (File.Exists(sSettingsPath + "IliasSync2Folder.exe.config") && File.Exists(sImportPath + "IliasSync2Folder.exe.config"))
             {
-                File.Copy(sImportPath + "WPF-ILIAS-Sync2Folder.exe.config", sSettingsPath + "WPF-ILIAS-Sync2Folder.exe.config", overwrite: true);
+                File.Copy(sImportPath + "IliasSync2Folder.exe.config", sSettingsPath + "IliasSync2Folder.exe.config", overwrite: true);
             }
             else
             {
