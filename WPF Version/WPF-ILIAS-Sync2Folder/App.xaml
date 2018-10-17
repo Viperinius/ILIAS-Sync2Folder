@@ -22,7 +22,8 @@
                 <ResourceDictionary Source="pack://application:,,,/Dragablz;component/themes/mahapps.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MahAppsTabablzControlStyle}" />
+            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MahAppsTabablzControlStyle}">
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

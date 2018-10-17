@@ -78,6 +78,41 @@ namespace WPF_ILIAS_Sync2Folder
             }
         }
 
+        private void ContextOpen_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            Activate();
+        }
+
+        private void ContextLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            if (!iliasHandling.bLoggedIn)
+            {
+                ShowLoginDialog();
+            }
+            else
+            {
+                ShowLogoutDialog();
+            }
+        }
+
+        private void ContextExit_Click(object sender, RoutedEventArgs e)
+        {
+            if (workerSync.IsBusy) { workerSync.CancelAsync(); }
+            if (workerCourses.IsBusy) { workerCourses.CancelAsync(); }
+            if (workerLogin.IsBusy) { workerLogin.CancelAsync(); }
+
+            Application.Current.Shutdown();
+            
+        }
+
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (!iliasHandling.bLoggedIn)
@@ -113,10 +148,13 @@ namespace WPF_ILIAS_Sync2Folder
             }
             //Console.WriteLine(result.Username + " " + result.Password);
 
-            sUsername = result.Username;
-            sPassword = result.Password;
+            if (result != null)
+            {
+                sUsername = result.Username;
+                sPassword = result.Password;
 
-            workerLogin.RunWorkerAsync();
+                workerLogin.RunWorkerAsync();
+            }            
         }
 
         /// <summary>
