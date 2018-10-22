@@ -37,6 +37,8 @@ namespace WPF_ILIAS_Sync2Folder
         private CUpdate updater;
         private CIliasHandling iliasHandling;
 
+        private StyleChanger styleChanger;
+
         private BackgroundWorker workerLogin;
         private BackgroundWorker workerSync;
         private BackgroundWorker workerCourses;
@@ -63,10 +65,47 @@ namespace WPF_ILIAS_Sync2Folder
             tabGeneralConfig.Content = new GeneralPage();
             tabInfo.Content = new HelpPage();
 
+            styleChanger = new StyleChanger(config);
+            styleChanger.Hide();
 
             notifyIcon.Icon = Properties.Resources.dliconWHITEsquare;
             notifyIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(NotifyIcon_MouseDown);
+            notifyIcon.DoubleClick += delegate (object sender, EventArgs e)
+                                    {
+                                        this.Show();
+                                        WindowState = WindowState.Normal;
+                                    };
+            notifyIcon.BalloonTipClicked += new EventHandler(NotifyIcon_BalloonTipClicked);
             updater = new CUpdate(notifyIcon, contextMenu);
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized && config.GetShowTrayIcon() == "true")
+            {
+                this.Hide();
+            }
+            base.OnStateChanged(e);
+        }
+
+        private async void NotifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            //if update notification popped up
+            if (notifyIcon.BalloonTipTitle == "Update available")
+            {
+                var metroWindow = (Application.Current.MainWindow as MetroWindow);
+                var result = await metroWindow.ShowMessageAsync("Update available", "An update has been found. Would you like to download it?", MessageDialogStyle.AffirmativeAndNegative);
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    //call updater programme
+                    if (!updater.GetUpdate())
+                    {
+                        await metroWindow.ShowMessageAsync("Error", "An error occured while updating...", MessageDialogStyle.Affirmative);
+                        return;
+                    }
+                }
+            }
         }
 
         private void NotifyIcon_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -80,8 +119,9 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void ContextOpen_Click(object sender, RoutedEventArgs e)
         {
-            if (WindowState == WindowState.Minimized)
+            if (this.Visibility == Visibility.Hidden)
             {
+                this.Show();
                 WindowState = WindowState.Normal;
             }
             Activate();
@@ -89,9 +129,11 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void ContextLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (WindowState == WindowState.Minimized)
+            if (this.Visibility == Visibility.Hidden)
             {
+                this.Show();
                 WindowState = WindowState.Normal;
+                Activate();
             }
             if (!iliasHandling.bLoggedIn)
             {
@@ -127,8 +169,15 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void BtnStyle_Click(object sender, RoutedEventArgs e)
         {
-            StyleChanger styleChanger = new StyleChanger();
-            styleChanger.Show();
+            try
+            {
+                styleChanger.Show();
+            }
+            catch (InvalidOperationException)
+            {
+                styleChanger = new StyleChanger(config);
+                styleChanger.Show();
+            }
         }
 
         /// <summary>
@@ -199,7 +248,7 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            //MessageBox.Show("Wow, you were not supposed to click this...", "Woah", MessageBoxButton.OK, MessageBoxImage.Question);
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -261,6 +310,24 @@ namespace WPF_ILIAS_Sync2Folder
                     updater.DisplayNotification("Update available", "A new update for ILIAS Sync2Folder has been found!");
                 }
             }
+
+            //-----------------------------
+            //  check for any set theme
+            //-----------------------------
+
+            if (config.GetWindowTheme() != "__NO_VAL__")
+            {
+                styleChanger.ChangeWindowTheme(config.GetWindowTheme());
+            }
+            if (config.GetWindowAccent() != "__NO_VAL__")
+            {                
+                styleChanger.ChangeWindowAccent(ThemeManager.GetAccent(config.GetWindowAccent()));                
+            }
+        }
+
+        private void MetroWindow_Closing(object sender, CancelEventArgs e)
+        {
+            styleChanger.Close();
         }
 
         //-----------------------------

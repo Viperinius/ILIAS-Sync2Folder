@@ -17,7 +17,7 @@ using System.Configuration;
 
 namespace IliasDL
 {
-    class CConfig
+    public class CConfig
     {
         public CConfig()
         {
@@ -487,6 +487,33 @@ namespace IliasDL
         public string GetShowOnlyNew()
         {
             return GetAppSetting("shownew");
+        }
+
+        public void SetWindowTheme(bool bState)
+        {
+            if (bState)
+            {
+                SetAppSetting("theme", "BaseLight");
+            }
+            else
+            {
+                SetAppSetting("theme", "BaseDark");
+            }
+        }
+
+        public string GetWindowTheme()
+        {
+            return GetAppSetting("theme");
+        }
+
+        public void SetWindowAccent(string sAccent)
+        {
+            SetAppSetting("accent", sAccent);
+        }
+
+        public string GetWindowAccent()
+        {
+            return GetAppSetting("accent");
         }
     }
 }

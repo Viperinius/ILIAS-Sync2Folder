@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
+using IliasDL;
 
 namespace WPF_ILIAS_Sync2Folder
 {
@@ -21,9 +22,13 @@ namespace WPF_ILIAS_Sync2Folder
     /// </summary>
     public partial class StyleChanger : MetroWindow
     {
-        public StyleChanger()
+        private CConfig config;
+
+        public StyleChanger(CConfig _config)
         {
             InitializeComponent();
+
+            config = _config;
         }
 
         private void AccentSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -32,24 +37,41 @@ namespace WPF_ILIAS_Sync2Folder
 
             if (selectedAccent != null)
             {
-                //get current app style
-                Tuple<AppTheme, Accent> style = ThemeManager.DetectAppStyle(Application.Current);
-                //set specific accent
-                ThemeManager.ChangeAppStyle(Application.Current, selectedAccent, style.Item1);
+                ChangeWindowAccent(selectedAccent);
+                config.SetWindowAccent(selectedAccent.Name);
             }
-        }
-
-        private void BtnDarkTheme_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         private void ChangeWindowThemeClick(object sender, RoutedEventArgs e)
         {
+            string sTheme = "Base" + ((Button)sender).Content;
+
+            ChangeWindowTheme(sTheme);
+
+            if (sTheme == "BaseLight")
+            {
+                config.SetWindowTheme(true);
+            }
+            else if (sTheme == "BaseDark")
+            {
+                config.SetWindowTheme(false);
+            }
+        }
+
+        public void ChangeWindowAccent(Accent accent)
+        {
+            //get current app style
+            Tuple<AppTheme, Accent> style = ThemeManager.DetectAppStyle(Application.Current);
+            //set specific accent
+            ThemeManager.ChangeAppStyle(Application.Current, accent, style.Item1);
+        }
+
+        public void ChangeWindowTheme(string sTheme)
+        {
             //get current app style
             Tuple<AppTheme, Accent> style = ThemeManager.DetectAppStyle(Application.Current);
             //set specific theme
-            ThemeManager.ChangeAppStyle(Application.Current, style.Item2, ThemeManager.GetAppTheme("Base" + ((Button)sender).Content));
+            ThemeManager.ChangeAppStyle(Application.Current, style.Item2, ThemeManager.GetAppTheme(sTheme));
         }
     }
 }

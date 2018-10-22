@@ -53,9 +53,9 @@
             <Button Name="btnImport" Click="BtnImport_Click" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="307,55,0,0" Height="37">Import</Button>
             <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14">Tray icon / notification options:</Label>
             <Grid Grid.Row="4" Grid.Column="2">
-                <Controls:ToggleSwitch Name="toggleTrayIcon" Checked="ToggleTrayIcon_Checked" Unchecked="ToggleTrayIcon_Unchecked" Header="Show tray icon" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0"></Controls:ToggleSwitch>
-                <Controls:ToggleSwitch Name="toggleUpdates" Checked="ToggleUpdates_Checked" Unchecked="ToggleUpdates_Unchecked" Header="Search for updates" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,0,0"></Controls:ToggleSwitch>
-                <Controls:ToggleSwitch Name="toggleSyncNotify" Checked="ToggleSyncNotify_Checked" Unchecked="ToggleSyncNotify_Unchecked" Header="Notify when done syncing" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,200,0,0"></Controls:ToggleSwitch>
+                <Controls:ToggleSwitch Name="toggleTrayIcon" Checked="ToggleTrayIcon_Checked" Unchecked="ToggleTrayIcon_Unchecked" Header="Show tray icon, hide minimised window" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Width="369" Margin="5,0,0,0"></Controls:ToggleSwitch>
+                <Controls:ToggleSwitch Name="toggleUpdates" Checked="ToggleUpdates_Checked" Unchecked="ToggleUpdates_Unchecked" Header="Search for updates" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,0,0" Width="369"></Controls:ToggleSwitch>
+                <Controls:ToggleSwitch Name="toggleSyncNotify" Checked="ToggleSyncNotify_Checked" Unchecked="ToggleSyncNotify_Unchecked" Header="Notify when done syncing" OnLabel="Yes" OffLabel="No" HorizontalAlignment="Left" VerticalAlignment="Top" Width="369" Margin="5,200,0,0"></Controls:ToggleSwitch>
 
             </Grid>
         </Grid>
