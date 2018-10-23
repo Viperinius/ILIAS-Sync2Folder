@@ -206,6 +206,8 @@ namespace WPF_ILIAS_Sync2Folder
         private string _sFileDate = "";
         private string _sFileSize = "";
         private string _sFileId = "";
+        private string _sFileVersion = "";
+        private string _sFileLastUpdate = "";
 
         private bool _bFileIsVisible = true;
 
@@ -266,6 +268,26 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 _sFileId = value;
                 OnPropertyChanged("FileId");
+            }
+        }
+
+        public string FileVersion
+        {
+            get { return _sFileVersion; }
+            set
+            {
+                _sFileVersion = value;
+                OnPropertyChanged("FileVersion");
+            }
+        }
+
+        public string FileLastUpdate
+        {
+            get { return _sFileLastUpdate; }
+            set
+            {
+                _sFileLastUpdate = value;
+                OnPropertyChanged("FileLastUpdate");
             }
         }
 

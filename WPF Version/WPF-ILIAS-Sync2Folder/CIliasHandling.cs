@@ -259,9 +259,9 @@ namespace WPF_ILIAS_Sync2Folder
                                 }
                             }
 
-                            currentFile = listFiles.Last();                                                                    //test if still the same as above
+                            currentFile = listFiles.Last();
 
-                            //find file size
+                            //find file size & version
                             foreach (XElement subElement in element.Descendants("Properties"))
                             {
                                 foreach (XElement subSubElement in subElement.Descendants("Property"))
@@ -270,13 +270,22 @@ namespace WPF_ILIAS_Sync2Folder
                                     {
                                         currentFile.FileSize = subSubElement.Value;
                                     }
+                                    if ((string)subSubElement.Attribute("name") == "fileVersion")
+                                    {
+                                        currentFile.FileVersion = subSubElement.Value;
+                                    }
                                 }
                             }
 
+                            //find creation date
+                            foreach (XElement subElement in element.Descendants("CreateDate"))
+                            {
+                                currentFile.FileDate = subElement.Value;
+                            }
                             //find last modified/updated date
                             foreach (XElement subElement in element.Descendants("LastUpdate"))
                             {
-                                currentFile.FileDate = subElement.Value;
+                                currentFile.FileLastUpdate = subElement.Value;
                             }
                             //find title
                             foreach (XElement subElement in element.Descendants("Title"))
@@ -372,10 +381,38 @@ namespace WPF_ILIAS_Sync2Folder
 
 
                 //check file status
+                string sLocalLastModifyDate = "";
                 if (File.Exists(Path.Combine(file.FilePath, file.FileName)))
                 {
                     sStatus = "Found on disk";
                     file.FileStatus = sStatus;
+
+                    //check if file has been updated
+                    if (int.Parse(file.FileVersion) > 1)
+                    {
+                        DateTime lastModified = File.GetLastWriteTime(Path.Combine(file.FilePath, file.FileName));
+
+                        sLocalLastModifyDate =
+                            lastModified.Year.ToString() + "-"
+                            + lastModified.Month.ToString() + "-"
+                            + lastModified.Day.ToString() + " "
+                            + lastModified.Hour.ToString() + ":"
+                            + lastModified.Minute.ToString() + ":"
+                            + lastModified.Second.ToString() + ":";
+
+                        DateTime fileLastModifyDate = DateTime.ParseExact(file.FileLastUpdate, "yyyy-MM-dd HH:mm:ss")
+
+                        if (file.FileLastUpdate)
+                        {
+
+                        }
+
+                    }
+
+
+
+
+
                 }
 
                 //format size to be human readable

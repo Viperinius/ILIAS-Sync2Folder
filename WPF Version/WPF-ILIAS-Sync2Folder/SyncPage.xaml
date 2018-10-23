@@ -114,7 +114,7 @@
                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding FileStatus}"/>
                     <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding FileName}"/>
                     <GridViewColumn Header="Path" DisplayMemberBinding="{Binding FilePath}"/>
-                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding FileDate}"/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding FileLastUpdate}"/>
                     <GridViewColumn Header="Size" DisplayMemberBinding="{Binding FileSize}"/>
                     <GridViewColumn Header="Ref ID" DisplayMemberBinding="{Binding FileId}"/>
                 </GridView>
