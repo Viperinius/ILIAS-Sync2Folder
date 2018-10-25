@@ -11,6 +11,7 @@ using System.IO.Compression;
 using System.Windows;
 using WPF_ILIAS_Sync2Folder.IliasSoapWebservice;
 using IliasDL;
+using System.Globalization;
 
 namespace WPF_ILIAS_Sync2Folder
 { 
@@ -349,9 +350,7 @@ namespace WPF_ILIAS_Sync2Folder
             if (window.WorkerSync_IsCancelPending())
             {
                 return;
-            }
-
-            string sStatus = "Not present";
+            }                       
 
             int iCounter = 0;
             foreach (FileInfo file in listFiles)
@@ -361,6 +360,8 @@ namespace WPF_ILIAS_Sync2Folder
                 {
                     return;
                 }
+
+                string sStatus = "Not present";
 
                 file.FileStatus = sStatus;
                 file.FileIsVisible = false;
@@ -381,42 +382,45 @@ namespace WPF_ILIAS_Sync2Folder
 
 
                 //check file status
-                string sLocalLastModifyDate = "";
                 if (File.Exists(Path.Combine(file.FilePath, file.FileName)))
                 {
                     sStatus = "Found on disk";
                     file.FileStatus = sStatus;
 
-                    //check if file has been updated
+                    //check if file has been updated                    
                     if (int.Parse(file.FileVersion) > 1)
                     {
-                        DateTime lastModified = File.GetLastWriteTime(Path.Combine(file.FilePath, file.FileName));
+                        DateTime localLastModified = File.GetLastWriteTime(Path.Combine(file.FilePath, file.FileName));
+                        DateTime fileLastModifyDate = DateTime.ParseExact(file.FileLastUpdate, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
-                        sLocalLastModifyDate =
-                            lastModified.Year.ToString() + "-"
-                            + lastModified.Month.ToString() + "-"
-                            + lastModified.Day.ToString() + " "
-                            + lastModified.Hour.ToString() + ":"
-                            + lastModified.Minute.ToString() + ":"
-                            + lastModified.Second.ToString() + ":";
-
-                        DateTime fileLastModifyDate = DateTime.ParseExact(file.FileLastUpdate, "yyyy-MM-dd HH:mm:ss")
-
-                        if (file.FileLastUpdate)
+                        if (fileLastModifyDate > localLastModified)  //wrong for testing
                         {
-
+                            //ilias version is more current
+                            if (config.GetFileIgnore(file.FileId) == file.FileId || config.GetOverwriteNone() == "true")
+                            {
+                                sStatus = "Update available";
+                            }
+                            else
+                            {
+                                sStatus = "Update available!";
+                            }
+                            file.FileStatus = sStatus;
                         }
-
                     }
+                }
 
-
-
-
-
+                //check file ignore rule
+                if (config.GetFileIgnore(file.FileId) == file.FileId || config.GetOverwriteNone() == "true")
+                {
+                    file.FileIgnore = "Ignored";
+                }
+                else
+                {
+                    file.FileIgnore = "Not ignored";
                 }
 
                 //format size to be human readable
-                int iSize = Int32.Parse(file.FileSize);
+                int iSize = int.Parse(file.FileSize);
                 if (iSize < 1049000)
                 {
                     //if smaller than 1 MB
@@ -460,7 +464,7 @@ namespace WPF_ILIAS_Sync2Folder
                     //report progress with fake percentage to change the current file in listview
                     window.WorkerSync_ChangeProgress(501, listFiles.IndexOf(file).ToString());
                 }
-                else if (config.GetShowOnlyNew() == "true" && (sStatus == "Not present" || sStatus == "New"))
+                else if (config.GetShowOnlyNew() == "true" && (sStatus == "Not present" || sStatus == "New" || sStatus == "Update available!"))
                 {
                     file.FileStatus = sStatus;
                     file.FileIsVisible = true;

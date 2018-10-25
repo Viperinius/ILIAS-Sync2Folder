@@ -20,6 +20,7 @@
         Height="450" 
         Width="800" 
         SaveWindowPosition="True" 
+        WindowState="Maximized"
         Icon="dliconWHITEsquare.ico"
         GlowBrush="{DynamicResource AccentColorBrush}" Loaded="MainWindow_Loaded" Closing="MetroWindow_Closing">
     <Controls:MetroWindow.Resources>

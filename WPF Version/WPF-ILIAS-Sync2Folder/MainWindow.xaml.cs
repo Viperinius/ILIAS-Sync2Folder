@@ -42,6 +42,7 @@ namespace WPF_ILIAS_Sync2Folder
         private BackgroundWorker workerLogin;
         private BackgroundWorker workerSync;
         private BackgroundWorker workerCourses;
+        private BackgroundWorker workerSyncOneFile;
 
         private string sUsername;
         private string sPassword;
@@ -298,6 +299,16 @@ namespace WPF_ILIAS_Sync2Folder
                 workerCourses.CancelAsync();
             }
 
+            workerSyncOneFile = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = false
+            };
+
+            workerSyncOneFile.DoWork += new DoWorkEventHandler(WorkerSyncOneFile_DoWork);
+            workerSyncOneFile.ProgressChanged += new ProgressChangedEventHandler(WorkerSyncOneFile_ProgressChanges);
+            workerSyncOneFile.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerSyncOneFile_RunWorkerCompleted);
+
             //-----------------------------
             //      check for update
             //-----------------------------
@@ -328,6 +339,11 @@ namespace WPF_ILIAS_Sync2Folder
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
             styleChanger.Close();
+        }
+
+        public async Task<MessageDialogResult> ShowMetroMessageBox(string sTitle, string sMessage, MessageDialogStyle dialogStyle)
+        {
+            return await this.ShowMessageAsync(sTitle, sMessage, dialogStyle);
         }
 
         //-----------------------------
@@ -367,6 +383,42 @@ namespace WPF_ILIAS_Sync2Folder
                 changedPropertyNotifier.ChangeBtnLoginText();
                 BtnLogin.Tag = PackIconOcticonsKind.SignOut;
             }
+        }
+
+        private void WorkerSyncOneFile_DoWork(object sender, DoWorkEventArgs e)
+        {
+            iliasHandling.bSyncRunning = true;
+            changedPropertyNotifier.BtnSyncIconSpin = true;
+
+            if (!iliasHandling.bLoggedIn)
+            {
+                return;
+            }
+
+            //get new file from ilias
+        }
+
+        private void WorkerSyncOneFile_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            iliasHandling.bSyncRunning = false;
+            changedPropertyNotifier.BtnSyncIconSpin = false;
+        }
+
+        private void WorkerSyncOneFile_ProgressChanges(object sender, ProgressChangedEventArgs e)
+        {
+            if (e.ProgressPercentage == 501)
+            {
+                FileInfo currentCollectionFile = iliasHandling.lFiles[Int32.Parse(e.UserState.ToString())];
+                FileInfo currentListFile = iliasHandling.listFiles[Int32.Parse(e.UserState.ToString())];
+
+                currentCollectionFile.FileStatus = currentListFile.FileStatus;
+                currentCollectionFile.FileIsVisible = currentListFile.FileIsVisible;
+            }
+        }
+
+        public void WorkerSyncOneFile_RunAsync()
+        {
+            workerSyncOneFile.RunWorkerAsync();
         }
 
         private void WorkerSync_DoWork(object sender, DoWorkEventArgs e)
@@ -436,7 +488,7 @@ namespace WPF_ILIAS_Sync2Folder
 
 
 
-    }
+        }
 
         private void WorkerSync_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

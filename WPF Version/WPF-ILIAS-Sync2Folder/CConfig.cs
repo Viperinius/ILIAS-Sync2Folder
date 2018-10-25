@@ -515,5 +515,54 @@ namespace IliasDL
         {
             return GetAppSetting("accent");
         }
+
+        public void SetOverwriteAll(bool bState)
+        {
+            if (bState)
+            {
+                SetAppSetting("overwrite", "true");
+            }
+            else
+            {
+                SetAppSetting("overwrite", "false");
+            }
+        }
+
+        public string GetOverwriteAll()
+        {
+            return GetAppSetting("overwrite");
+        }
+
+        public void SetOverwriteNone(bool bState)
+        {
+            if (bState)
+            {
+                SetAppSetting("owignore", "true");
+            }
+            else
+            {
+                SetAppSetting("owignore", "false");
+            }
+        }
+
+        public string GetOverwriteNone()
+        {
+            return GetAppSetting("owignore");
+        }
+
+        public void SetFileIgnore(string sRefId)
+        {
+            SetAppSetting("fileignore" + sRefId, sRefId);
+        }
+
+        public string GetFileIgnore(string sRefId)
+        {
+            return GetAppSetting("fileignore" + sRefId);
+        }
+
+        public void ClearFileIgnore(string sRefId)
+        {
+            ClearAppSetting("fileignore" + sRefId);
+        }
     }
 }

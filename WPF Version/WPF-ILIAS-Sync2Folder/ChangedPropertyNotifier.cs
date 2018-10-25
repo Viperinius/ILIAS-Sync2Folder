@@ -19,6 +19,8 @@ namespace WPF_ILIAS_Sync2Folder
         private int _SyncProgBarCourseVal = 0;
         private string _SyncLbProgFile = "0 %";
         private string _SyncLbProgCourses = "0 %";
+        private bool _SyncContextShowOverwrite = false;
+        private string _SyncContextIgnoreHeader = "Ignore updates for this file";
 
         public string BtnLoginText
         {
@@ -97,6 +99,26 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 _SyncLbProgCourses = value;
                 OnPropertyChanged("SyncLbProgCourses");
+            }
+        }
+
+        public bool SyncContextShowOverwrite
+        {
+            get { return _SyncContextShowOverwrite; }
+            set
+            {
+                _SyncContextShowOverwrite = value;
+                OnPropertyChanged("SyncContextShowOverwrite");
+            }
+        }
+
+        public string SyncContextIgnoreHeader
+        {
+            get { return _SyncContextIgnoreHeader; }
+            set
+            {
+                _SyncContextIgnoreHeader = value;
+                OnPropertyChanged("SyncContextIgnoreHeader");
             }
         }
 
@@ -208,6 +230,7 @@ namespace WPF_ILIAS_Sync2Folder
         private string _sFileId = "";
         private string _sFileVersion = "";
         private string _sFileLastUpdate = "";
+        private string _sFileIgnore = "";
 
         private bool _bFileIsVisible = true;
 
@@ -288,6 +311,16 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 _sFileLastUpdate = value;
                 OnPropertyChanged("FileLastUpdate");
+            }
+        }
+
+        public string FileIgnore
+        {
+            get { return _sFileIgnore; }
+            set
+            {
+                _sFileIgnore = value;
+                OnPropertyChanged("FileIgnore");
             }
         }
 

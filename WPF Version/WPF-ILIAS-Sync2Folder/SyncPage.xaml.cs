@@ -13,7 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using IliasDL;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace WPF_ILIAS_Sync2Folder
 {
@@ -45,6 +48,7 @@ namespace WPF_ILIAS_Sync2Folder
             lbProgCourses.DataContext = changedPropertyNotifier;
 
             listViewSync.ItemsSource = iliasHandling.lFiles;
+            listViewSync.DataContext = changedPropertyNotifier;
 
             //iliasHandling.lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "Test.pdf", FilePath = @"Test\Test2\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "12345" });
             //iliasHandling.lFiles.Add(new FileInfo() { FileStatus = "Done", FileName = "First.pdf", FilePath = @"Test\OMG\", FileDate = "19.08.2018", FileSize = "12 KB", FileId = "882184", FileIsVisible = false });
@@ -106,6 +110,120 @@ namespace WPF_ILIAS_Sync2Folder
             config.SetShowOnlyNew(false);
         }
 
+        private void CheckOverwriteAll_Checked(object sender, RoutedEventArgs e)
+        {
+            config.SetOverwriteAll(true);
+            if (checkOverwriteNone.IsChecked == true)
+            {
+                checkOverwriteNone.IsChecked = false;
+                config.SetOverwriteNone(false);
+            }
+            foreach (FileInfo fileInfo in iliasHandling.lFiles)
+            {
+                fileInfo.FileIgnore = "Not ignored";
+                config.ClearFileIgnore(fileInfo.FileId);
+            }
+        }
+
+        private void CheckOverwriteNone_Checked(object sender, RoutedEventArgs e)
+        {
+            config.SetOverwriteNone(true);
+            if (checkOverwriteAll.IsChecked == true)
+            {
+                checkOverwriteAll.IsChecked = false;
+                config.SetOverwriteAll(false);
+            }
+            foreach (FileInfo fileInfo in iliasHandling.lFiles)
+            {
+                fileInfo.FileIgnore = "Ignored";
+                config.SetFileIgnore(fileInfo.FileId);
+            }
+        }
+
+        private void CheckOverwriteAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            config.SetOverwriteAll(false);
+        }
+
+        private void CheckOverwriteNone_Unchecked(object sender, RoutedEventArgs e)
+        {
+            config.SetOverwriteNone(false);
+        }
+
+        private async void SyncContextOverwrite_Click(object sender, RoutedEventArgs e)
+        {
+            if (listViewSync.SelectedIndex > -1)
+            {
+                FileInfo fileInfo = (FileInfo) listViewSync.SelectedItem;
+                if (fileInfo.FileStatus == "Update available")
+                {
+                    var result = await window.ShowMetroMessageBox("Warning", "Do you really want to overwrite this file? This ist not reversible.", MessageDialogStyle.AffirmativeAndNegative);
+                    if (result == MessageDialogResult.Negative)
+                    {
+                        return;
+                    }
+                }
+
+                //start worker for current file
+                window.WorkerSyncOneFile_RunAsync();
+            }
+        }
+
+        private void SyncContextIgnore_Click(object sender, RoutedEventArgs e)
+        {
+            if (listViewSync.SelectedIndex > -1)
+            {
+                FileInfo fileInfo = (FileInfo)listViewSync.SelectedItem;
+                if (config.GetFileIgnore(fileInfo.FileId) == fileInfo.FileId)
+                {
+                    config.ClearFileIgnore(fileInfo.FileId);                    
+                    fileInfo.FileIgnore = "Not ignored";
+                }
+                else
+                {
+                    config.SetFileIgnore(fileInfo.FileId);
+                    fileInfo.FileIgnore = "Ignored";
+                }
+            }
+        }
+
+        private void ListViewSync_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            if (listViewSync.SelectedIndex > -1)
+            {
+                FileInfo fileInfo = (FileInfo)listViewSync.SelectedItem;
+                if (fileInfo.FileIgnore == "Ignored")
+                {
+                    changedPropertyNotifier.SyncContextIgnoreHeader = "Remove ignore rule";
+                }
+                else
+                {
+                    changedPropertyNotifier.SyncContextIgnoreHeader = "Ignore updates for this file";
+                }
+
+                if (fileInfo.FileStatus.StartsWith("Update available"))
+                {
+                    changedPropertyNotifier.SyncContextShowOverwrite = true;
+                }
+                else
+                {
+                    changedPropertyNotifier.SyncContextShowOverwrite = false;
+                }
+            }
+        }
+
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (listViewSync.SelectedIndex > -1)
+            {
+                FileInfo fileInfo = (FileInfo)listViewSync.SelectedItem;
+                if (File.Exists(System.IO.Path.Combine(fileInfo.FilePath, fileInfo.FileName)))
+                {
+                    Process.Start(System.IO.Path.Combine(fileInfo.FilePath, fileInfo.FileName));
+                }
+            }
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (config.GetShowOnly() == "true")
@@ -118,6 +236,8 @@ namespace WPF_ILIAS_Sync2Folder
                 checkShowOnlyNew.IsChecked = true;
             }
         }
+
+        
     }
 
     

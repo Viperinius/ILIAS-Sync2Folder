@@ -9,7 +9,7 @@
              xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+             d:DesignHeight="450" d:DesignWidth="1011" Loaded="UserControl_Loaded">
     <Grid SizeChanged="SyncPage_SizeChanged">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -18,10 +18,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="210"/>
+            <ColumnDefinition Width="210"/>
             <ColumnDefinition Width="195"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Name="btnSync" Width="200" Height="50" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Margin="10,25,0,0" Click="BtnSync_Click">
+        <Button Name="btnSync" Width="200" Height="50" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Margin="10,25,10,0" Click="BtnSync_Click">
             <StackPanel Orientation="Horizontal" Name="stackSyncButton">
                 <iconPacks:PackIconOcticons Kind="Sync" Name="iconSync" Width="20" Height="20" Spin="{Binding BtnSyncIconSpin}"/>
                 <TextBlock Text="{Binding BtnSyncText}" Margin="10,0,0,0" TextAlignment="Center"/>
@@ -29,14 +30,25 @@
         </Button>
         <CheckBox Name="checkShowOnly" Checked="CheckShowOnly_Checked" Unchecked="CheckShowOnly_Unchecked" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,25,0,0">Show only (no file download)</CheckBox>
         <CheckBox Name="checkShowOnlyNew" Checked="CheckShowOnlyNew_Checked" Unchecked="CheckShowOnlyNew_Unchecked" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,55,0,0">Only new files are shown</CheckBox>
-        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0">Progress (this course):</Label>
-        <Label Grid.Row="0" Grid.Column="2" Name="lbProgFile" Content="{Binding SyncLbProgFile}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"></Label>
-        <Controls:MetroProgressBar Grid.Row="0" Grid.Column="2" Name="progBarFile" Value="{Binding SyncProgBarFileVal}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="45,55,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-        <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0">Progress (total):</Label>
-        <Label Grid.Row="0" Grid.Column="3" Name="lbProgCourses" Content="{Binding SyncLbProgCourses}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"></Label>
-        <Controls:MetroProgressBar Grid.Row="0" Grid.Column="3" Name="progBarCourses" Value="{Binding SyncProgBarCourseVal}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="45,55,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <CheckBox Name="checkOverwriteAll" Checked="CheckOverwriteAll_Checked"  Unchecked="CheckOverwriteAll_Unchecked"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,25,0,0">Overwrite all updated files</CheckBox>
+        <CheckBox Name="checkOverwriteNone" Checked="CheckOverwriteNone_Checked"  Unchecked="CheckOverwriteNone_Unchecked"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,55,0,0">Ignore all file updates</CheckBox>
+        <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0">Progress (this course):</Label>
+        <Label Grid.Row="0" Grid.Column="3" Name="lbProgFile" Content="{Binding SyncLbProgFile}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"></Label>
+        <Controls:MetroProgressBar Grid.Row="0" Grid.Column="3" Name="progBarFile" Value="{Binding SyncProgBarFileVal}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="45,55,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0">Progress (total):</Label>
+        <Label Grid.Row="0" Grid.Column="4" Name="lbProgCourses" Content="{Binding SyncLbProgCourses}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"></Label>
+        <Controls:MetroProgressBar Grid.Row="0" Grid.Column="4" Name="progBarCourses" Value="{Binding SyncProgBarCourseVal}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="45,55,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
 
-        <ListView x:Name="listViewSync" Grid.Row="1" Grid.ColumnSpan="4" Margin="10,10" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+        <ListView x:Name="listViewSync" Grid.Row="1" Grid.ColumnSpan="5" Margin="10,10" ContextMenuOpening="ListViewSync_ContextMenuOpening" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+            <ListView.Resources>
+                <ContextMenu x:Key="syncContextMenu">
+                    <ContextMenu.DataContext>
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}" Path="DataContext"/>
+                    </ContextMenu.DataContext>
+                    <MenuItem Name="syncContextOverwrite" Header="Overwrite local file" IsEnabled="{Binding SyncContextShowOverwrite}" Click="SyncContextOverwrite_Click"/>
+                    <MenuItem Name="syncContextIgnore" Header="{Binding SyncContextIgnoreHeader}" Click="SyncContextIgnore_Click"/>
+                </ContextMenu>
+            </ListView.Resources>
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
@@ -98,6 +110,8 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="ContextMenu" Value="{StaticResource syncContextMenu}"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
 
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding FileIsVisible}" Value="False">
@@ -105,6 +119,9 @@
                         </DataTrigger>
                         <DataTrigger Binding="{Binding FileStatus}" Value="Path too long!">
                             <Setter Property="Background" Value="Firebrick"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding FileStatus}" Value="Update available!">
+                            <Setter Property="Background" Value="LightGray"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -117,6 +134,7 @@
                     <GridViewColumn Header="Date" DisplayMemberBinding="{Binding FileLastUpdate}"/>
                     <GridViewColumn Header="Size" DisplayMemberBinding="{Binding FileSize}"/>
                     <GridViewColumn Header="Ref ID" DisplayMemberBinding="{Binding FileId}"/>
+                    <GridViewColumn Header="Updates ignored" DisplayMemberBinding="{Binding FileIgnore}"/>
                 </GridView>
             </ListView.View>
         </ListView>
