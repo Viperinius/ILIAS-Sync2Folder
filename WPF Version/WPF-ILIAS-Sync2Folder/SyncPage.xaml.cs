@@ -165,7 +165,7 @@ namespace WPF_ILIAS_Sync2Folder
                 }
 
                 //start worker for current file
-                window.WorkerSyncOneFile_RunAsync();
+                window.WorkerSyncOneFile_RunAsync(fileInfo);
             }
         }
 
@@ -234,6 +234,16 @@ namespace WPF_ILIAS_Sync2Folder
             if (config.GetShowOnlyNew() == "true")
             {
                 checkShowOnlyNew.IsChecked = true;
+            }
+
+            if (config.GetOverwriteAll() == "true")
+            {
+                checkOverwriteAll.IsChecked = true;
+            }
+
+            if (config.GetOverwriteNone() == "true")
+            {
+                checkOverwriteNone.IsChecked = true;
             }
         }
 

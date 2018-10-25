@@ -453,7 +453,20 @@ namespace WPF_ILIAS_Sync2Folder
                         window.WorkerSync_ChangeProgress(500, listFiles.IndexOf(file).ToString());
                     }
 
-                    GetFileByRefGZIP(Int32.Parse(file.FileId), file.FilePath, file.FileName, ref sStatus);
+                    if (config.GetOverwriteAll() == "true" && sStatus.StartsWith("Update available"))
+                    {
+                        string sSize = file.FileSize;
+                        GetFileByRefGZIP(Int32.Parse(file.FileId), file.FilePath, file.FileName, ref sStatus, ref sSize);
+
+                        file.FileSize = sSize;
+                    }
+                    else
+                    {
+                        if (!sStatus.StartsWith("Update available"))
+                        {
+                            GetFileByRefGZIP(Int32.Parse(file.FileId), file.FilePath, file.FileName, ref sStatus);
+                        }
+                    }
                     file.FileStatus = sStatus;
                 }
 
@@ -640,6 +653,116 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 sFileStatus = "Found on disk";
             }
+        }
+
+        private void GetFileByRefGZIP(int iRefId, string sPath, string sName, ref string sFileStatus, ref string sSize)
+        {
+            string sFullPath = "";
+
+            //build full path
+            sFullPath = Path.Combine(sPath, sName);
+            //Console.WriteLine("Path: " + sFullPath);
+
+            if (File.Exists(sFullPath))                             //different from the other method version
+            {
+                //##############
+                //Console.WriteLine("Requesting file " + sName + " ...");
+                //##############
+
+                //request file xml from SOAP
+                string xmlFile = client.getFileXML(sSessionId, iRefId, 3);
+                //string xmlFile = client.getFileXMLAsync(sSessionId, iRefId, 3).Result;
+                //Console.WriteLine("XML FILE GZIP: " + xmlFile);
+
+                //scan xml for <Content>, i.e. the file base64 string
+                string sContent = "";
+
+                XDocument xDoc = XDocument.Parse(xmlFile);
+                foreach (XNode node in xDoc.Nodes())
+                {
+                    if (node is XElement)
+                    {
+                        XElement element = (XElement)node;
+                        if (element.Name.LocalName.Equals("File"))
+                        {
+                            int iTmp = int.Parse((string)element.Attribute("size"));
+
+                            if (iTmp < 1049000)
+                            {
+                                //if smaller than 1 MB
+                                sSize = cSimple.GetSizeInKiB(iTmp).ToString() + " KB";
+                            }
+                            else
+                            {
+                                sSize = cSimple.GetSizeInMiB(iTmp).ToString() + " MB";
+                            }
+                        }
+                    }
+                }
+
+                foreach (XNode node in xDoc.DescendantNodes())
+                {
+                    if (node is XElement)
+                    {
+                        XElement element = (XElement)node;
+                        if (element.Name.LocalName.Equals("Content"))
+                        {
+                            sContent = element.Value;
+                        }
+                    }
+                }
+
+                //##############
+                //Console.WriteLine("Searching for content in file done.");
+                //##############
+
+                //convert base64 string
+                byte[] byB64 = Convert.FromBase64String(sContent);
+
+                //decompress gzip
+                byte[] byDecompressed;
+                using (var compressedStream = new MemoryStream(byB64))
+                using (var zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+                using (var resultStream = new MemoryStream())
+                {
+                    var buffer = new byte[4096];
+                    int iRead = 0;
+
+                    while ((iRead = zipStream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        resultStream.Write(buffer, 0, iRead);
+                    }
+                    byDecompressed = resultStream.ToArray();
+                }
+
+                //generate file from base64 string
+                try
+                {
+                    File.WriteAllBytes(sFullPath, byDecompressed);
+                    sFileStatus = "New";
+                }
+                catch (PathTooLongException)
+                {
+                    sFileStatus = "Path too long!";
+                }
+
+                //##############
+                //Console.WriteLine("Writing file to disk done.");
+                //##############
+            }
+        }
+
+        public void GetSingleFile(FileInfo file)
+        {
+            string sStatus = "";
+            string sSize = "";
+            GetFileByRefGZIP(int.Parse(file.FileId), file.FilePath, file.FileName, ref sStatus, ref sSize);
+
+            file.FileStatus = sStatus;
+            file.FileSize = sSize;
+
+            //report progress with fake percentage to change the current file in listview
+            window.WorkerSyncOneFile_ChangeProgress(501, listFiles.IndexOf(file).ToString());
         }
     }
 

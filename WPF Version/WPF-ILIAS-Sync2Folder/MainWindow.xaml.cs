@@ -396,6 +396,7 @@ namespace WPF_ILIAS_Sync2Folder
             }
 
             //get new file from ilias
+            iliasHandling.GetSingleFile((FileInfo)e.Argument);
         }
 
         private void WorkerSyncOneFile_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -416,9 +417,14 @@ namespace WPF_ILIAS_Sync2Folder
             }
         }
 
-        public void WorkerSyncOneFile_RunAsync()
+        public void WorkerSyncOneFile_RunAsync(FileInfo file)
         {
-            workerSyncOneFile.RunWorkerAsync();
+            workerSyncOneFile.RunWorkerAsync(file);
+        }
+
+        public void WorkerSyncOneFile_ChangeProgress(int iPercentage, object userState)
+        {
+            workerSyncOneFile.ReportProgress(iPercentage, userState);
         }
 
         private void WorkerSync_DoWork(object sender, DoWorkEventArgs e)
