@@ -407,6 +407,7 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerSyncOneFile_ProgressChanges(object sender, ProgressChangedEventArgs e)
         {
+            /*
             if (e.ProgressPercentage == 501)
             {
                 FileInfo currentCollectionFile = iliasHandling.lFiles[Int32.Parse(e.UserState.ToString())];
@@ -414,7 +415,7 @@ namespace WPF_ILIAS_Sync2Folder
 
                 currentCollectionFile.FileStatus = currentListFile.FileStatus;
                 currentCollectionFile.FileIsVisible = currentListFile.FileIsVisible;
-            }
+            }*/
         }
 
         public void WorkerSyncOneFile_RunAsync(FileInfo file)
