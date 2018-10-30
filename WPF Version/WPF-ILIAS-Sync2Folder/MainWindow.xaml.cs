@@ -534,11 +534,13 @@ namespace WPF_ILIAS_Sync2Folder
                 }
                 else if (e.ProgressPercentage == 501)
                 {
+                    /*
                     FileInfo currentCollectionFile = iliasHandling.lFiles[Int32.Parse(e.UserState.ToString())];
                     FileInfo currentListFile = iliasHandling.listFiles[Int32.Parse(e.UserState.ToString())];
 
                     currentCollectionFile.FileStatus = currentListFile.FileStatus;
                     currentCollectionFile.FileIsVisible = currentListFile.FileIsVisible;
+                    */
                 }
             }
             else
