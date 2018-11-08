@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using System.Windows.Shell;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
@@ -499,6 +500,19 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerSync_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Cancelled)
+            {
+                taskbarItemInfo.ProgressState = TaskbarItemProgressState.Paused;
+            }
+            else if (e.Error != null)
+            {
+                taskbarItemInfo.ProgressState = TaskbarItemProgressState.Error;
+            }
+            else
+            {
+                taskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
+            }
+
             iliasHandling.bCoursesDone = false;
             if (!iliasHandling.lCourseInfos.Any())
             {
@@ -551,6 +565,7 @@ namespace WPF_ILIAS_Sync2Folder
                 {
                     changedPropertyNotifier.SyncProgBarCourseVal = (int)e.UserState;
                     changedPropertyNotifier.SyncLbProgCourses = e.UserState.ToString() + " %";
+                    taskbarItemInfo.ProgressValue = Convert.ToDouble(e.UserState) / 100;
                 }
             }
         }
@@ -558,6 +573,7 @@ namespace WPF_ILIAS_Sync2Folder
         public void WorkerSync_RunAsync()
         {
             workerSync.RunWorkerAsync();
+            taskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
         }
 
         public void WorkerSync_ChangeProgress(int iPercentage)

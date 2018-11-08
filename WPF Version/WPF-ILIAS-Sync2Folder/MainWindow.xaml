@@ -51,6 +51,10 @@
         </dockablz:Layout>
     </Grid>
 
+    <Controls:MetroWindow.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="taskbarItemInfo" Description="ILIAS Sync2Folder"/>
+    </Controls:MetroWindow.TaskbarItemInfo>
+    
     <!-- Add more stuff to the title bar: -->
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
