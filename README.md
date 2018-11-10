@@ -7,6 +7,8 @@ All features can be found at [Features](#features). Part of the features and des
 
 *Note:* The code is currently barely commented and sorted out as this is just a small project.
 
+![pic1](https://github.com/Viperinius/ILIAS-Sync2Folder/raw/master/wiki-pictures/mainwindow-sync.JPG)
+
 ### Used libraries
 + [Octokit](https://github.com/octokit/octokit.net) (licensed under MIT License)
 + [Wunder.ClickOnceUninstaller](https://github.com/6wunderkinder/Wunder.ClickOnceUninstaller) (licensed under MIT License)
