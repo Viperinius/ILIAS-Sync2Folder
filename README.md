@@ -20,7 +20,9 @@ Download the vX.X.X.X.zip from the latest release. Extract the zip and run the s
 
 ### How to use
 When installed, you have to insert a link to your ILIAS login page if you are not at FH Bielefeld. To change it, switch to *"General Settings"*, paste the login link into the text box and click on *"Check Link"*. If everything went right, your universities name (or some abbreviation) should pop up in the box below. To apply the changes, restart Sync2Folder.
+
 You can now proceed and login via the button in the top right of the window. When the connection is established, a checkmark will appear. To set your destination folder, select the *"Folder Options"* tab and click on the *"..."*. If you want to save courses in folders for each semester, turn on the corresponding options in this tab.
+
 You can now switch to the *"Course Options"* tab and your courses will be shown. Adjust names etc. to your liking and head towards the *"Synchronising"* tab. After pressing the *"Start synchronisation"* button, the programme will get the files from all selected courses.
 
 For more details, visit the [Wiki](https://github.com/Viperinius/ILIAS-Sync2Folder/wiki) page.
