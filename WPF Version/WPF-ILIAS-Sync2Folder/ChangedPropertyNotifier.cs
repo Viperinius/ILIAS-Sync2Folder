@@ -21,6 +21,7 @@ namespace WPF_ILIAS_Sync2Folder
         private string _SyncLbProgCourses = "0 %";
         private bool _SyncContextShowOverwrite = false;
         private string _SyncContextIgnoreHeader = "Ignore updates for this file";
+        private int _NewFilesCount = 0;
 
         public string BtnLoginText
         {
@@ -99,6 +100,16 @@ namespace WPF_ILIAS_Sync2Folder
             {
                 _SyncLbProgCourses = value;
                 OnPropertyChanged("SyncLbProgCourses");
+            }
+        }
+
+        public int NewFilesCount
+        {
+            get { return _NewFilesCount; }
+            set
+            {
+                _NewFilesCount = value;
+                OnPropertyChanged("NewFilesCount");
             }
         }
 

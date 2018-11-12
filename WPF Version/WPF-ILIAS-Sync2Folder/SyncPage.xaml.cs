@@ -46,6 +46,7 @@ namespace WPF_ILIAS_Sync2Folder
             progBarCourses.DataContext = changedPropertyNotifier;
             lbProgFile.DataContext = changedPropertyNotifier;
             lbProgCourses.DataContext = changedPropertyNotifier;
+            lbNewFilesCount.DataContext = changedPropertyNotifier;
 
             listViewSync.ItemsSource = iliasHandling.lFiles;
             listViewSync.DataContext = changedPropertyNotifier;

@@ -32,12 +32,14 @@
         <CheckBox Name="checkShowOnlyNew" Checked="CheckShowOnlyNew_Checked" Unchecked="CheckShowOnlyNew_Unchecked" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,55,0,0">Only new files are shown</CheckBox>
         <CheckBox Name="checkOverwriteAll" Checked="CheckOverwriteAll_Checked"  Unchecked="CheckOverwriteAll_Unchecked"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,25,0,0">Overwrite all updated files</CheckBox>
         <CheckBox Name="checkOverwriteNone" Checked="CheckOverwriteNone_Checked"  Unchecked="CheckOverwriteNone_Unchecked"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="0,55,0,0">Ignore all file updates</CheckBox>
-        <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0">Progress (this course):</Label>
-        <Label Grid.Row="0" Grid.Column="3" Name="lbProgFile" Content="{Binding SyncLbProgFile}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"></Label>
-        <Controls:MetroProgressBar Grid.Row="0" Grid.Column="3" Name="progBarFile" Value="{Binding SyncProgBarFileVal}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="45,55,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-        <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,22,0,0">Progress (total):</Label>
-        <Label Grid.Row="0" Grid.Column="4" Name="lbProgCourses" Content="{Binding SyncLbProgCourses}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"></Label>
-        <Controls:MetroProgressBar Grid.Row="0" Grid.Column="4" Name="progBarCourses" Value="{Binding SyncProgBarCourseVal}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="45,55,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,7,0,0">Progress (this course):</Label>
+        <Label Grid.Row="0" Grid.Column="3" Name="lbProgFile" Content="{Binding SyncLbProgFile}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,37,0,0"></Label>
+        <Controls:MetroProgressBar Grid.Row="0" Grid.Column="3" Name="progBarFile" Value="{Binding SyncProgBarFileVal}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="45,40,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,7,0,0">Progress (total):</Label>
+        <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,67,0,0">New files count:</Label>
+        <Label Grid.Row="0" Grid.Column="3" Name="lbNewFilesCount" Content="{Binding NewFilesCount}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,67,0,0"></Label>
+        <Label Grid.Row="0" Grid.Column="4" Name="lbProgCourses" Content="{Binding SyncLbProgCourses}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,37,0,0"></Label>
+        <Controls:MetroProgressBar Grid.Row="0" Grid.Column="4" Name="progBarCourses" Value="{Binding SyncProgBarCourseVal}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="120" Margin="45,40,0,0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
 
         <ListView x:Name="listViewSync" Grid.Row="1" Grid.ColumnSpan="5" Margin="10,10" ContextMenuOpening="ListViewSync_ContextMenuOpening" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
             <ListView.Resources>

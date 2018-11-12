@@ -59,7 +59,7 @@ namespace WPF_ILIAS_Sync2Folder
             textblockLogin.DataContext = changedPropertyNotifier;
             rectLoginIcon.DataContext = changedPropertyNotifier;
 
-            iliasHandling = new CIliasHandling(this);
+            iliasHandling = new CIliasHandling(this, changedPropertyNotifier);
 
             tabSync.Content = new SyncPage(this, iliasHandling, changedPropertyNotifier);
             tabCourseConfig.Content = new CoursePage(iliasHandling, changedPropertyNotifier);
@@ -446,6 +446,7 @@ namespace WPF_ILIAS_Sync2Folder
             iliasHandling.iFilePercentage = 0;
             iliasHandling.iCoursePercentage = 0;
             iliasHandling.iCurrentCourseNum = 0;
+            changedPropertyNotifier.NewFilesCount = 0;
 
             if (!iliasHandling.listCourseInfos.Any())
             {

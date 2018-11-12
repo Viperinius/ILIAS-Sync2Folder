@@ -37,9 +37,12 @@ namespace WPF_ILIAS_Sync2Folder
         public bool bCoursesDone;
 
         private MainWindow window;
-        public CIliasHandling(MainWindow mainWindow)
+        private ChangedPropertyNotifier changedPropertyNotifier;
+
+        public CIliasHandling(MainWindow mainWindow, ChangedPropertyNotifier changedPropNotifier)
         {
             window = mainWindow;
+            changedPropertyNotifier = changedPropNotifier;
         }
 
         /// <summary>
@@ -472,6 +475,8 @@ namespace WPF_ILIAS_Sync2Folder
 
                 if (bNewFile)
                 {
+                    changedPropertyNotifier.NewFilesCount++;
+
                     file.FileStatus = sStatus;
                     file.FileIsVisible = true;
                     //report progress with fake percentage to change the current file in listview
@@ -479,6 +484,8 @@ namespace WPF_ILIAS_Sync2Folder
                 }
                 else if (config.GetShowOnlyNew() == "true" && (sStatus == "Not present" || sStatus == "New" || sStatus == "Update available!"))
                 {
+                    changedPropertyNotifier.NewFilesCount++;
+
                     file.FileStatus = sStatus;
                     file.FileIsVisible = true;
                     //report progress with fake percentage to add the current file to listview
@@ -486,6 +493,11 @@ namespace WPF_ILIAS_Sync2Folder
                 }
                 else if (config.GetShowOnlyNew() == "false")
                 {
+                    if (sStatus == "Not present" || sStatus == "Update available!")
+                    {
+                        changedPropertyNotifier.NewFilesCount++;
+                    }
+
                     file.FileIsVisible = true;
                     //report progress with fake percentage to add the current file to listview
                     window.WorkerSync_ChangeProgress(500, listFiles.IndexOf(file).ToString());
