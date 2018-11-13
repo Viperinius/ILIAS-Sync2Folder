@@ -530,7 +530,14 @@ namespace WPF_ILIAS_Sync2Folder
                 if (config.GetUseOwnNames() == "true")
                 {
                     string sOwnName = config.GetCourseName(sCourseId);
-                    sTempPath = sPath.Replace(sCourseName, sOwnName);
+                    if (sOwnName != "__NO_VAL__" && sOwnName != "")
+                    {
+                        sTempPath = sPath.Replace(sCourseName, sOwnName);
+                    }
+                    else
+                    {
+                        sTempPath = sPath;
+                    }
 
                     if (sStructTemplate != "__NO_VAL__" && sStructTemplate != "")
                     {
@@ -553,7 +560,10 @@ namespace WPF_ILIAS_Sync2Folder
                 if (config.GetUseOwnNames() == "true")
                 {
                     string sOwnName = config.GetCourseName(sCourseId);
-                    sPath = sPath.Replace(sCourseName, sOwnName);
+                    if (sOwnName != "__NO_VAL__" && sOwnName != "")
+                    {
+                        sPath = sPath.Replace(sCourseName, sOwnName);
+                    }
                 }
             }
 
@@ -569,7 +579,15 @@ namespace WPF_ILIAS_Sync2Folder
                         MessageBox.Show("No save path specified.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    Directory.CreateDirectory(sPath);
+                    
+                    try
+                    {
+                        Directory.CreateDirectory(sPath);
+                    }
+                    catch (PathTooLongException)
+                    {
+                        //"Path too long!"
+                    }
                 }
             }
         }
