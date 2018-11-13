@@ -402,6 +402,19 @@ namespace WPF_ILIAS_Sync2Folder
 
         private void WorkerSyncOneFile_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (e.Cancelled)
+            {
+                taskbarItemInfo.ProgressState = TaskbarItemProgressState.Paused;
+            }
+            else if (e.Error != null)
+            {
+                taskbarItemInfo.ProgressState = TaskbarItemProgressState.Error;
+            }
+            else
+            {
+                taskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
+            }
+
             iliasHandling.bSyncRunning = false;
             changedPropertyNotifier.BtnSyncIconSpin = false;
         }
@@ -417,16 +430,19 @@ namespace WPF_ILIAS_Sync2Folder
                 currentCollectionFile.FileStatus = currentListFile.FileStatus;
                 currentCollectionFile.FileIsVisible = currentListFile.FileIsVisible;
             }*/
+
+            taskbarItemInfo.ProgressValue = 1;
         }
 
         public void WorkerSyncOneFile_RunAsync(FileInfo file)
         {
             workerSyncOneFile.RunWorkerAsync(file);
+            taskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
         }
 
         public void WorkerSyncOneFile_ChangeProgress(int iPercentage, object userState)
         {
-            workerSyncOneFile.ReportProgress(iPercentage, userState);
+            workerSyncOneFile.ReportProgress(iPercentage, userState);            
         }
 
         private void WorkerSync_DoWork(object sender, DoWorkEventArgs e)
