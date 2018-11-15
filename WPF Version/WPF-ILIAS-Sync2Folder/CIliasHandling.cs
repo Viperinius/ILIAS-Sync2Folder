@@ -792,7 +792,7 @@ namespace WPF_ILIAS_Sync2Folder
             file.FileSize = sSize;
 
             //report progress with fake percentage to change the current file in listview
-            window.WorkerSyncOneFile_ChangeProgress(501, lFiles.IndexOf(file).ToString());
+            window.WorkerSyncOverwrite_ChangeProgress(501, lFiles.IndexOf(file).ToString());
         }
     }
 

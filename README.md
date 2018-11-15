@@ -1,7 +1,7 @@
 ILIAS-Sync2Folder
 =================
 ### Summary
-Sync2Folder is a tool to download files from the e-Learning platform ILIAS.
+Sync2Folder is an unofficial tool to download files from the e-Learning platform ILIAS.
 It automatically scans your courses including their content and either shows or downloads the files.
 All features can be found at [Features](#features). Part of the features and design are inspired by [ILIASDownloader2](https://github.com/kekru/ILIASDownloader2).
 
@@ -39,6 +39,7 @@ For more details, visit the [Wiki](https://github.com/Viperinius/ILIAS-Sync2Fold
 + change the server address to get access to your university's version of ILIAS (Default: FH Bielefeld)
 + optional update notification / receive optional notifications when sync is done
 + open files directly from within the programme
++ if files in ILIAS get updated, the programme marks this file and you can overwrite the local old version (or keep it and disable the files' highlighting)
 - UI currently only in English (old UI version with < v2 only in German)
 
 #### Note
@@ -64,6 +65,7 @@ So just stick to use the login link to set your ILIAS server for now.
 + implement an optional automatic synchronisation (automatically check for new files every x minutes)
 + ~~switch from WinForms to WPF in v2 with new UI design~~ done.
 + be able to sort the file list view columns (sort by date / size / title etc)
++ optionally save an old version of a file instead of just overwriting it
 
 ### Support
 If you have any questions, bugs or just feedback, you have multiple possibilities to make contact:

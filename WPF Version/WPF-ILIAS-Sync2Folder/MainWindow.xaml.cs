@@ -43,7 +43,7 @@ namespace WPF_ILIAS_Sync2Folder
         private BackgroundWorker workerLogin;
         private BackgroundWorker workerSync;
         private BackgroundWorker workerCourses;
-        private BackgroundWorker workerSyncOneFile;
+        private BackgroundWorker workerSyncOverwrite;
 
         private string sUsername;
         private string sPassword;
@@ -300,15 +300,15 @@ namespace WPF_ILIAS_Sync2Folder
                 workerCourses.CancelAsync();
             }
 
-            workerSyncOneFile = new BackgroundWorker
+            workerSyncOverwrite = new BackgroundWorker
             {
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = false
             };
 
-            workerSyncOneFile.DoWork += new DoWorkEventHandler(WorkerSyncOneFile_DoWork);
-            workerSyncOneFile.ProgressChanged += new ProgressChangedEventHandler(WorkerSyncOneFile_ProgressChanges);
-            workerSyncOneFile.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerSyncOneFile_RunWorkerCompleted);
+            workerSyncOverwrite.DoWork += new DoWorkEventHandler(WorkerSyncOverwrite_DoWork);
+            workerSyncOverwrite.ProgressChanged += new ProgressChangedEventHandler(WorkerSyncOverwrite_ProgressChanges);
+            workerSyncOverwrite.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerSyncOverwrite_RunWorkerCompleted);
 
             //-----------------------------
             //      check for update
@@ -340,6 +340,8 @@ namespace WPF_ILIAS_Sync2Folder
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
             styleChanger.Close();
+            notifyIcon.Visible = false;
+            notifyIcon.Dispose();
         }
 
         public async Task<MessageDialogResult> ShowMetroMessageBox(string sTitle, string sMessage, MessageDialogStyle dialogStyle)
@@ -386,7 +388,7 @@ namespace WPF_ILIAS_Sync2Folder
             }
         }
 
-        private void WorkerSyncOneFile_DoWork(object sender, DoWorkEventArgs e)
+        private void WorkerSyncOverwrite_DoWork(object sender, DoWorkEventArgs e)
         {
             iliasHandling.bSyncRunning = true;
             changedPropertyNotifier.BtnSyncIconSpin = true;
@@ -396,11 +398,28 @@ namespace WPF_ILIAS_Sync2Folder
                 return;
             }
 
-            //get new file from ilias
-            iliasHandling.GetSingleFile((FileInfo)e.Argument);
+            //get arguments
+            List<object> tempList = e.Argument as List<object>; //file info first, then mode selector
+
+            if (tempList[1].ToString() == "single")
+            {
+                //get new file from ilias
+                iliasHandling.GetSingleFile((FileInfo)tempList[0]);
+            }
+            else if (tempList[1].ToString() == "multiple")
+            {
+                //get new file from ilias
+                foreach (FileInfo fileInfo in iliasHandling.lFiles)
+                {
+                    if (fileInfo.FileStatus == "Update available!")
+                    {
+                        iliasHandling.GetSingleFile(fileInfo);
+                    }
+                }
+            }
         }
 
-        private void WorkerSyncOneFile_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void WorkerSyncOverwrite_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled)
             {
@@ -419,7 +438,7 @@ namespace WPF_ILIAS_Sync2Folder
             changedPropertyNotifier.BtnSyncIconSpin = false;
         }
 
-        private void WorkerSyncOneFile_ProgressChanges(object sender, ProgressChangedEventArgs e)
+        private void WorkerSyncOverwrite_ProgressChanges(object sender, ProgressChangedEventArgs e)
         {
             /*
             if (e.ProgressPercentage == 501)
@@ -434,15 +453,38 @@ namespace WPF_ILIAS_Sync2Folder
             taskbarItemInfo.ProgressValue = 1;
         }
 
-        public void WorkerSyncOneFile_RunAsync(FileInfo file)
+        public void WorkerSyncOverwrite_RunAsync(FileInfo file)
         {
-            workerSyncOneFile.RunWorkerAsync(file);
+            List<object> lArguments = new List<object>
+            {
+                file,
+                "single"
+            };
+
+            workerSyncOverwrite.RunWorkerAsync(lArguments);
             taskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
         }
 
-        public void WorkerSyncOneFile_ChangeProgress(int iPercentage, object userState)
+        /// <summary>
+        /// Run the overwrite sync worker
+        /// </summary>
+        /// <param name="file">File info, set to null if multiple files should be overwritten</param>
+        /// <param name="sMode">Mode selector ("single" or "multiple")</param>
+        public void WorkerSyncOverwrite_RunAsync(FileInfo file, string sMode)
         {
-            workerSyncOneFile.ReportProgress(iPercentage, userState);            
+            List<object> lArguments = new List<object>
+            {
+                file,
+                sMode
+            };
+
+            workerSyncOverwrite.RunWorkerAsync(lArguments);
+            taskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
+        }
+
+        public void WorkerSyncOverwrite_ChangeProgress(int iPercentage, object userState)
+        {
+            workerSyncOverwrite.ReportProgress(iPercentage, userState);            
         }
 
         private void WorkerSync_DoWork(object sender, DoWorkEventArgs e)

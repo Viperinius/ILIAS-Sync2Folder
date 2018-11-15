@@ -120,6 +120,8 @@ namespace WPF_ILIAS_Sync2Folder
                 fileInfo.FileIgnore = "Not ignored";
                 config.ClearFileIgnore(fileInfo.FileId);
             }
+
+            window.WorkerSyncOverwrite_RunAsync(null, "multiple");
         }
 
         private void CheckOverwriteNone_Checked(object sender, RoutedEventArgs e)
@@ -162,7 +164,7 @@ namespace WPF_ILIAS_Sync2Folder
                 }
 
                 //start worker for current file
-                window.WorkerSyncOneFile_RunAsync(fileInfo);
+                window.WorkerSyncOverwrite_RunAsync(fileInfo);
             }
         }
 
