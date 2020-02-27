@@ -56,17 +56,6 @@ Regarding the server change:
 The link check allows aside from the login page the web service page, too. Due to some connection problems, this is currently not working.
 So just stick to use the login link to set your ILIAS server for now.
 
-#### Planned Features
-+ be able to change the folder structure settings (e.g. turning the "semester structure" on) and move already loaded files to the new structure
-+ ~~make the update notification optional / receive optional notifications e.g. when sync is done~~ done.
-+ ~~be able to export your settings and import them on another device~~ done.
-+ ~~changeable servers (for other universities)~~ done.
-+ switchable language (German <-> English)
-+ implement an optional automatic synchronisation (automatically check for new files every x minutes)
-+ ~~switch from WinForms to WPF in v2 with new UI design~~ done.
-+ be able to sort the file list view columns (sort by date / size / title etc)
-+ optionally save an old version of a file instead of just overwriting it
-
 ### Support
 If you have any questions, bugs or just feedback, you have multiple possibilities to make contact:
 + open an issue here at Github
