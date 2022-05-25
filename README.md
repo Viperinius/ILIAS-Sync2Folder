@@ -57,8 +57,4 @@ The link check allows aside from the login page the web service page, too. Due t
 So just stick to use the login link to set your ILIAS server for now.
 
 ### Support
-If you have any questions, bugs or just feedback, you have multiple possibilities to make contact:
-+ open an issue here at Github
-+ visit our Discord server: [Link](http://discord.gg/zxDfVpM)
-
-![](https://img.shields.io/discord/469639729164582912.svg?style=for-the-badge)
+If you have any questions or found bugs, open an issue here at Github.
